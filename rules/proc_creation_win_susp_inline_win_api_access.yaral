@@ -8,7 +8,7 @@ rule potential_winapi_calls_via_commandline {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /AddSecurityPackage|AdjustTokenPrivileges|Advapi32|CloseHandle|CreateProcessWithToken|CreatePseudoConsole|CreateRemoteThread|CreateThread|CreateUserThread|DangerousGetHandle|DuplicateTokenEx|EnumerateSecurityPackages|FreeHGlobal|FreeLibrary|GetDelegateForFunctionPointer|GetLogonSessionData|GetModuleHandle|GetProcAddress|GetProcessHandle|GetTokenInformation|ImpersonateLoggedOnUser|kernel32|LoadLibrary|memcpy|MiniDumpWriteDump|ntdll|OpenDesktop|OpenProcess|OpenProcessToken|OpenThreadToken|OpenWindowStation|PtrToString|QueueUserApc|ReadProcessMemory|RevertToSelf|RtlCreateUserThread|secur32|SetThreadToken|VirtualAlloc|VirtualFree|VirtualProtect|WaitForSingleObject|WriteInt32|WriteProcessMemory|ZeroFreeGlobalAllocUnicode/ nocase and
-        $event.target.process.file.full_path = /\\\\MpCmdRun\\.exe$/ nocase and
+        $event.target.process.file.full_path = /\\MpCmdRun\.exe$/ nocase and
         $event.target.process.command_line = /GetLoadLibraryWAddress32/ nocase)
     condition:
         $event

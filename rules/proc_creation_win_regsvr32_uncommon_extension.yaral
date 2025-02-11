@@ -7,16 +7,16 @@ rule regsvr32_dll_execution_with_uncommon_extension {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\regsvr32\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase or
         $event.target.process.file.names = "REGSVR32.EXE" nocase) and
-        (($event.target.process.command_line != /\\.ax/ nocase and
-        $event.target.process.command_line != /\\.cpl/ nocase and
-        $event.target.process.command_line != /\\.dll/ nocase and
-        $event.target.process.command_line != /\\.ocx/ nocase) or
+        (($event.target.process.command_line != /\.ax/ nocase and
+        $event.target.process.command_line != /\.cpl/ nocase and
+        $event.target.process.command_line != /\.dll/ nocase and
+        $event.target.process.command_line != /\.ocx/ nocase) or
         $event.target.process.command_line = "" or
         $event.target.process.command_line != "" nocase) and
-        ($event.target.process.command_line != /\\.ppl/ nocase and
-        $event.target.process.command_line != /\\.bav/ nocase))
+        ($event.target.process.command_line != /\.ppl/ nocase and
+        $event.target.process.command_line != /\.bav/ nocase))
     condition:
         $event
 }

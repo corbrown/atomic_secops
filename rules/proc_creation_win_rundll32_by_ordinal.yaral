@@ -7,13 +7,13 @@ rule dll_call_by_ordinal_via_rundll32_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\rundll32\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\rundll32\.exe$/ nocase or
         $event.target.process.file.names = "RUNDLL32.EXE" nocase) and
-        $event.target.process.command_line = /,#|, #|\\.dll #|\\.ocx #/ nocase and
-        (($event.target.process.command_line = /EDGEHTML\\.dll/ nocase and
+        $event.target.process.command_line = /,#|, #|\.dll #|\.ocx #/ nocase and
+        (($event.target.process.command_line = /EDGEHTML\.dll/ nocase and
         $event.target.process.command_line = /#141/ nocase) or
-        ($event.principal.process.file.full_path = /\\\\Msbuild\\\\Current\\\\Bin\\\\|\\\\VC\\\\Tools\\\\MSVC\\\\|\\\\Tracker\\.exe/ nocase and
-        $event.target.process.command_line = /\\\\FileTracker32\\.dll,#1|\\\\FileTracker32\\.dll",#1|\\\\FileTracker64\\.dll,#1|\\\\FileTracker64\\.dll",#1/ nocase)))
+        ($event.principal.process.file.full_path = /\\Msbuild\\Current\\Bin\\|\\VC\\Tools\\MSVC\\|\\Tracker\.exe/ nocase and
+        $event.target.process.command_line = /\\FileTracker32\.dll,#1|\\FileTracker32\.dll",#1|\\FileTracker64\.dll,#1|\\FileTracker64\.dll",#1/ nocase)))
     condition:
         $event
 }

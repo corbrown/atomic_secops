@@ -7,9 +7,9 @@ rule add_safeboot_keys_via_reg_utility {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
         $event.target.process.file.names = "reg.exe" nocase) and
-        $event.target.process.command_line = /\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\SafeBoot/ nocase and
+        $event.target.process.command_line = /\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot/ nocase and
         $event.target.process.command_line = / copy | add / nocase)
     condition:
         $event

@@ -7,7 +7,7 @@ rule security_software_discovery___linux {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/grep|\\/egrep/ nocase and
+        ($event.target.process.file.full_path = /\/grep|\/egrep/ nocase and
         $event.target.process.command_line = /nessusd|td-agent|packetbeat|filebeat|auditbeat|osqueryd|cbagentd|falcond/ nocase)
     condition:
         $event

@@ -7,10 +7,10 @@ rule new_dll_registered_via_odbcconf_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\odbcconf\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\odbcconf\.exe$/ nocase or
         $event.target.process.file.names = "odbcconf.exe" nocase) and
         $event.target.process.command_line = /REGSVR / nocase and
-        $event.target.process.command_line = /\\.dll/ nocase)
+        $event.target.process.command_line = /\.dll/ nocase)
     condition:
         $event
 }

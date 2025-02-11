@@ -7,14 +7,14 @@ rule potentially_suspicious_powershell_child_processes {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.principal.process.file.full_path = /\\\\powershell_ise\\.exe|\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase and
-        $event.target.process.file.full_path = /\\\\bash\\.exe|\\\\bitsadmin\\.exe|\\\\certutil\\.exe|\\\\cscript\\.exe|\\\\forfiles\\.exe|\\\\hh\\.exe|\\\\mshta\\.exe|\\\\regsvr32\\.exe|\\\\rundll32\\.exe|\\\\schtasks\\.exe|\\\\scrcons\\.exe|\\\\scriptrunner\\.exe|\\\\sh\\.exe|\\\\wmic\\.exe|\\\\wscript\\.exe/ nocase and
-        (($event.target.process.file.full_path = /\\\\certutil\\.exe$/ nocase and
+        ($event.principal.process.file.full_path = /\\powershell_ise\.exe|\\powershell\.exe|\\pwsh\.exe/ nocase and
+        $event.target.process.file.full_path = /\\bash\.exe|\\bitsadmin\.exe|\\certutil\.exe|\\cscript\.exe|\\forfiles\.exe|\\hh\.exe|\\mshta\.exe|\\regsvr32\.exe|\\rundll32\.exe|\\schtasks\.exe|\\scrcons\.exe|\\scriptrunner\.exe|\\sh\.exe|\\wmic\.exe|\\wscript\.exe/ nocase and
+        (($event.target.process.file.full_path = /\\certutil\.exe$/ nocase and
         $event.target.process.command_line = /-verifystore / nocase) or
-        ($event.target.process.file.full_path = /\\\\wmic\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\wmic\.exe$/ nocase and
         $event.target.process.command_line = /qfe list|diskdrive |csproduct |computersystem | os |/ nocase)) and
-        $event.principal.process.command_line = /\\\\Program Files\\\\Amazon\\\\WorkspacesConfig\\\\Scripts\\\\/ nocase and
-        $event.target.process.command_line = /\\\\Program Files\\\\Amazon\\\\WorkspacesConfig\\\\Scripts\\\\/ nocase)
+        $event.principal.process.command_line = /\\Program Files\\Amazon\\WorkspacesConfig\\Scripts\\/ nocase and
+        $event.target.process.command_line = /\\Program Files\\Amazon\\WorkspacesConfig\\Scripts\\/ nocase)
     condition:
         $event
 }

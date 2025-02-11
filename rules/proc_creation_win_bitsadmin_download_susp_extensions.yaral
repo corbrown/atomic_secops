@@ -7,10 +7,10 @@ rule file_with_suspicious_extension_downloaded_via_bitsadmin {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\bitsadmin\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\bitsadmin\.exe$/ nocase or
         $event.target.process.file.names = "bitsadmin.exe" nocase) and
-        $event.target.process.command_line = / \\/transfer | \\/create | \\/addfile / nocase and
-        $event.target.process.command_line = /\\.7z|\\.asax|\\.ashx|\\.asmx|\\.asp|\\.aspx|\\.bat|\\.cfm|\\.cgi|\\.chm|\\.cmd|\\.dll|\\.gif|\\.jpeg|\\.jpg|\\.jsp|\\.jspx|\\.log|\\.png|\\.ps1|\\.psm1|\\.rar|\\.scf|\\.sct|\\.txt|\\.vbe|\\.vbs|\\.war|\\.wsf|\\.wsh|\\.xll|\\.zip/ nocase)
+        $event.target.process.command_line = / \/transfer | \/create | \/addfile / nocase and
+        $event.target.process.command_line = /\.7z|\.asax|\.ashx|\.asmx|\.asp|\.aspx|\.bat|\.cfm|\.cgi|\.chm|\.cmd|\.dll|\.gif|\.jpeg|\.jpg|\.jsp|\.jspx|\.log|\.png|\.ps1|\.psm1|\.rar|\.scf|\.sct|\.txt|\.vbe|\.vbs|\.war|\.wsf|\.wsh|\.xll|\.zip/ nocase)
     condition:
         $event
 }

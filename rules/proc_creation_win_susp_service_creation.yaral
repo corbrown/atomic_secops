@@ -7,12 +7,12 @@ rule suspicious_new_service_creation {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\\\sc\\.exe$/ nocase and
+        ((($event.target.process.file.full_path = /\\sc\.exe$/ nocase and
         $event.target.process.command_line = /create/ nocase and
         $event.target.process.command_line = /binPath=/ nocase) or
         ($event.target.process.command_line = /New-Service/ nocase and
         $event.target.process.command_line = /-BinaryPathName/ nocase)) and
-        $event.target.process.command_line = /powershell|mshta|wscript|cscript|svchost|dllhost|cmd |cmd\\.exe \\/c|cmd\\.exe \\/k|cmd\\.exe \\/r|rundll32|C:\\\\Users\\\\Public|\\\\Downloads\\\\|\\\\Desktop\\\\|\\\\Microsoft\\\\Windows\\\\Start Menu\\\\Programs\\\\Startup\\\\|C:\\\\Windows\\\\TEMP\\\\|\\\\AppData\\\\Local\\\\Temp/ nocase)
+        $event.target.process.command_line = /powershell|mshta|wscript|cscript|svchost|dllhost|cmd |cmd\.exe \/c|cmd\.exe \/k|cmd\.exe \/r|rundll32|C:\\Users\\Public|\\Downloads\\|\\Desktop\\|\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\|C:\\Windows\\TEMP\\|\\AppData\\Local\\Temp/ nocase)
     condition:
         $event
 }

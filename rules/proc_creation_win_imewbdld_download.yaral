@@ -7,9 +7,9 @@ rule arbitrary_file_download_via_imewdbld_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\IMEWDBLD\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\IMEWDBLD\.exe$/ nocase or
         $event.target.process.file.names = "imewdbld.exe" nocase) and
-        $event.target.process.command_line = /http:\\/\\/|https:\\/\\// nocase)
+        $event.target.process.command_line = /http:\/\/|https:\/\// nocase)
     condition:
         $event
 }

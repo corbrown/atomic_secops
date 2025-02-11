@@ -7,21 +7,21 @@ rule file_deletion_via_del {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
         $event.target.process.file.names = "Cmd.Exe" nocase) and
         $event.target.process.command_line = /del |erase / nocase and
         ($event.target.process.command_line = / -f/ nocase or
-        $event.target.process.command_line = / \\/f/ nocase or
+        $event.target.process.command_line = / \/f/ nocase or
         $event.target.process.command_line = / –f/ nocase or
         $event.target.process.command_line = / —f/ nocase or
         $event.target.process.command_line = / ―f/ nocase or
         $event.target.process.command_line = / -s/ nocase or
-        $event.target.process.command_line = / \\/s/ nocase or
+        $event.target.process.command_line = / \/s/ nocase or
         $event.target.process.command_line = / –s/ nocase or
         $event.target.process.command_line = / —s/ nocase or
         $event.target.process.command_line = / ―s/ nocase or
         $event.target.process.command_line = / -q/ nocase or
-        $event.target.process.command_line = / \\/q/ nocase or
+        $event.target.process.command_line = / \/q/ nocase or
         $event.target.process.command_line = / –q/ nocase or
         $event.target.process.command_line = / —q/ nocase or
         $event.target.process.command_line = / ―q/ nocase))

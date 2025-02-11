@@ -9,7 +9,7 @@ rule deletion_of_volume_shadow_copies_via_wmi_with_powershell {
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /Get-WmiObject|gwmi|Get-CimInstance|gcim/ nocase and
         $event.target.process.command_line = /Win32_ShadowCopy/ nocase and
-        $event.target.process.command_line = /\\.Delete\\(\\)|Remove-WmiObject|rwmi|Remove-CimInstance|rcim/ nocase)
+        $event.target.process.command_line = /\.Delete\(\)|Remove-WmiObject|rwmi|Remove-CimInstance|rcim/ nocase)
     condition:
         $event
 }

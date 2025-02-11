@@ -7,7 +7,7 @@ rule sysmon_driver_unloaded_via_fltmc_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\fltMC\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\fltMC\.exe$/ nocase or
         $event.target.process.file.names = "fltMC.exe" nocase) and
         $event.target.process.command_line = /unload/ nocase and
         $event.target.process.command_line = /sysmon/ nocase)

@@ -8,8 +8,8 @@ rule hh_exe_execution {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "HH.exe" nocase or
-        $event.target.process.file.full_path = /\\\\hh\\.exe$/ nocase) and
-        $event.target.process.command_line = /\\.chm/ nocase)
+        $event.target.process.file.full_path = /\\hh\.exe$/ nocase) and
+        $event.target.process.command_line = /\.chm/ nocase)
     condition:
         $event
 }

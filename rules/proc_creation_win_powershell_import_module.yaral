@@ -7,12 +7,12 @@ rule import_new_module_via_powershell_commandline {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or
         $event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase) and
         $event.target.process.command_line = /Import-Module |ipmo / nocase and
-        $event.principal.process.file.full_path = /:\\\\Program Files\\\\WindowsApps\\\\Microsoft\\.WindowsTerminal_|:\\\\Windows\\\\System32\\\\cmd\\.exe/ nocase and
-        $event.target.process.command_line = /:\\\\Program Files\\\\Microsoft Visual Studio\\\\/ nocase and
-        $event.target.process.command_line = /Tools\\\\Microsoft\\.VisualStudio\\.DevShell\\.dll/ nocase)
+        $event.principal.process.file.full_path = /:\\Program Files\\WindowsApps\\Microsoft\.WindowsTerminal_|:\\Windows\\System32\\cmd\.exe/ nocase and
+        $event.target.process.command_line = /:\\Program Files\\Microsoft Visual Studio\\/ nocase and
+        $event.target.process.command_line = /Tools\\Microsoft\.VisualStudio\.DevShell\.dll/ nocase)
     condition:
         $event
 }

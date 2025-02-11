@@ -7,7 +7,7 @@ rule microsoft_workflow_compiler_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\Microsoft\\.Workflow\\.Compiler\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\Microsoft\.Workflow\.Compiler\.exe$/ nocase or
         $event.target.process.file.names = "Microsoft.Workflow.Compiler.exe" nocase))
     condition:
         $event

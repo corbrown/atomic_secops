@@ -7,13 +7,13 @@ rule suspicious_copy_from_or_to_system_directory {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase and
+        ((($event.target.process.file.full_path = /\\cmd\.exe$/ nocase and
         $event.target.process.command_line = /copy / nocase) or
-        ($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase and
+        ($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase and
         $event.target.process.command_line = /copy-item| copy |cpi | cp / nocase) or
-        ($event.target.process.file.full_path = /\\\\robocopy\\.exe|\\\\xcopy\\.exe/ nocase or
+        ($event.target.process.file.full_path = /\\robocopy\.exe|\\xcopy\.exe/ nocase or
         $event.target.process.file.names = /robocopy.exe|XCOPY.EXE/ nocase)) and
-        $event.target.process.command_line = /\\\\System32|\\\\SysWOW64|\\\\WinSxS/ nocase)
+        $event.target.process.command_line = /\\System32|\\SysWOW64|\\WinSxS/ nocase)
     condition:
         $event
 }

@@ -7,7 +7,7 @@ rule new_service_creation_using_sc_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\sc\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\sc\.exe$/ nocase and
         $event.target.process.command_line = /create/ nocase and
         $event.target.process.command_line = /binPath/ nocase)
     condition:

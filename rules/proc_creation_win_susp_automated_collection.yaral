@@ -7,12 +7,12 @@ rule automated_collection_command_prompt {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\.doc|\\.docx|\\.xls|\\.xlsx|\\.ppt|\\.pptx|\\.rtf|\\.pdf|\\.txt/ nocase and
+        ($event.target.process.command_line = /\.doc|\.docx|\.xls|\.xlsx|\.ppt|\.pptx|\.rtf|\.pdf|\.txt/ nocase and
         (($event.target.process.command_line = /dir / nocase and
-        $event.target.process.command_line = / \\/b / nocase and
-        $event.target.process.command_line = / \\/s / nocase) or
+        $event.target.process.command_line = / \/b / nocase and
+        $event.target.process.command_line = / \/s / nocase) or
         ($event.target.process.file.names = "FINDSTR.EXE" nocase and
-        $event.target.process.command_line = / \\/e | \\/si / nocase)))
+        $event.target.process.command_line = / \/e | \/si / nocase)))
     condition:
         $event
 }

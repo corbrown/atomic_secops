@@ -8,7 +8,7 @@ rule network_reconnaissance_activity {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /nslookup/ nocase and
-        $event.target.process.command_line = /_ldap\\._tcp\\.dc\\._msdcs\\./ nocase)
+        $event.target.process.command_line = /_ldap\._tcp\.dc\._msdcs\./ nocase)
     condition:
         $event
 }

@@ -7,14 +7,14 @@ rule private_keys_reconnaissance_via_commandline_tools {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\.key|\\.pgp|\\.gpg|\\.ppk|\\.p12|\\.pem|\\.pfx|\\.cer|\\.p7b|\\.asc/ nocase and
-        ((($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase or
+        ($event.target.process.command_line = /\.key|\.pgp|\.gpg|\.ppk|\.p12|\.pem|\.pfx|\.cer|\.p7b|\.asc/ nocase and
+        ((($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
         $event.target.process.file.names = "Cmd.Exe" nocase) and
         $event.target.process.command_line = /dir / nocase) or
-        (($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or
         $event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase) and
         $event.target.process.command_line = /Get-ChildItem / nocase) or
-        ($event.target.process.file.full_path = /\\\\findstr\\.exe$/ nocase or
+        ($event.target.process.file.full_path = /\\findstr\.exe$/ nocase or
         $event.target.process.file.names = "FINDSTR.EXE" nocase)))
     condition:
         $event

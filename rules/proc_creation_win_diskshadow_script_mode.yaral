@@ -8,9 +8,9 @@ rule diskshadow_script_mode_execution {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "diskshadow.exe" nocase or
-        $event.target.process.file.full_path = /\\\\diskshadow\\.exe$/ nocase) and
+        $event.target.process.file.full_path = /\\diskshadow\.exe$/ nocase) and
         $event.target.process.command_line = /-s / nocase or
-        $event.target.process.command_line = /\\/s / nocase or
+        $event.target.process.command_line = /\/s / nocase or
         $event.target.process.command_line = /–s / nocase or
         $event.target.process.command_line = /—s / nocase or
         $event.target.process.command_line = /―s / nocase)

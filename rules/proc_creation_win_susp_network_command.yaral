@@ -7,7 +7,7 @@ rule suspicious_network_command {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /ipconfig \\/all|netsh interface show interface|arp -a|nbtstat -n|net config|route print/ nocase)
+        ($event.target.process.command_line = /ipconfig \/all|netsh interface show interface|arp -a|nbtstat -n|net config|route print/ nocase)
     condition:
         $event
 }

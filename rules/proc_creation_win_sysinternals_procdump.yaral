@@ -7,7 +7,7 @@ rule procdump_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\procdump\\.exe|\\\\procdump64\\.exe/ nocase)
+        ($event.target.process.file.full_path = /\\procdump\.exe|\\procdump64\.exe/ nocase)
     condition:
         $event
 }

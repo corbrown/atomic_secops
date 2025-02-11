@@ -7,10 +7,10 @@ rule potential_amsi_bypass_via__net_reflection {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.command_line = /System\\.Management\\.Automation\\.AmsiUtils/ nocase and
+        ((($event.target.process.command_line = /System\.Management\.Automation\.AmsiUtils/ nocase and
         $event.target.process.command_line = /amsiInitFailed/ nocase) or
-        ($event.target.process.command_line = /\\[Ref\\]\\.Assembly\\.GetType/ nocase and
-        $event.target.process.command_line = /SetValue\\(\\$null,\\$true\\)/ nocase and
+        ($event.target.process.command_line = /\[Ref\]\.Assembly\.GetType/ nocase and
+        $event.target.process.command_line = /SetValue\(\$null,\$true\)/ nocase and
         $event.target.process.command_line = /NonPublic,Static/ nocase)))
     condition:
         $event

@@ -7,9 +7,9 @@ rule suspicious_process_masquerading_as_svchost_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\svchost\\.exe$/ nocase and
-        (($event.target.process.file.full_path != /C:\\\\Windows\\\\System32\\\\svchost.exe/ nocase and
-        $event.target.process.file.full_path != /C:\\\\Windows\\\\SysWOW64\\\\svchost.exe/ nocase) or
+        ($event.target.process.file.full_path = /\\svchost\.exe$/ nocase and
+        (($event.target.process.file.full_path != /C:\\Windows\\System32\\svchost.exe/ nocase and
+        $event.target.process.file.full_path != /C:\\Windows\\SysWOW64\\svchost.exe/ nocase) or
         $event.target.process.file.names != "svchost.exe" nocase))
     condition:
         $event

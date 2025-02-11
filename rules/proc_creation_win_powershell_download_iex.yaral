@@ -7,8 +7,8 @@ rule powershell_download_and_execution_cradles {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\.DownloadString\\(|\\.DownloadFile\\(|Invoke-WebRequest |iwr / nocase and
-        $event.target.process.command_line = /;iex \\$|\\| IEX|\\|IEX |I`E`X|I`EX|IE`X|iex |IEX \\(|IEX\\(|Invoke-Expression/ nocase)
+        ($event.target.process.command_line = /\.DownloadString\(|\.DownloadFile\(|Invoke-WebRequest |iwr / nocase and
+        $event.target.process.command_line = /;iex \$|\| IEX|\|IEX |I`E`X|I`EX|IE`X|iex |IEX \(|IEX\(|Invoke-Expression/ nocase)
     condition:
         $event
 }

@@ -7,7 +7,7 @@ rule suspicious_javascript_execution_via_mshta_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\mshta\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\mshta\.exe$/ nocase or
         $event.target.process.file.names = "MSHTA.EXE" nocase) and
         $event.target.process.command_line = /javascript/ nocase)
     condition:

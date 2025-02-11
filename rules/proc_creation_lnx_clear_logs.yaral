@@ -7,8 +7,8 @@ rule clear_linux_logs {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/rm|\\/shred|\\/unlink/ nocase and
-        $event.target.process.command_line = /\\/var\\/log|\\/var\\/spool\\/mail/ nocase)
+        ($event.target.process.file.full_path = /\/rm|\/shred|\/unlink/ nocase and
+        $event.target.process.command_line = /\/var\/log|\/var\/spool\/mail/ nocase)
     condition:
         $event
 }

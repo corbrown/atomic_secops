@@ -8,7 +8,7 @@ rule suspicious_redirection_to_local_admin_share {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = />/ nocase and
-        $event.target.process.command_line = /\\\\\\\\127\\.0\\.0\\.1\\\\admin\\$\\\\|\\\\\\\\localhost\\\\admin\\$\\\\/ nocase)
+        $event.target.process.command_line = /\\\\127\.0\.0\.1\\admin\$\\|\\\\localhost\\admin\$\\/ nocase)
     condition:
         $event
 }

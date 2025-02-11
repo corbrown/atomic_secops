@@ -7,12 +7,12 @@ rule process_memory_dump_via_comsvcs_dll {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\\\rundll32\\.exe$/ nocase or
+        ((($event.target.process.file.full_path = /\\rundll32\.exe$/ nocase or
         $event.target.process.file.names = "RUNDLL32.EXE" nocase or
         $event.target.process.command_line = /rundll32/ nocase) and
         $event.target.process.command_line = /comsvcs/ nocase and
         $event.target.process.command_line = /full/ nocase and
-        $event.target.process.command_line = /#-|#\\+|#24|24 |MiniDump/ nocase) or
+        $event.target.process.command_line = /#-|#\+|#24|24 |MiniDump/ nocase) or
         ($event.target.process.command_line = /24/ nocase and
         $event.target.process.command_line = /comsvcs/ nocase and
         $event.target.process.command_line = /full/ nocase and

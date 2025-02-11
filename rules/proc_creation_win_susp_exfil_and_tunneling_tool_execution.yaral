@@ -7,7 +7,7 @@ rule tunneling_tool_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\httptunnel\\.exe|\\\\plink\\.exe|\\\\socat\\.exe|\\\\stunnel\\.exe/ nocase)
+        ($event.target.process.file.full_path = /\\httptunnel\.exe|\\plink\.exe|\\socat\.exe|\\stunnel\.exe/ nocase)
     condition:
         $event
 }

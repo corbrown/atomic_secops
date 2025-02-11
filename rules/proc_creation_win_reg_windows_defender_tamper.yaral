@@ -7,9 +7,9 @@ rule suspicious_windows_defender_registry_key_tampering_via_reg_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
         $event.target.process.file.names = "reg.exe" nocase) and
-        $event.target.process.command_line = /SOFTWARE\\\\Microsoft\\\\Windows Defender\\\\|SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows Defender Security Center|SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows Defender\\\\/ nocase and
+        $event.target.process.command_line = /SOFTWARE\\Microsoft\\Windows Defender\\|SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center|SOFTWARE\\Policies\\Microsoft\\Windows Defender\\/ nocase and
         (($event.target.process.command_line = / add / nocase and
         $event.target.process.command_line = /d 0/ nocase and
         $event.target.process.command_line = /DisallowExploitProtectionOverride|EnableControlledFolderAccess|MpEnablePus|PUAProtection|SpynetReporting|SubmitSamplesConsent|TamperProtection/ nocase) or

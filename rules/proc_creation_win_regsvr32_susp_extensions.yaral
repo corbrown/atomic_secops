@@ -7,9 +7,9 @@ rule regsvr32_dll_execution_with_suspicious_file_extension {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\regsvr32\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase or
         $event.target.process.file.names = "REGSVR32.EXE" nocase) and
-        $event.target.process.command_line = /\\.bin|\\.bmp|\\.cr2|\\.dat|\\.eps|\\.gif|\\.ico|\\.jpeg|\\.jpg|\\.nef|\\.orf|\\.png|\\.raw|\\.sr2|\\.temp|\\.tif|\\.tiff|\\.tmp|\\.rtf|\\.txt/ nocase)
+        $event.target.process.command_line = /\.bin|\.bmp|\.cr2|\.dat|\.eps|\.gif|\.ico|\.jpeg|\.jpg|\.nef|\.orf|\.png|\.raw|\.sr2|\.temp|\.tif|\.tiff|\.tmp|\.rtf|\.txt/ nocase)
     condition:
         $event
 }

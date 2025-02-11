@@ -8,7 +8,7 @@ rule potential_execution_of_sysinternals_tools {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = / -accepteula/ nocase or
-        $event.target.process.command_line = / \\/accepteula/ nocase or
+        $event.target.process.command_line = / \/accepteula/ nocase or
         $event.target.process.command_line = / –accepteula/ nocase or
         $event.target.process.command_line = / —accepteula/ nocase or
         $event.target.process.command_line = / ―accepteula/ nocase)

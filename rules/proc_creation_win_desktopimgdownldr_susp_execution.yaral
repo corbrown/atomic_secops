@@ -7,12 +7,12 @@ rule suspicious_desktopimgdownldr_command {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.command_line = / \\/lockscreenurl:/ nocase and
-        ($event.target.process.command_line != /\\.jpg/ nocase and
-        $event.target.process.command_line != /\\.jpeg/ nocase and
-        $event.target.process.command_line != /\\.png/ nocase)) or
+        (($event.target.process.command_line = / \/lockscreenurl:/ nocase and
+        ($event.target.process.command_line != /\.jpg/ nocase and
+        $event.target.process.command_line != /\.jpeg/ nocase and
+        $event.target.process.command_line != /\.png/ nocase)) or
         ($event.target.process.command_line = /reg delete/ nocase and
-        $event.target.process.command_line = /\\\\PersonalizationCSP/ nocase))
+        $event.target.process.command_line = /\\PersonalizationCSP/ nocase))
     condition:
         $event
 }

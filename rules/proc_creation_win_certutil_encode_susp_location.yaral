@@ -7,14 +7,14 @@ rule file_in_suspicious_location_encoded_to_base64_via_certutil_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\certutil\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\certutil\.exe$/ nocase or
         $event.target.process.file.names = "CertUtil.exe" nocase) and
         $event.target.process.command_line = /-encode/ nocase or
-        $event.target.process.command_line = /\\/encode/ nocase or
+        $event.target.process.command_line = /\/encode/ nocase or
         $event.target.process.command_line = /–encode/ nocase or
         $event.target.process.command_line = /—encode/ nocase or
         $event.target.process.command_line = /―encode/ nocase and
-        $event.target.process.command_line = /\\\\AppData\\\\Roaming\\\\|\\\\Desktop\\\\|\\\\Local\\\\Temp\\\\|\\\\PerfLogs\\\\|\\\\Users\\\\Public\\\\|\\\\Windows\\\\Temp\\\\|\\$Recycle\\.Bin/ nocase)
+        $event.target.process.command_line = /\\AppData\\Roaming\\|\\Desktop\\|\\Local\\Temp\\|\\PerfLogs\\|\\Users\\Public\\|\\Windows\\Temp\\|\$Recycle\.Bin/ nocase)
     condition:
         $event
 }

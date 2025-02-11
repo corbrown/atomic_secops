@@ -9,22 +9,22 @@ rule renamed_procdump_execution {
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "procdump" nocase or
         (($event.target.process.command_line = / -ma / nocase or
-        $event.target.process.command_line = / \\/ma / nocase or
+        $event.target.process.command_line = / \/ma / nocase or
         $event.target.process.command_line = / –ma / nocase or
         $event.target.process.command_line = / —ma / nocase or
         $event.target.process.command_line = / ―ma / nocase or
         $event.target.process.command_line = / -mp / nocase or
-        $event.target.process.command_line = / \\/mp / nocase or
+        $event.target.process.command_line = / \/mp / nocase or
         $event.target.process.command_line = / –mp / nocase or
         $event.target.process.command_line = / —mp / nocase or
         $event.target.process.command_line = / ―mp / nocase) and
         $event.target.process.command_line = / -accepteula/ nocase or
-        $event.target.process.command_line = / \\/accepteula/ nocase or
+        $event.target.process.command_line = / \/accepteula/ nocase or
         $event.target.process.command_line = / –accepteula/ nocase or
         $event.target.process.command_line = / —accepteula/ nocase or
         $event.target.process.command_line = / ―accepteula/ nocase)) and
-        ($event.target.process.file.full_path != /\\\\procdump\\.exe/ nocase and
-        $event.target.process.file.full_path != /\\\\procdump64\\.exe/ nocase))
+        ($event.target.process.file.full_path != /\\procdump\.exe/ nocase and
+        $event.target.process.file.full_path != /\\procdump64\.exe/ nocase))
     condition:
         $event
 }

@@ -7,24 +7,24 @@ rule suspicious_msiexec_execute_arbitrary_dll {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\msiexec\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\msiexec\.exe$/ nocase and
         $event.target.process.command_line = / -y/ nocase or
-        $event.target.process.command_line = / \\/y/ nocase or
+        $event.target.process.command_line = / \/y/ nocase or
         $event.target.process.command_line = / –y/ nocase or
         $event.target.process.command_line = / —y/ nocase or
         $event.target.process.command_line = / ―y/ nocase and
-        ($event.target.process.command_line != /\\\\MsiExec\\.exe" \\/Y "C:\\\\Program Files\\\\Bonjour\\\\mdnsNSP\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" \\/Y "C:\\\\Program Files \\(x86\\)\\\\Bonjour\\\\mdnsNSP\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" \\/Y "C:\\\\Program Files \\(x86\\)\\\\Apple Software Update\\\\ScriptingObjectModel\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" \\/Y "C:\\\\Program Files \\(x86\\)\\\\Apple Software Update\\\\SoftwareUpdateAdmin\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" \\/Y "C:\\\\Windows\\\\CCM\\\\/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" \\/Y C:\\\\Windows\\\\CCM\\\\/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" -Y "C:\\\\Program Files\\\\Bonjour\\\\mdnsNSP\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" -Y "C:\\\\Program Files \\(x86\\)\\\\Bonjour\\\\mdnsNSP\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" -Y "C:\\\\Program Files \\(x86\\)\\\\Apple Software Update\\\\ScriptingObjectModel\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" -Y "C:\\\\Program Files \\(x86\\)\\\\Apple Software Update\\\\SoftwareUpdateAdmin\\.dll/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" -Y "C:\\\\Windows\\\\CCM\\\\/ nocase and
-        $event.target.process.command_line != /\\\\MsiExec\\.exe" -Y C:\\\\Windows\\\\CCM\\\\/ nocase))
+        ($event.target.process.command_line != /\\MsiExec\.exe" \/Y "C:\\Program Files\\Bonjour\\mdnsNSP\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" \/Y "C:\\Program Files \(x86\)\\Bonjour\\mdnsNSP\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" \/Y "C:\\Program Files \(x86\)\\Apple Software Update\\ScriptingObjectModel\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" \/Y "C:\\Program Files \(x86\)\\Apple Software Update\\SoftwareUpdateAdmin\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" \/Y "C:\\Windows\\CCM\\/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" \/Y C:\\Windows\\CCM\\/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" -Y "C:\\Program Files\\Bonjour\\mdnsNSP\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" -Y "C:\\Program Files \(x86\)\\Bonjour\\mdnsNSP\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" -Y "C:\\Program Files \(x86\)\\Apple Software Update\\ScriptingObjectModel\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" -Y "C:\\Program Files \(x86\)\\Apple Software Update\\SoftwareUpdateAdmin\.dll/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" -Y "C:\\Windows\\CCM\\/ nocase and
+        $event.target.process.command_line != /\\MsiExec\.exe" -Y C:\\Windows\\CCM\\/ nocase))
     condition:
         $event
 }

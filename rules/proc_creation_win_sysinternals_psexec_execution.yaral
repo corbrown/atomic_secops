@@ -7,7 +7,7 @@ rule psexec_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\psexec\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\psexec\.exe$/ nocase or
         $event.target.process.file.names = "psexec.c" nocase))
     condition:
         $event

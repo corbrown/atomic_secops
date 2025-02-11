@@ -7,11 +7,11 @@ rule wmic_remote_command_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\WMIC\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\WMIC\.exe$/ nocase or
         $event.target.process.file.names = "wmic.exe" nocase) and
-        $event.target.process.command_line = /\\/node:/ nocase and
-        ($event.target.process.command_line != /\\/node:127\\.0\\.0\\.1 / nocase and
-        $event.target.process.command_line != /\\/node:localhost / nocase))
+        $event.target.process.command_line = /\/node:/ nocase and
+        ($event.target.process.command_line != /\/node:127\.0\.0\.1 / nocase and
+        $event.target.process.command_line != /\/node:localhost / nocase))
     condition:
         $event
 }

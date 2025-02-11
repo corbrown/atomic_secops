@@ -7,10 +7,10 @@ rule greedy_file_deletion_using_del {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
         $event.target.process.file.names = "Cmd.Exe" nocase) and
         $event.target.process.command_line = /del |erase / nocase and
-        $event.target.process.command_line = /\\\\\\*\\.au3|\\\\\\*\\.dll|\\\\\\*\\.exe|\\\\\\*\\.js/ nocase)
+        $event.target.process.command_line = /\\\*\.au3|\\\*\.dll|\\\*\.exe|\\\*\.js/ nocase)
     condition:
         $event
 }

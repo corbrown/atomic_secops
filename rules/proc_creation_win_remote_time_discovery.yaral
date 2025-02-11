@@ -7,9 +7,9 @@ rule discovery_of_a_system_time {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\net\\.exe|\\\\net1\\.exe/ nocase and
+        (($event.target.process.file.full_path = /\\net\.exe|\\net1\.exe/ nocase and
         $event.target.process.command_line = /time/ nocase) or
-        ($event.target.process.file.full_path = /\\\\w32tm\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\w32tm\.exe$/ nocase and
         $event.target.process.command_line = /tz/ nocase))
     condition:
         $event

@@ -7,7 +7,7 @@ rule windows_defender_definition_files_removed {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\MpCmdRun\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\MpCmdRun\.exe$/ nocase or
         $event.target.process.file.names = "MpCmdRun.exe" nocase) and
         $event.target.process.command_line = / -RemoveDefinitions/ nocase and
         $event.target.process.command_line = / -All/ nocase)

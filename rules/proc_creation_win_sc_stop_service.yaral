@@ -8,7 +8,7 @@ rule stop_windows_service_via_sc_exe {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "sc.exe" nocase or
-        $event.target.process.file.full_path = /\\\\sc\\.exe$/ nocase) and
+        $event.target.process.file.full_path = /\\sc\.exe$/ nocase) and
         $event.target.process.command_line = / stop / nocase)
     condition:
         $event

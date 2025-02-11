@@ -7,7 +7,7 @@ rule potential_provisioning_registry_key_abuse_for_binary_proxy_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /SOFTWARE\\\\Microsoft\\\\Provisioning\\\\Commands\\\\/ nocase)
+        ($event.target.process.command_line = /SOFTWARE\\Microsoft\\Provisioning\\Commands\\/ nocase)
     condition:
         $event
 }

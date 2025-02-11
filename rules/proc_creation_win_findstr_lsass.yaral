@@ -7,23 +7,23 @@ rule lsass_process_reconnaissance_via_findstr_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\\\find\\.exe|\\\\findstr\\.exe/ nocase or
+        ((($event.target.process.file.full_path = /\\find\.exe|\\findstr\.exe/ nocase or
         $event.target.process.file.names = /FIND.EXE|FINDSTR.EXE/ nocase) and
         $event.target.process.command_line = /lsass/ nocase) or
         ($event.target.process.command_line = / -i "lsass/ nocase or
-        $event.target.process.command_line = / \\/i "lsass/ nocase or
+        $event.target.process.command_line = / \/i "lsass/ nocase or
         $event.target.process.command_line = / –i "lsass/ nocase or
         $event.target.process.command_line = / —i "lsass/ nocase or
         $event.target.process.command_line = / ―i "lsass/ nocase or
-        $event.target.process.command_line = / -i lsass\\.exe/ nocase or
-        $event.target.process.command_line = / \\/i lsass\\.exe/ nocase or
-        $event.target.process.command_line = / –i lsass\\.exe/ nocase or
-        $event.target.process.command_line = / —i lsass\\.exe/ nocase or
-        $event.target.process.command_line = / ―i lsass\\.exe/ nocase or
+        $event.target.process.command_line = / -i lsass\.exe/ nocase or
+        $event.target.process.command_line = / \/i lsass\.exe/ nocase or
+        $event.target.process.command_line = / –i lsass\.exe/ nocase or
+        $event.target.process.command_line = / —i lsass\.exe/ nocase or
+        $event.target.process.command_line = / ―i lsass\.exe/ nocase or
         $event.target.process.command_line = /findstr "lsass/ nocase or
         $event.target.process.command_line = /findstr lsass/ nocase or
-        $event.target.process.command_line = /findstr\\.exe "lsass/ nocase or
-        $event.target.process.command_line = /findstr\\.exe lsass/ nocase))
+        $event.target.process.command_line = /findstr\.exe "lsass/ nocase or
+        $event.target.process.command_line = /findstr\.exe lsass/ nocase))
     condition:
         $event
 }

@@ -7,37 +7,37 @@ rule msiexec_quiet_installation {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\msiexec\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\msiexec\.exe$/ nocase or
         $event.target.process.file.names = "msiexec.exe" nocase) and
         ($event.target.process.command_line = /-i/ nocase or
-        $event.target.process.command_line = /\\/i/ nocase or
+        $event.target.process.command_line = /\/i/ nocase or
         $event.target.process.command_line = /–i/ nocase or
         $event.target.process.command_line = /—i/ nocase or
         $event.target.process.command_line = /―i/ nocase or
         $event.target.process.command_line = /-package/ nocase or
-        $event.target.process.command_line = /\\/package/ nocase or
+        $event.target.process.command_line = /\/package/ nocase or
         $event.target.process.command_line = /–package/ nocase or
         $event.target.process.command_line = /—package/ nocase or
         $event.target.process.command_line = /―package/ nocase or
         $event.target.process.command_line = /-a/ nocase or
-        $event.target.process.command_line = /\\/a/ nocase or
+        $event.target.process.command_line = /\/a/ nocase or
         $event.target.process.command_line = /–a/ nocase or
         $event.target.process.command_line = /—a/ nocase or
         $event.target.process.command_line = /―a/ nocase or
         $event.target.process.command_line = /-j/ nocase or
-        $event.target.process.command_line = /\\/j/ nocase or
+        $event.target.process.command_line = /\/j/ nocase or
         $event.target.process.command_line = /–j/ nocase or
         $event.target.process.command_line = /—j/ nocase or
         $event.target.process.command_line = /―j/ nocase) and
         $event.target.process.command_line = /-q/ nocase or
-        $event.target.process.command_line = /\\/q/ nocase or
+        $event.target.process.command_line = /\/q/ nocase or
         $event.target.process.command_line = /–q/ nocase or
         $event.target.process.command_line = /—q/ nocase or
         $event.target.process.command_line = /―q/ nocase and
-        (($event.principal.process.file.full_path = /^C:\\\\Users\\\\/ nocase and
-        $event.principal.process.file.full_path = /\\\\AppData\\\\Local\\\\Temp\\\\/ nocase) or
-        $event.principal.process.file.full_path != /^C:\\\\Windows\\\\Temp\\\\/ nocase or
-        ($event.principal.process.file.full_path = "C:\\\\Windows\\\\CCM\\\\Ccm32BitLauncher.exe" nocase and
+        (($event.principal.process.file.full_path = /^C:\\Users\\/ nocase and
+        $event.principal.process.file.full_path = /\\AppData\\Local\\Temp\\/ nocase) or
+        $event.principal.process.file.full_path != /^C:\\Windows\\Temp\\/ nocase or
+        ($event.principal.process.file.full_path = "C:\\Windows\\CCM\\Ccm32BitLauncher.exe" nocase and
         $event.target.process.integrity_level_rid = /System|S-1-16-16384/ nocase)))
     condition:
         $event

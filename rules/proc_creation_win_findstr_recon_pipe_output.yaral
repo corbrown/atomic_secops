@@ -7,7 +7,7 @@ rule recon_command_output_piped_to_findstr_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /ipconfig.*\\|.*find|net.*\\|.*find|netstat.*\\|.*find|ping.*\\|.*find|systeminfo.*\\|.*find|tasklist.*\\|.*find|whoami.*\\|.*find/ nocase)
+        ($event.target.process.command_line = /ipconfig.*\|.*find|net.*\|.*find|netstat.*\|.*find|ping.*\|.*find|systeminfo.*\|.*find|tasklist.*\|.*find|whoami.*\|.*find/ nocase)
     condition:
         $event
 }

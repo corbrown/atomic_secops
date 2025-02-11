@@ -7,10 +7,10 @@ rule detected_windows_software_discovery {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\reg\.exe$/ nocase and
         $event.target.process.command_line = /query/ nocase and
-        $event.target.process.command_line = /\\\\software\\\\/ nocase and
-        $event.target.process.command_line = /\\/v/ nocase and
+        $event.target.process.command_line = /\\software\\/ nocase and
+        $event.target.process.command_line = /\/v/ nocase and
         $event.target.process.command_line = /svcversion/ nocase)
     condition:
         $event

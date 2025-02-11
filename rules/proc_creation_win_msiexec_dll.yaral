@@ -7,14 +7,14 @@ rule dllunregisterserver_function_call_via_msiexec_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\msiexec\\.exe$/ nocase or
-        $event.target.process.file.names = "\\\\msiexec.exe" nocase) and
+        (($event.target.process.file.full_path = /\\msiexec\.exe$/ nocase or
+        $event.target.process.file.names = "\\msiexec.exe" nocase) and
         $event.target.process.command_line = / -z / nocase or
-        $event.target.process.command_line = / \\/z / nocase or
+        $event.target.process.command_line = / \/z / nocase or
         $event.target.process.command_line = / –z / nocase or
         $event.target.process.command_line = / —z / nocase or
         $event.target.process.command_line = / ―z / nocase and
-        $event.target.process.command_line = /\\.dll/ nocase)
+        $event.target.process.command_line = /\.dll/ nocase)
     condition:
         $event
 }

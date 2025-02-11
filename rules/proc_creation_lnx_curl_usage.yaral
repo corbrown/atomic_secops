@@ -7,7 +7,7 @@ rule curl_usage_on_linux {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/curl$/ nocase)
+        ($event.target.process.file.full_path = /\/curl$/ nocase)
     condition:
         $event
 }

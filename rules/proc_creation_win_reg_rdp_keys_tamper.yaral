@@ -1,21 +1,21 @@
 rule potential_tampering_with_rdp_related_registry_keys_via_reg_exe {
     meta:
-        description = "Detects the execution of 'reg.exe' for enabling/disabling the RDP service on the host by tampering with the 'CurrentControlSet\\Control\\Terminal Server' values"
+        description = "Detects the execution of 'reg.exe' for enabling/disabling the RDP service on the host by tampering with the 'CurrentControlSet\Control\Terminal Server' values"
         references = "https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/"
         mitre = "attack.defense-evasion, attack.lateral-movement, attack.t1021.001, attack.t1112"
         logsource = "process_creation"
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
         $event.target.process.file.names = "reg.exe" nocase) and
         $event.target.process.command_line = / add / nocase and
-        $event.target.process.command_line = /\\\\CurrentControlSet\\\\Control\\\\Terminal Server/ nocase and
+        $event.target.process.command_line = /\\CurrentControlSet\\Control\\Terminal Server/ nocase and
         $event.target.process.command_line = /REG_DWORD/ nocase and
-        $event.target.process.command_line = / \\/f/ nocase and
+        $event.target.process.command_line = / \/f/ nocase and
         (($event.target.process.command_line = /Licensing Core/ nocase and
         $event.target.process.command_line = /EnableConcurrentSessions/ nocase) or
-        $event.target.process.command_line = /WinStations\\\\RDP-Tcp|MaxInstanceCount|fEnableWinStation|TSUserEnabled|TSEnabled|TSAppCompat|IdleWinStationPoolCount|TSAdvertise|AllowTSConnections|fSingleSessionPerUser|fDenyTSConnections/ nocase))
+        $event.target.process.command_line = /WinStations\\RDP-Tcp|MaxInstanceCount|fEnableWinStation|TSUserEnabled|TSEnabled|TSAppCompat|IdleWinStationPoolCount|TSAdvertise|AllowTSConnections|fSingleSessionPerUser|fDenyTSConnections/ nocase))
     condition:
         $event
 }

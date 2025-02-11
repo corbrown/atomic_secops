@@ -8,8 +8,8 @@ rule persistence_via_sticky_key_backdoor {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /copy / nocase and
-        $event.target.process.command_line = /\\/y / nocase and
-        $event.target.process.command_line = /C:\\\\windows\\\\system32\\\\cmd\\.exe C:\\\\windows\\\\system32\\\\sethc\\.exe/ nocase)
+        $event.target.process.command_line = /\/y / nocase and
+        $event.target.process.command_line = /C:\\windows\\system32\\cmd\.exe C:\\windows\\system32\\sethc\.exe/ nocase)
     condition:
         $event
 }

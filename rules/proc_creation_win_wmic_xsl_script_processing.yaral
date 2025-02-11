@@ -7,9 +7,9 @@ rule xsl_script_execution_via_wmic_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\wmic\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\wmic\.exe$/ nocase and
         $event.target.process.command_line = /-format/ nocase or
-        $event.target.process.command_line = /\\/format/ nocase or
+        $event.target.process.command_line = /\/format/ nocase or
         $event.target.process.command_line = /–format/ nocase or
         $event.target.process.command_line = /—format/ nocase or
         $event.target.process.command_line = /―format/ nocase and

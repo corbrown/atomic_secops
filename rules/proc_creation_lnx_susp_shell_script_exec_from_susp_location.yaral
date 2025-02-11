@@ -7,9 +7,9 @@ rule execution_of_script_located_in_potentially_suspicious_directory {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/bash|\\/csh|\\/dash|\\/fish|\\/ksh|\\/sh|\\/zsh/ nocase and
+        ($event.target.process.file.full_path = /\/bash|\/csh|\/dash|\/fish|\/ksh|\/sh|\/zsh/ nocase and
         $event.target.process.command_line = / -c / nocase and
-        $event.target.process.command_line = /\\/tmp\\// nocase)
+        $event.target.process.command_line = /\/tmp\// nocase)
     condition:
         $event
 }

@@ -7,9 +7,9 @@ rule potentially_suspicious_regsvr32_http_ftp_pattern {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\regsvr32\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase or
         $event.target.process.file.names = "REGSVR32.EXE" nocase) and
-        $event.target.process.command_line = / \\/i| -i/ nocase and
+        $event.target.process.command_line = / \/i| -i/ nocase and
         $event.target.process.command_line = /ftp|http/ nocase)
     condition:
         $event

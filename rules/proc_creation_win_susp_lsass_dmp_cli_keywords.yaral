@@ -7,13 +7,13 @@ rule lsass_dump_keyword_in_commandline {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.command_line = /lsass\\.dmp|lsass\\.zip|lsass\\.rar|Andrew\\.dmp|Coredump\\.dmp|NotLSASS\\.zip|lsass_2|lsassdump|lsassdmp/ nocase or
+        (($event.target.process.command_line = /lsass\.dmp|lsass\.zip|lsass\.rar|Andrew\.dmp|Coredump\.dmp|NotLSASS\.zip|lsass_2|lsassdump|lsassdmp/ nocase or
         ($event.target.process.command_line = /lsass/ nocase and
-        $event.target.process.command_line = /\\.dmp/ nocase) or
+        $event.target.process.command_line = /\.dmp/ nocase) or
         ($event.target.process.command_line = /SQLDmpr/ nocase and
-        $event.target.process.command_line = /\\.mdmp/ nocase) or
+        $event.target.process.command_line = /\.mdmp/ nocase) or
         ($event.target.process.command_line = /nanodump/ nocase and
-        $event.target.process.command_line = /\\.dmp/ nocase)))
+        $event.target.process.command_line = /\.dmp/ nocase)))
     condition:
         $event
 }

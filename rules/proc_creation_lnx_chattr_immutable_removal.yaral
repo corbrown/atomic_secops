@@ -7,7 +7,7 @@ rule remove_immutable_file_attribute {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/chattr$/ nocase and
+        ($event.target.process.file.full_path = /\/chattr$/ nocase and
         $event.target.process.command_line = / -i / nocase)
     condition:
         $event

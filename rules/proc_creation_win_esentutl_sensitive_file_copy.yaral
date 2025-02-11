@@ -7,20 +7,20 @@ rule copying_sensitive_files_with_credential_data {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\\\esentutl\\.exe$/ nocase or
-        $event.target.process.file.names = "\\\\esentutl.exe" nocase) and
+        ((($event.target.process.file.full_path = /\\esentutl\.exe$/ nocase or
+        $event.target.process.file.names = "\\esentutl.exe" nocase) and
         ($event.target.process.command_line = /vss/ nocase or
         $event.target.process.command_line = / -m / nocase or
-        $event.target.process.command_line = / \\/m / nocase or
+        $event.target.process.command_line = / \/m / nocase or
         $event.target.process.command_line = / –m / nocase or
         $event.target.process.command_line = / —m / nocase or
         $event.target.process.command_line = / ―m / nocase or
         $event.target.process.command_line = / -y / nocase or
-        $event.target.process.command_line = / \\/y / nocase or
+        $event.target.process.command_line = / \/y / nocase or
         $event.target.process.command_line = / –y / nocase or
         $event.target.process.command_line = / —y / nocase or
         $event.target.process.command_line = / ―y / nocase)) or
-        $event.target.process.command_line = /\\\\config\\\\RegBack\\\\sam|\\\\config\\\\RegBack\\\\security|\\\\config\\\\RegBack\\\\system|\\\\config\\\\sam|\\\\config\\\\security|\\\\config\\\\system |\\\\repair\\\\sam|\\\\repair\\\\security|\\\\repair\\\\system|\\\\windows\\\\ntds\\\\ntds\\.dit/ nocase)
+        $event.target.process.command_line = /\\config\\RegBack\\sam|\\config\\RegBack\\security|\\config\\RegBack\\system|\\config\\sam|\\config\\security|\\config\\system |\\repair\\sam|\\repair\\security|\\repair\\system|\\windows\\ntds\\ntds\.dit/ nocase)
     condition:
         $event
 }

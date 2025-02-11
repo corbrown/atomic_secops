@@ -7,11 +7,11 @@ rule potential_recon_activity_via_nltest_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\nltest\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\nltest\.exe$/ nocase or
         $event.target.process.file.names = "nltestrk.exe" nocase) and
         (($event.target.process.command_line = /server/ nocase and
         $event.target.process.command_line = /query/ nocase) or
-        $event.target.process.command_line = /\\/user|all_trusts|dclist:|dnsgetdc:|domain_trusts|dsgetdc:|parentdomain|trusted_domains/ nocase))
+        $event.target.process.command_line = /\/user|all_trusts|dclist:|dnsgetdc:|domain_trusts|dsgetdc:|parentdomain|trusted_domains/ nocase))
     condition:
         $event
 }

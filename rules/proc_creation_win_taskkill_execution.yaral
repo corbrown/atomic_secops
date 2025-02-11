@@ -7,30 +7,30 @@ rule process_terminated_via_taskkill {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\taskkill\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\taskkill\.exe$/ nocase or
         $event.target.process.file.names = "taskkill.exe" nocase) and
         ($event.target.process.command_line = / -f / nocase or
-        $event.target.process.command_line = / \\/f / nocase or
+        $event.target.process.command_line = / \/f / nocase or
         $event.target.process.command_line = / –f / nocase or
         $event.target.process.command_line = / —f / nocase or
         $event.target.process.command_line = / ―f / nocase or
         $event.target.process.command_line = / -f$/ nocase or
-        $event.target.process.command_line = / \\/f$/ nocase or
+        $event.target.process.command_line = / \/f$/ nocase or
         $event.target.process.command_line = / –f$/ nocase or
         $event.target.process.command_line = / —f$/ nocase or
         $event.target.process.command_line = / ―f$/ nocase) and
         ($event.target.process.command_line = / -im / nocase or
-        $event.target.process.command_line = / \\/im / nocase or
+        $event.target.process.command_line = / \/im / nocase or
         $event.target.process.command_line = / –im / nocase or
         $event.target.process.command_line = / —im / nocase or
         $event.target.process.command_line = / ―im / nocase or
         $event.target.process.command_line = / -pid / nocase or
-        $event.target.process.command_line = / \\/pid / nocase or
+        $event.target.process.command_line = / \/pid / nocase or
         $event.target.process.command_line = / –pid / nocase or
         $event.target.process.command_line = / —pid / nocase or
         $event.target.process.command_line = / ―pid / nocase) and
-        $event.principal.process.file.full_path = /\\\\AppData\\\\Local\\\\Temp\\\\|:\\\\Windows\\\\Temp/ nocase and
-        $event.principal.process.file.full_path = /\\.tmp$/ nocase)
+        $event.principal.process.file.full_path = /\\AppData\\Local\\Temp\\|:\\Windows\\Temp/ nocase and
+        $event.principal.process.file.full_path = /\.tmp$/ nocase)
     condition:
         $event
 }

@@ -7,11 +7,11 @@ rule suspicious_gup_usage {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\GUP\\.exe$/ nocase and
-        (($event.target.process.file.full_path != /\\\\Program Files\\\\Notepad\\+\\+\\\\updater\\\\GUP\\.exe/ nocase and
-        $event.target.process.file.full_path != /\\\\Program Files \\(x86\\)\\\\Notepad\\+\\+\\\\updater\\\\GUP\\.exe/ nocase) or
-        ($event.target.process.file.full_path = /\\\\Users\\\\/ nocase and
-        $event.target.process.file.full_path = /\\\\AppData\\\\Local\\\\Notepad\\+\\+\\\\updater\\\\GUP\\.exe|\\\\AppData\\\\Roaming\\\\Notepad\\+\\+\\\\updater\\\\GUP\\.exe/ nocase)))
+        ($event.target.process.file.full_path = /\\GUP\.exe$/ nocase and
+        (($event.target.process.file.full_path != /\\Program Files\\Notepad\+\+\\updater\\GUP\.exe/ nocase and
+        $event.target.process.file.full_path != /\\Program Files \(x86\)\\Notepad\+\+\\updater\\GUP\.exe/ nocase) or
+        ($event.target.process.file.full_path = /\\Users\\/ nocase and
+        $event.target.process.file.full_path = /\\AppData\\Local\\Notepad\+\+\\updater\\GUP\.exe|\\AppData\\Roaming\\Notepad\+\+\\updater\\GUP\.exe/ nocase)))
     condition:
         $event
 }

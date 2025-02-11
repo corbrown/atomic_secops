@@ -7,8 +7,8 @@ rule hacktool___xordump_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\xordump\\.exe$/ nocase or
-        $event.target.process.command_line = / -process lsass\\.exe | -m comsvcs | -m dbghelp | -m dbgcore / nocase))
+        (($event.target.process.file.full_path = /\\xordump\.exe$/ nocase or
+        $event.target.process.command_line = / -process lsass\.exe | -m comsvcs | -m dbghelp | -m dbgcore / nocase))
     condition:
         $event
 }

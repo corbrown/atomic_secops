@@ -7,9 +7,9 @@ rule scheduled_task_executing_encoded_payload_from_registry {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\schtasks\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase or
         $event.target.process.file.names = "schtasks.exe" nocase) and
-        $event.target.process.command_line = /\\/Create/ nocase and
+        $event.target.process.command_line = /\/Create/ nocase and
         $event.target.process.command_line = /FromBase64String|encodedcommand/ nocase and
         $event.target.process.command_line = /Get-ItemProperty| gp / nocase and
         $event.target.process.command_line = /HKCU:|HKLM:|registry::|HKEY_/ nocase)

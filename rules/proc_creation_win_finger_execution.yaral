@@ -8,7 +8,7 @@ rule finger_exe_execution {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "finger.exe" nocase or
-        $event.target.process.file.full_path = /\\\\finger\\.exe$/ nocase))
+        $event.target.process.file.full_path = /\\finger\.exe$/ nocase))
     condition:
         $event
 }

@@ -7,7 +7,7 @@ rule powershell_base64_encoded_invoke_keyword {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or
         $event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase) and
         $event.target.process.command_line = / -e/ nocase and
         $event.target.process.command_line = /SQBuAHYAbwBrAGUALQ|kAbgB2AG8AawBlAC0A|JAG4AdgBvAGsAZQAtA|SW52b2tlL|ludm9rZS|JbnZva2Ut/ nocase)

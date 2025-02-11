@@ -7,7 +7,7 @@ rule disable_or_stop_services {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/service|\\/systemctl|\\/chkconfig/ nocase and
+        ($event.target.process.file.full_path = /\/service|\/systemctl|\/chkconfig/ nocase and
         $event.target.process.command_line = /stop|disable/ nocase)
     condition:
         $event

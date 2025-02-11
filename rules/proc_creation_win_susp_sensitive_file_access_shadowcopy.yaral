@@ -7,8 +7,8 @@ rule sensitive_file_access_via_volume_shadow_copy_backup {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\\\\\\\\\?\\\\GLOBALROOT\\\\Device\\\\HarddiskVolumeShadowCopy/ nocase and
-        $event.target.process.command_line = /\\\\NTDS\\.dit|\\\\SYSTEM|\\\\SECURITY/ nocase)
+        ($event.target.process.command_line = /\\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy/ nocase and
+        $event.target.process.command_line = /\\NTDS\.dit|\\SYSTEM|\\SECURITY/ nocase)
     condition:
         $event
 }

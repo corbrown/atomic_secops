@@ -7,11 +7,11 @@ rule suspicious_execution_of_powershell_with_base64 {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase and
+        ($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase and
         $event.target.process.command_line = / -e | -en | -enc | -enco| -ec / nocase and
         ($event.target.process.command_line != / -Encoding / nocase or
-        ($event.principal.process.file.full_path != /C:\\\\Packages\\\\Plugins\\\\Microsoft\\.GuestConfiguration\\.ConfigurationforWindows\\\\/ nocase and
-        $event.principal.process.file.full_path != /\\\\gc_worker\\.exe/ nocase)))
+        ($event.principal.process.file.full_path != /C:\\Packages\\Plugins\\Microsoft\.GuestConfiguration\.ConfigurationforWindows\\/ nocase and
+        $event.principal.process.file.full_path != /\\gc_worker\.exe/ nocase)))
     condition:
         $event
 }

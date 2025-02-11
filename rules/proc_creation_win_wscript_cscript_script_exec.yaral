@@ -8,8 +8,8 @@ rule wsf_jse_js_vba_vbe_file_execution_via_cscript_wscript {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = /wscript.exe|cscript.exe/ nocase or
-        $event.target.process.file.full_path = /\\\\wscript\\.exe|\\\\cscript\\.exe/ nocase) and
-        $event.target.process.command_line = /\\.js|\\.jse|\\.vba|\\.vbe|\\.vbs|\\.wsf/ nocase)
+        $event.target.process.file.full_path = /\\wscript\.exe|\\cscript\.exe/ nocase) and
+        $event.target.process.command_line = /\.js|\.jse|\.vba|\.vbe|\.vbs|\.wsf/ nocase)
     condition:
         $event
 }

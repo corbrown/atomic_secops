@@ -7,13 +7,13 @@ rule suspicious_group_and_account_reconnaissance_activity_using_net_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\net\\.exe|\\\\net1\\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\net\.exe|\\net1\.exe/ nocase or
         $event.target.process.file.names = /net.exe|net1.exe/ nocase) and
         (($event.target.process.command_line = / group | localgroup / nocase and
-        $event.target.process.command_line = /domain admins| administrator| administrateur|enterprise admins|Exchange Trusted Subsystem|Remote Desktop Users|Utilisateurs du Bureau à distance|Usuarios de escritorio remoto| \\/do/ nocase and
-        $event.target.process.command_line != / \\/add/ nocase) or
+        $event.target.process.command_line = /domain admins| administrator| administrateur|enterprise admins|Exchange Trusted Subsystem|Remote Desktop Users|Utilisateurs du Bureau à distance|Usuarios de escritorio remoto| \/do/ nocase and
+        $event.target.process.command_line != / \/add/ nocase) or
         ($event.target.process.command_line = / accounts / nocase and
-        $event.target.process.command_line = / \\/do/ nocase)))
+        $event.target.process.command_line = / \/do/ nocase)))
     condition:
         $event
 }

@@ -7,9 +7,9 @@ rule suspicious_recursive_takeown {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\takeown\\.exe$/ nocase and
-        $event.target.process.command_line = /\\/f / nocase and
-        $event.target.process.command_line = /\\/r/ nocase)
+        ($event.target.process.file.full_path = /\\takeown\.exe$/ nocase and
+        $event.target.process.command_line = /\/f / nocase and
+        $event.target.process.command_line = /\/r/ nocase)
     condition:
         $event
 }

@@ -7,14 +7,14 @@ rule potential_regsvr32_commandline_flag_anomaly {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\regsvr32\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase and
         $event.target.process.command_line = / -i:/ nocase or
-        $event.target.process.command_line = / \\/i:/ nocase or
+        $event.target.process.command_line = / \/i:/ nocase or
         $event.target.process.command_line = / –i:/ nocase or
         $event.target.process.command_line = / —i:/ nocase or
         $event.target.process.command_line = / ―i:/ nocase and
         $event.target.process.command_line != / -n / nocase or
-        $event.target.process.command_line != / \\/n / nocase or
+        $event.target.process.command_line != / \/n / nocase or
         $event.target.process.command_line != / –n / nocase or
         $event.target.process.command_line != / —n / nocase or
         $event.target.process.command_line != / ―n / nocase)

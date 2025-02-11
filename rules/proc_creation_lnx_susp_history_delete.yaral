@@ -7,9 +7,9 @@ rule history_file_deletion {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/rm|\\/unlink|\\/shred/ nocase and
-        ($event.target.process.command_line = /\\/\\.bash_history|\\/\\.zsh_history/ nocase or
-        $event.target.process.command_line = /_history|\\.history|zhistory/ nocase))
+        ($event.target.process.file.full_path = /\/rm|\/unlink|\/shred/ nocase and
+        ($event.target.process.command_line = /\/\.bash_history|\/\.zsh_history/ nocase or
+        $event.target.process.command_line = /_history|\.history|zhistory/ nocase))
     condition:
         $event
 }

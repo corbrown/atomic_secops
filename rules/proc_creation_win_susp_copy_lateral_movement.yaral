@@ -7,13 +7,13 @@ rule copy_from_or_to_admin_share_or_sysvol_folder {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\\\\\\\.*\\$|\\\\Sysvol\\\\/ nocase and
-        (($event.target.process.file.full_path = /\\\\robocopy\\.exe|\\\\xcopy\\.exe/ nocase or
+        ($event.target.process.command_line = /\\\\.*\$|\\Sysvol\\/ nocase and
+        (($event.target.process.file.full_path = /\\robocopy\.exe|\\xcopy\.exe/ nocase or
         $event.target.process.file.names = /robocopy.exe|XCOPY.EXE/ nocase) or
-        (($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
         $event.target.process.file.names = "Cmd.Exe" nocase) and
         $event.target.process.command_line = /copy/ nocase) or
-        (($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or
         $event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase) and
         $event.target.process.command_line = /copy-item|copy |cpi | cp |move |move-item| mi | mv / nocase)))
     condition:

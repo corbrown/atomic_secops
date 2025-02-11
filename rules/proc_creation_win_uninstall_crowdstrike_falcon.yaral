@@ -7,9 +7,9 @@ rule uninstall_crowdstrike_falcon_sensor {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\\\WindowsSensor\\.exe/ nocase and
-        $event.target.process.command_line = / \\/uninstall/ nocase and
-        $event.target.process.command_line = / \\/quiet/ nocase)
+        ($event.target.process.command_line = /\\WindowsSensor\.exe/ nocase and
+        $event.target.process.command_line = / \/uninstall/ nocase and
+        $event.target.process.command_line = / \/quiet/ nocase)
     condition:
         $event
 }

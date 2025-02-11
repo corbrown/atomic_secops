@@ -7,7 +7,7 @@ rule nohup_execution {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/nohup$/ nocase)
+        ($event.target.process.file.full_path = /\/nohup$/ nocase)
     condition:
         $event
 }

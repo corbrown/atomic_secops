@@ -7,12 +7,12 @@ rule potentially_suspicious_cmd_shell_output_redirect {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
         $event.target.process.file.names = "Cmd.Exe" nocase) and
-        ($event.target.process.command_line = />.%APPDATA%\\\\|>.%TEMP%\\\\|>.%TMP%\\\\|>.%USERPROFILE%\\\\|>.C:\\\\ProgramData\\\\|>.C:\\\\Temp\\\\|>.C:\\\\Users\\\\Public\\\\|>.C:\\\\Windows\\\\Temp\\\\/ nocase or
+        ($event.target.process.command_line = />.%APPDATA%\\|>.%TEMP%\\|>.%TMP%\\|>.%USERPROFILE%\\|>.C:\\ProgramData\\|>.C:\\Temp\\|>.C:\\Users\\Public\\|>.C:\\Windows\\Temp\\/ nocase or
         ($event.target.process.command_line = / >|">|'>/ nocase and
-        $event.target.process.command_line = /C:\\\\Users\\\\/ nocase and
-        $event.target.process.command_line = /\\\\AppData\\\\Local\\\\/ nocase)))
+        $event.target.process.command_line = /C:\\Users\\/ nocase and
+        $event.target.process.command_line = /\\AppData\\Local\\/ nocase)))
     condition:
         $event
 }

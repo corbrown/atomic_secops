@@ -7,10 +7,10 @@ rule potential_reconnaissance_for_cached_credentials_via_cmdkey_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\cmdkey\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\cmdkey\.exe$/ nocase or
         $event.target.process.file.names = "cmdkey.exe" nocase) and
         $event.target.process.command_line = / -l/ nocase or
-        $event.target.process.command_line = / \\/l/ nocase or
+        $event.target.process.command_line = / \/l/ nocase or
         $event.target.process.command_line = / –l/ nocase or
         $event.target.process.command_line = / —l/ nocase or
         $event.target.process.command_line = / ―l/ nocase)

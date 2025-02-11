@@ -7,9 +7,9 @@ rule suspicious_rundll32_execution_with_image_extension {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\rundll32\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\rundll32\.exe$/ nocase or
         $event.target.process.file.names = "RUNDLL32.exe" nocase) and
-        $event.target.process.command_line = /\\.bmp|\\.cr2|\\.eps|\\.gif|\\.ico|\\.jpeg|\\.jpg|\\.nef|\\.orf|\\.png|\\.raw|\\.sr2|\\.tif|\\.tiff/ nocase)
+        $event.target.process.command_line = /\.bmp|\.cr2|\.eps|\.gif|\.ico|\.jpeg|\.jpg|\.nef|\.orf|\.png|\.raw|\.sr2|\.tif|\.tiff/ nocase)
     condition:
         $event
 }

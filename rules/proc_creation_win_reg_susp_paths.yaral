@@ -7,9 +7,9 @@ rule reg_add_suspicious_paths {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
         $event.target.process.file.names = "reg.exe" nocase) and
-        $event.target.process.command_line = /\\\\AppDataLow\\\\Software\\\\Microsoft\\\\|\\\\Policies\\\\Microsoft\\\\Windows\\\\OOBE|\\\\Policies\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon|\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\Currentversion\\\\Winlogon|\\\\CurrentControlSet\\\\Control\\\\SecurityProviders\\\\WDigest|\\\\Microsoft\\\\Windows Defender\\\\/ nocase)
+        $event.target.process.command_line = /\\AppDataLow\\Software\\Microsoft\\|\\Policies\\Microsoft\\Windows\\OOBE|\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon|\\SOFTWARE\\Microsoft\\Windows NT\\Currentversion\\Winlogon|\\CurrentControlSet\\Control\\SecurityProviders\\WDigest|\\Microsoft\\Windows Defender\\/ nocase)
     condition:
         $event
 }

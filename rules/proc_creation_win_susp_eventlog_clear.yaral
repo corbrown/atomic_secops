@@ -7,13 +7,13 @@ rule suspicious_eventlog_clearing_or_configuration_change_activity {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\\\wevtutil\\.exe$/ nocase and
+        ((($event.target.process.file.full_path = /\\wevtutil\.exe$/ nocase and
         $event.target.process.command_line = /clear-log | cl |set-log | sl |lfn:/ nocase) or
-        ($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase and
+        ($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase and
         $event.target.process.command_line = /Clear-EventLog |Remove-EventLog |Limit-EventLog |Clear-WinEvent / nocase) or
-        ($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe|\\\\wmic\\.exe/ nocase and
+        ($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe|\\wmic\.exe/ nocase and
         $event.target.process.command_line = /ClearEventLog/ nocase)) and
-        $event.principal.process.file.full_path = /C:\\\\Windows\\\\SysWOW64\\\\msiexec.exe|C:\\\\Windows\\\\System32\\\\msiexec.exe/ nocase and
+        $event.principal.process.file.full_path = /C:\\Windows\\SysWOW64\\msiexec.exe|C:\\Windows\\System32\\msiexec.exe/ nocase and
         $event.target.process.command_line = / sl / nocase)
     condition:
         $event

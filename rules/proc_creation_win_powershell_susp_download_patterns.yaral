@@ -7,7 +7,7 @@ rule suspicious_powershell_download_and_execute_pattern {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /IEX \\(\\(New-Object Net\\.WebClient\\)\\.DownloadString|IEX \\(New-Object Net\\.WebClient\\)\\.DownloadString|IEX\\(\\(New-Object Net\\.WebClient\\)\\.DownloadString|IEX\\(New-Object Net\\.WebClient\\)\\.DownloadString| -command \\(New-Object System\\.Net\\.WebClient\\)\\.DownloadFile\\(| -c \\(New-Object System\\.Net\\.WebClient\\)\\.DownloadFile\\(/ nocase)
+        ($event.target.process.command_line = /IEX \(\(New-Object Net\.WebClient\)\.DownloadString|IEX \(New-Object Net\.WebClient\)\.DownloadString|IEX\(\(New-Object Net\.WebClient\)\.DownloadString|IEX\(New-Object Net\.WebClient\)\.DownloadString| -command \(New-Object System\.Net\.WebClient\)\.DownloadFile\(| -c \(New-Object System\.Net\.WebClient\)\.DownloadFile\(/ nocase)
     condition:
         $event
 }

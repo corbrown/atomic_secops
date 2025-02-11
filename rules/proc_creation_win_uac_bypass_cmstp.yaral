@@ -7,9 +7,9 @@ rule bypass_uac_via_cmstp {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\\\cmstp\\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\cmstp\.exe$/ nocase or
         $event.target.process.file.names = "CMSTP.EXE" nocase) and
-        $event.target.process.command_line = /\\/s|-s|\\/au|-au|\\/ni|-ni/ nocase)
+        $event.target.process.command_line = /\/s|-s|\/au|-au|\/ni|-ni/ nocase)
     condition:
         $event
 }

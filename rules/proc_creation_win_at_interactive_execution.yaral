@@ -7,7 +7,7 @@ rule interactive_at_job {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\\\at\\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\at\.exe$/ nocase and
         $event.target.process.command_line = /interactive/ nocase)
     condition:
         $event

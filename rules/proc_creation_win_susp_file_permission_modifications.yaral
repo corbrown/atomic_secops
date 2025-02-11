@@ -7,18 +7,18 @@ rule file_or_folder_permissions_modifications {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\\\cacls\\.exe|\\\\icacls\\.exe|\\\\net\\.exe|\\\\net1\\.exe/ nocase and
-        $event.target.process.command_line = /\\/grant|\\/setowner|\\/inheritance:r/ nocase) or
-        ($event.target.process.file.full_path = /\\\\attrib\\.exe$/ nocase and
+        ((($event.target.process.file.full_path = /\\cacls\.exe|\\icacls\.exe|\\net\.exe|\\net1\.exe/ nocase and
+        $event.target.process.command_line = /\/grant|\/setowner|\/inheritance:r/ nocase) or
+        ($event.target.process.file.full_path = /\\attrib\.exe$/ nocase and
         $event.target.process.command_line = /-r/ nocase) or
-        $event.target.process.file.full_path = /\\\\takeown\\.exe$/ nocase) and
-        ($event.target.process.command_line != /ICACLS C:\\\\ProgramData\\\\dynatrace\\\\gateway\\\\config\\\\connectivity\\.history \\/reset$/ nocase or
-        ($event.target.process.command_line = /ICACLS C:\\\\ProgramData\\\\dynatrace\\\\gateway\\\\config\\\\config\\.properties \\/grant :r / nocase and
+        $event.target.process.file.full_path = /\\takeown\.exe$/ nocase) and
+        ($event.target.process.command_line != /ICACLS C:\\ProgramData\\dynatrace\\gateway\\config\\connectivity\.history \/reset$/ nocase or
+        ($event.target.process.command_line = /ICACLS C:\\ProgramData\\dynatrace\\gateway\\config\\config\.properties \/grant :r / nocase and
         $event.target.process.command_line = /S-1-5-19:F/ nocase) or
-        ($event.target.process.command_line != /\\\\AppData\\\\Local\\\\Programs\\\\Microsoft VS Code/ nocase and
-        $event.target.process.command_line != /:\\\\Program Files\\\\Microsoft VS Code/ nocase) or
-        ($event.target.process.command_line != /:\\\\Program Files \\(x86\\)\\\\Avira/ nocase and
-        $event.target.process.command_line != /:\\\\Program Files\\\\Avira/ nocase)))
+        ($event.target.process.command_line != /\\AppData\\Local\\Programs\\Microsoft VS Code/ nocase and
+        $event.target.process.command_line != /:\\Program Files\\Microsoft VS Code/ nocase) or
+        ($event.target.process.command_line != /:\\Program Files \(x86\)\\Avira/ nocase and
+        $event.target.process.command_line != /:\\Program Files\\Avira/ nocase)))
     condition:
         $event
 }

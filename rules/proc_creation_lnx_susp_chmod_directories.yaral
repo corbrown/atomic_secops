@@ -7,8 +7,8 @@ rule chmod_suspicious_directory {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\/chmod$/ nocase and
-        $event.target.process.command_line = /\\/tmp\\/|\\/\\.Library\\/|\\/etc\\/|\\/opt\\// nocase)
+        ($event.target.process.file.full_path = /\/chmod$/ nocase and
+        $event.target.process.command_line = /\/tmp\/|\/\.Library\/|\/etc\/|\/opt\// nocase)
     condition:
         $event
 }

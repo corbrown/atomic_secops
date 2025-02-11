@@ -7,7 +7,7 @@ rule mavinject_inject_dll_into_running_process {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = / \\/INJECTRUNNING / nocase and
+        ($event.target.process.command_line = / \/INJECTRUNNING / nocase and
         $event.principal.process.file.full_path != "C:\\Windows\\System32\\AppVClient.exe" nocase)
     condition:
         $event
