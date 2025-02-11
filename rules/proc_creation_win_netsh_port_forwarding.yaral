@@ -1,0 +1,25 @@
+rule new_port_forwarding_rule_added_via_netsh.exe {
+    meta:
+        description = "Detects the execution of netsh commands that configure a new port forwarding (PortProxy) rule"
+        references = "https://www.fireeye.com/blog/threat-research/2019/01/bypassing-network-restrictions-through-rdp-tunneling.html, https://adepts.of0x.cc/netsh-portproxy-code/, https://www.dfirnotes.net/portproxy_detection/"
+        mitre = "attack.lateral-movement, attack.defense-evasion, attack.command-and-control, attack.t1090"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\netsh\.exe$/ nocase or
+        $event.target.process.file.names = "netsh.exe" nocase) and
+        (($event.target.process.command_line = /interface/ nocase and
+        $event.target.process.command_line = /portproxy/ nocase and
+        $event.target.process.command_line = /add/ nocase and
+        $event.target.process.command_line = /v4tov4/ nocase) or
+        ($event.target.process.command_line = /i / nocase and
+        $event.target.process.command_line = /p / nocase and
+        $event.target.process.command_line = /a / nocase and
+        $event.target.process.command_line = /v / nocase) or
+        ($event.target.process.command_line = /connectp/ nocase and
+        $event.target.process.command_line = /listena/ nocase and
+        $event.target.process.command_line = /c=/ nocase)))
+    condition:
+        $event
+}

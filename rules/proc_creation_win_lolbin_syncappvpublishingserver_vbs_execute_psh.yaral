@@ -1,0 +1,14 @@
+rule syncappvpublishingserver_vbs_execute_arbitrary_powershell_code {
+    meta:
+        description = "Executes arbitrary PowerShell code using SyncAppvPublishingServer.vbs"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1216/T1216.md, https://lolbas-project.github.io/lolbas/Binaries/Syncappvpublishingserver/"
+        mitre = "attack.defense-evasion, attack.t1218, attack.t1216"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /\\SyncAppvPublishingServer\.vbs/ nocase and
+        $event.target.process.command_line = /;/ nocase)
+    condition:
+        $event
+}

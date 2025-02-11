@@ -1,0 +1,15 @@
+rule wscript_shell_run_in_commandline {
+    meta:
+        description = "Detects the presence of the keywords "Wscript", "Shell" and "Run" in the command, which could indicate a suspicious activity"
+        references = "https://web.archive.org/web/20220830122045/http://blog.talosintelligence.com/2022/08/modernloader-delivers-multiple-stealers.html, https://blog.talosintelligence.com/modernloader-delivers-multiple-stealers-cryptominers-and-rats/"
+        mitre = "attack.execution, attack.t1059"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /Wscript\./ nocase and
+        $event.target.process.command_line = /\.Shell/ nocase and
+        $event.target.process.command_line = /\.Run/ nocase)
+    condition:
+        $event
+}

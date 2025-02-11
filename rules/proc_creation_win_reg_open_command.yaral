@@ -1,0 +1,25 @@
+rule suspicious_reg_add_open_command {
+    meta:
+        description = "Threat actors performed dumping of SAM, SECURITY and SYSTEM registry hives using DelegateExecute key"
+        references = "https://thedfirreport.com/2021/12/13/diavol-ransomware/"
+        mitre = "attack.credential-access, attack.t1003"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.command_line = /reg/ nocase and
+        $event.target.process.command_line = /add/ nocase and
+        $event.target.process.command_line = /hkcu\\software\\classes\\ms-settings\\shell\\open\\command/ nocase and
+        $event.target.process.command_line = /\/ve / nocase and
+        $event.target.process.command_line = /\/d/ nocase) or
+        ($event.target.process.command_line = /reg/ nocase and
+        $event.target.process.command_line = /add/ nocase and
+        $event.target.process.command_line = /hkcu\\software\\classes\\ms-settings\\shell\\open\\command/ nocase and
+        $event.target.process.command_line = /\/v/ nocase and
+        $event.target.process.command_line = /DelegateExecute/ nocase) or
+        ($event.target.process.command_line = /reg/ nocase and
+        $event.target.process.command_line = /delete/ nocase and
+        $event.target.process.command_line = /hkcu\\software\\classes\\ms-settings/ nocase))
+    condition:
+        $event
+}

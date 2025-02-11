@@ -1,0 +1,18 @@
+rule suspicious_schtasks_schedule_types {
+    meta:
+        description = "Detects scheduled task creations or modification on a suspicious schedule type"
+        references = "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-change, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create, http://blog.talosintelligence.com/2022/09/lazarus-three-rats.html"
+        mitre = "attack.execution, attack.t1053.005"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase or
+        $event.target.process.file.names = "schtasks.exe" nocase) and
+        $event.target.process.command_line = / ONLOGON | ONSTART | ONCE | ONIDLE / nocase and
+        ($event.target.process.command_line != /NT AUT/ nocase and
+        $event.target.process.command_line != / SYSTEM/ nocase and
+        $event.target.process.command_line != /HIGHEST/ nocase))
+    condition:
+        $event
+}

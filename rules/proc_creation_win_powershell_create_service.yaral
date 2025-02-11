@@ -1,0 +1,14 @@
+rule new_service_creation_using_powershell {
+    meta:
+        description = "Detects the creation of a new service using powershell."
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1543.003/T1543.003.md"
+        mitre = "attack.persistence, attack.privilege-escalation, attack.t1543.003"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /New-Service/ nocase and
+        $event.target.process.command_line = /-BinaryPathName/ nocase)
+    condition:
+        $event
+}

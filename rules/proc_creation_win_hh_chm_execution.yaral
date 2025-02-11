@@ -1,0 +1,15 @@
+rule hh.exe_execution {
+    meta:
+        description = "Detects the execution of "hh.exe" to open ".chm" files."
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218.001/T1218.001.md, https://eqllib.readthedocs.io/en/latest/analytics/b25aa548-7937-11e9-8f5c-d46d6d62a49e.html, https://www.zscaler.com/blogs/security-research/unintentional-leak-glimpse-attack-vectors-apt37"
+        mitre = "attack.defense-evasion, attack.t1218.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.names = "HH.exe" nocase or
+        $event.target.process.file.full_path = /\\hh\.exe$/ nocase) and
+        $event.target.process.command_line = /\.chm/ nocase)
+    condition:
+        $event
+}

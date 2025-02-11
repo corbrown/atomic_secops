@@ -1,0 +1,18 @@
+rule scheduled_task_executing_encoded_payload_from_registry {
+    meta:
+        description = "Detects the creation of a schtask that potentially executes a base64 encoded payload stored in the Windows Registry using PowerShell."
+        references = "https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/"
+        mitre = "attack.execution, attack.persistence, attack.t1053.005, attack.t1059.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase or
+        $event.target.process.file.names = "schtasks.exe" nocase) and
+        $event.target.process.command_line = /\/Create/ nocase and
+        $event.target.process.command_line = /FromBase64String|encodedcommand/ nocase and
+        $event.target.process.command_line = /Get-ItemProperty| gp / nocase and
+        $event.target.process.command_line = /HKCU:|HKLM:|registry::|HKEY_/ nocase)
+    condition:
+        $event
+}

@@ -1,0 +1,15 @@
+rule dll_execution_via_register-cimprovider.exe {
+    meta:
+        description = "Detects using register-cimprovider.exe to execute arbitrary dll file."
+        references = "https://twitter.com/PhilipTsukerman/status/992021361106268161, https://lolbas-project.github.io/lolbas/Binaries/Register-cimprovider/"
+        mitre = "attack.defense-evasion, attack.t1574"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\\register-cimprovider\.exe$/ nocase and
+        $event.target.process.command_line = /-path/ nocase and
+        $event.target.process.command_line = /dll/ nocase)
+    condition:
+        $event
+}

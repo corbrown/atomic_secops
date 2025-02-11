@@ -1,0 +1,14 @@
+rule pubprn.vbs_proxy_execution {
+    meta:
+        description = "Detects the use of the 'Pubprn.vbs' Microsoft signed script to execute commands."
+        references = "https://lolbas-project.github.io/lolbas/Scripts/Pubprn/"
+        mitre = "attack.defense-evasion, attack.t1216.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /\\pubprn\.vbs/ nocase and
+        $event.target.process.command_line = /script:/ nocase)
+    condition:
+        $event
+}

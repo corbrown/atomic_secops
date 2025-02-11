@@ -1,0 +1,13 @@
+rule usage_of_web_request_commands_and_cmdlets {
+    meta:
+        description = "Detects the use of various web request commands with commandline tools and Windows PowerShell cmdlets (including aliases) via CommandLine"
+        references = "https://4sysops.com/archives/use-powershell-to-download-a-file-with-http-https-and-ftp/, https://blog.jourdant.me/post/3-ways-to-download-files-with-powershell, https://learn.microsoft.com/en-us/powershell/module/bitstransfer/add-bitsfile?view=windowsserver2019-ps"
+        mitre = "attack.execution, attack.t1059.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /\[System\.Net\.WebRequest\]::create|curl |Invoke-RestMethod|Invoke-WebRequest|iwr |Net\.WebClient|Resume-BitsTransfer|Start-BitsTransfer|wget |WinHttp\.WinHttpRequest/ nocase)
+    condition:
+        $event
+}

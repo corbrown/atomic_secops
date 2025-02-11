@@ -1,0 +1,17 @@
+rule suspicious_invoke-webrequest_execution {
+    meta:
+        description = "Detects a suspicious call to Invoke-WebRequest cmdlet where the and output is located in a suspicious location"
+        references = "https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool/"
+        mitre = "attack.command-and-control, attack.t1105"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or
+        $event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase) and
+        $event.target.process.command_line = /curl |Invoke-WebRequest|iwr |wget / nocase and
+        $event.target.process.command_line = / -ur| -o/ nocase and
+        $event.target.process.command_line = /\\AppData\\|\\Desktop\\|\\Temp\\|\\Users\\Public\\|%AppData%|%Public%|%Temp%|%tmp%|:\\Windows\\/ nocase)
+    condition:
+        $event
+}

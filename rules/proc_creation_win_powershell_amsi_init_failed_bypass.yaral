@@ -1,0 +1,17 @@
+rule potential_amsi_bypass_via_.net_reflection {
+    meta:
+        description = "Detects Request to "amsiInitFailed" that can be used to disable AMSI Scanning"
+        references = "https://s3cur3th1ssh1t.github.io/Bypass_AMSI_by_manual_modification/, https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/"
+        mitre = "attack.defense-evasion, attack.t1562.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ((($event.target.process.command_line = /System\.Management\.Automation\.AmsiUtils/ nocase and
+        $event.target.process.command_line = /amsiInitFailed/ nocase) or
+        ($event.target.process.command_line = /\[Ref\]\.Assembly\.GetType/ nocase and
+        $event.target.process.command_line = /SetValue\(\$null,\$true\)/ nocase and
+        $event.target.process.command_line = /NonPublic,Static/ nocase)))
+    condition:
+        $event
+}

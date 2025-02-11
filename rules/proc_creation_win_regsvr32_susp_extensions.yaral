@@ -1,0 +1,15 @@
+rule regsvr32_dll_execution_with_suspicious_file_extension {
+    meta:
+        description = "Detects the execution of REGSVR32.exe with DLL files masquerading as other files"
+        references = "https://thedfirreport.com/2021/11/29/continuing-the-bazar-ransomware-story/, https://blog.talosintelligence.com/2021/10/threat-hunting-in-large-datasets-by.html, https://guides.lib.umich.edu/c.php?g=282942&p=1885348"
+        mitre = "attack.defense-evasion, attack.t1218.010"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase or
+        $event.target.process.file.names = "REGSVR32.EXE" nocase) and
+        $event.target.process.command_line = /\.bin|\.bmp|\.cr2|\.dat|\.eps|\.gif|\.ico|\.jpeg|\.jpg|\.nef|\.orf|\.png|\.raw|\.sr2|\.temp|\.tif|\.tiff|\.tmp|\.rtf|\.txt/ nocase)
+    condition:
+        $event
+}

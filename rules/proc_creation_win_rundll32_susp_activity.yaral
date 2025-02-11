@@ -1,0 +1,67 @@
+rule potentially_suspicious_rundll32_activity {
+    meta:
+        description = "Detects suspicious execution of rundll32, with specific calls to some DLLs with known LOLBIN functionalities"
+        references = "http://www.hexacorn.com/blog/2017/05/01/running-programs-via-proxy-jumping-on-a-edr-bypass-trampoline/, https://twitter.com/Hexacorn/status/885258886428725250, https://gist.github.com/ryhanson/227229866af52e2d963cf941af135a52, https://twitter.com/nas_bench/status/1433344116071583746, https://twitter.com/eral4m/status/1479106975967240209, https://twitter.com/eral4m/status/1479080793003671557"
+        mitre = "attack.defense-evasion, attack.t1218.011"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ((($event.target.process.command_line = /javascript:/ nocase and
+        $event.target.process.command_line = /\.RegisterXLL/ nocase) or
+        ($event.target.process.command_line = /url\.dll/ nocase and
+        $event.target.process.command_line = /OpenURL/ nocase) or
+        ($event.target.process.command_line = /url\.dll/ nocase and
+        $event.target.process.command_line = /OpenURLA/ nocase) or
+        ($event.target.process.command_line = /url\.dll/ nocase and
+        $event.target.process.command_line = /FileProtocolHandler/ nocase) or
+        ($event.target.process.command_line = /zipfldr\.dll/ nocase and
+        $event.target.process.command_line = /RouteTheCall/ nocase) or
+        ($event.target.process.command_line = /shell32\.dll/ nocase and
+        $event.target.process.command_line = /Control_RunDLL/ nocase) or
+        ($event.target.process.command_line = /shell32\.dll/ nocase and
+        $event.target.process.command_line = /ShellExec_RunDLL/ nocase) or
+        ($event.target.process.command_line = /mshtml\.dll/ nocase and
+        $event.target.process.command_line = /PrintHTML/ nocase) or
+        ($event.target.process.command_line = /advpack\.dll/ nocase and
+        $event.target.process.command_line = /LaunchINFSection/ nocase) or
+        ($event.target.process.command_line = /advpack\.dll/ nocase and
+        $event.target.process.command_line = /RegisterOCX/ nocase) or
+        ($event.target.process.command_line = /ieadvpack\.dll/ nocase and
+        $event.target.process.command_line = /LaunchINFSection/ nocase) or
+        ($event.target.process.command_line = /ieadvpack\.dll/ nocase and
+        $event.target.process.command_line = /RegisterOCX/ nocase) or
+        ($event.target.process.command_line = /ieframe\.dll/ nocase and
+        $event.target.process.command_line = /OpenURL/ nocase) or
+        ($event.target.process.command_line = /shdocvw\.dll/ nocase and
+        $event.target.process.command_line = /OpenURL/ nocase) or
+        ($event.target.process.command_line = /syssetup\.dll/ nocase and
+        $event.target.process.command_line = /SetupInfObjectInstallAction/ nocase) or
+        ($event.target.process.command_line = /setupapi\.dll/ nocase and
+        $event.target.process.command_line = /InstallHinfSection/ nocase) or
+        ($event.target.process.command_line = /pcwutl\.dll/ nocase and
+        $event.target.process.command_line = /LaunchApplication/ nocase) or
+        ($event.target.process.command_line = /dfshim\.dll/ nocase and
+        $event.target.process.command_line = /ShOpenVerbApplication/ nocase) or
+        ($event.target.process.command_line = /dfshim\.dll/ nocase and
+        $event.target.process.command_line = /ShOpenVerbShortcut/ nocase) or
+        ($event.target.process.command_line = /scrobj\.dll/ nocase and
+        $event.target.process.command_line = /GenerateTypeLib/ nocase and
+        $event.target.process.command_line = /http/ nocase) or
+        ($event.target.process.command_line = /shimgvw\.dll/ nocase and
+        $event.target.process.command_line = /ImageView_Fullscreen/ nocase and
+        $event.target.process.command_line = /http/ nocase) or
+        ($event.target.process.command_line = /comsvcs\.dll/ nocase and
+        $event.target.process.command_line = /MiniDump/ nocase)) and
+        ($event.target.process.command_line != /shell32\.dll,Control_RunDLL desk\.cpl,screensaver,@screensaver/ nocase or
+        ($event.principal.process.file.full_path = "C:\\Windows\\System32\\control.exe" nocase and
+        $event.principal.process.command_line = /\.cpl/ nocase and
+        $event.target.process.command_line = /Shell32\.dll/ nocase and
+        $event.target.process.command_line = /Control_RunDLL/ nocase and
+        $event.target.process.command_line = /\.cpl/ nocase) or
+        ($event.principal.process.file.full_path = "C:\\Windows\\System32\\control.exe" nocase and
+        $event.target.process.command_line = /^"C:\\Windows\\system32\\rundll32\.exe" Shell32\.dll,Control_RunDLL "C:\\Windows\\System32\\/ nocase and
+        $event.target.process.command_line = /\.cpl",$/ nocase)))
+    condition:
+        $event
+}

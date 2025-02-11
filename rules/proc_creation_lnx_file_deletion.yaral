@@ -1,0 +1,13 @@
+rule file_deletion {
+    meta:
+        description = "Detects file deletion using "rm", "shred" or "unlink" commands which are used often by adversaries to delete files left behind by the actions of their intrusion activity"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.004/T1070.004.md"
+        mitre = "attack.defense-evasion, attack.t1070.004"
+        logsource = "process_creation"
+        product = "linux"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\/rm|\/shred|\/unlink/ nocase)
+    condition:
+        $event
+}

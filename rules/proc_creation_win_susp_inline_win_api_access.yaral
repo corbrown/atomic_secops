@@ -1,0 +1,15 @@
+rule potential_winapi_calls_via_commandline {
+    meta:
+        description = "Detects the use of WinAPI Functions via the commandline. As seen used by threat actors via the tool winapiexec"
+        references = "https://twitter.com/m417z/status/1566674631788007425"
+        mitre = "attack.execution, attack.t1106"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /AddSecurityPackage|AdjustTokenPrivileges|Advapi32|CloseHandle|CreateProcessWithToken|CreatePseudoConsole|CreateRemoteThread|CreateThread|CreateUserThread|DangerousGetHandle|DuplicateTokenEx|EnumerateSecurityPackages|FreeHGlobal|FreeLibrary|GetDelegateForFunctionPointer|GetLogonSessionData|GetModuleHandle|GetProcAddress|GetProcessHandle|GetTokenInformation|ImpersonateLoggedOnUser|kernel32|LoadLibrary|memcpy|MiniDumpWriteDump|ntdll|OpenDesktop|OpenProcess|OpenProcessToken|OpenThreadToken|OpenWindowStation|PtrToString|QueueUserApc|ReadProcessMemory|RevertToSelf|RtlCreateUserThread|secur32|SetThreadToken|VirtualAlloc|VirtualFree|VirtualProtect|WaitForSingleObject|WriteInt32|WriteProcessMemory|ZeroFreeGlobalAllocUnicode/ nocase and
+        $event.target.process.file.full_path = /\\MpCmdRun\.exe$/ nocase and
+        $event.target.process.command_line = /GetLoadLibraryWAddress32/ nocase)
+    condition:
+        $event
+}

@@ -1,0 +1,26 @@
+rule shadow_copies_deletion_using_operating_systems_utilities {
+    meta:
+        description = "Shadow Copies deletion using operating systems utilities"
+        references = "https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment, https://blog.talosintelligence.com/2017/05/wannacry.html, https://securingtomorrow.mcafee.com/other-blogs/mcafee-labs/new-teslacrypt-ransomware-arrives-via-spam/, https://www.bleepingcomputer.com/news/security/why-everyone-should-disable-vssadmin-exe-now/, https://www.hybrid-analysis.com/sample/ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41aa?environmentId=100, https://github.com/Neo23x0/Raccine#the-process, https://github.com/Neo23x0/Raccine/blob/20a569fa21625086433dcce8bb2765d0ea08dcb6/yara/gen_ransomware_command_lines.yar, https://redcanary.com/blog/intelligence-insights-october-2021/, https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/blackbyte-exbyte-ransomware"
+        mitre = "attack.defense-evasion, attack.impact, attack.t1070, attack.t1490"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ((($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe|\\wmic\.exe|\\vssadmin\.exe|\\diskshadow\.exe/ nocase or
+        $event.target.process.file.names = /PowerShell.EXE|pwsh.dll|wmic.exe|VSSADMIN.EXE|diskshadow.exe/ nocase) and
+        $event.target.process.command_line = /shadow/ nocase and
+        $event.target.process.command_line = /delete/ nocase) or
+        (($event.target.process.file.full_path = /\\wbadmin\.exe$/ nocase or
+        $event.target.process.file.names = "WBADMIN.EXE" nocase) and
+        $event.target.process.command_line = /delete/ nocase and
+        $event.target.process.command_line = /catalog/ nocase and
+        $event.target.process.command_line = /quiet/ nocase) or
+        (($event.target.process.file.full_path = /\\vssadmin\.exe$/ nocase or
+        $event.target.process.file.names = "VSSADMIN.EXE" nocase) and
+        $event.target.process.command_line = /resize/ nocase and
+        $event.target.process.command_line = /shadowstorage/ nocase and
+        $event.target.process.command_line = /unbounded|\/MaxSize=/ nocase))
+    condition:
+        $event
+}

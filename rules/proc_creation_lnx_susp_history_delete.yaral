@@ -1,0 +1,15 @@
+rule history_file_deletion {
+    meta:
+        description = "Detects events in which a history file gets deleted, e.g. the ~/bash_history to remove traces of malicious activity"
+        references = "https://github.com/sleventyeleven/linuxprivchecker/, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1552.003/T1552.003.md"
+        mitre = "attack.impact, attack.t1565.001"
+        logsource = "process_creation"
+        product = "linux"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\/rm|\/unlink|\/shred/ nocase and
+        ($event.target.process.command_line = /\/\.bash_history|\/\.zsh_history/ nocase or
+        $event.target.process.command_line = /_history|\.history|zhistory/ nocase))
+    condition:
+        $event
+}

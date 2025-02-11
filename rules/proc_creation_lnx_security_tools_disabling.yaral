@@ -1,0 +1,50 @@
+rule disabling_security_tools {
+    meta:
+        description = "Detects disabling security tools"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.004/T1562.004.md"
+        mitre = "attack.defense-evasion, attack.t1562.004"
+        logsource = "process_creation"
+        product = "linux"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\/service$/ nocase and
+        $event.target.process.command_line = /iptables/ nocase and
+        $event.target.process.command_line = /stop/ nocase) or
+        ($event.target.process.file.full_path = /\/service$/ nocase and
+        $event.target.process.command_line = /ip6tables/ nocase and
+        $event.target.process.command_line = /stop/ nocase) or
+        ($event.target.process.file.full_path = /\/chkconfig$/ nocase and
+        $event.target.process.command_line = /iptables/ nocase and
+        $event.target.process.command_line = /stop/ nocase) or
+        ($event.target.process.file.full_path = /\/chkconfig$/ nocase and
+        $event.target.process.command_line = /ip6tables/ nocase and
+        $event.target.process.command_line = /stop/ nocase) or
+        ($event.target.process.file.full_path = /\/systemctl$/ nocase and
+        $event.target.process.command_line = /firewalld/ nocase and
+        $event.target.process.command_line = /stop/ nocase) or
+        ($event.target.process.file.full_path = /\/systemctl$/ nocase and
+        $event.target.process.command_line = /firewalld/ nocase and
+        $event.target.process.command_line = /disable/ nocase) or
+        ($event.target.process.file.full_path = /\/service$/ nocase and
+        $event.target.process.command_line = /cbdaemon/ nocase and
+        $event.target.process.command_line = /stop/ nocase) or
+        ($event.target.process.file.full_path = /\/chkconfig$/ nocase and
+        $event.target.process.command_line = /cbdaemon/ nocase and
+        $event.target.process.command_line = /off/ nocase) or
+        ($event.target.process.file.full_path = /\/systemctl$/ nocase and
+        $event.target.process.command_line = /cbdaemon/ nocase and
+        $event.target.process.command_line = /stop/ nocase) or
+        ($event.target.process.file.full_path = /\/systemctl$/ nocase and
+        $event.target.process.command_line = /cbdaemon/ nocase and
+        $event.target.process.command_line = /disable/ nocase) or
+        ($event.target.process.file.full_path = /\/setenforce$/ nocase and
+        $event.target.process.command_line = /0/ nocase) or
+        ($event.target.process.file.full_path = /\/systemctl$/ nocase and
+        $event.target.process.command_line = /stop/ nocase and
+        $event.target.process.command_line = /falcon-sensor/ nocase) or
+        ($event.target.process.file.full_path = /\/systemctl$/ nocase and
+        $event.target.process.command_line = /disable/ nocase and
+        $event.target.process.command_line = /falcon-sensor/ nocase))
+    condition:
+        $event
+}

@@ -1,0 +1,15 @@
+rule service_security_descriptor_tampering_via_sc.exe {
+    meta:
+        description = "Detection of sc.exe utility adding a new service with special permission which hides that service."
+        references = "https://blog.talosintelligence.com/2021/10/threat-hunting-in-large-datasets-by.html, https://www.sans.org/blog/red-team-tactics-hiding-windows-services/, https://twitter.com/Alh4zr3d/status/1580925761996828672, https://twitter.com/0gtweet/status/1628720819537936386, https://itconnect.uw.edu/tools-services-support/it-systems-infrastructure/msinf/other-help/understanding-sddl-syntax/"
+        mitre = "attack.persistence, attack.defense-evasion, attack.privilege-escalation, attack.t1574.011"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\sc\.exe$/ nocase or
+        $event.target.process.file.names = "sc.exe" nocase) and
+        $event.target.process.command_line = /sdset/ nocase)
+    condition:
+        $event
+}

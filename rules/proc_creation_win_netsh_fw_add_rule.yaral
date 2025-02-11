@@ -1,0 +1,18 @@
+rule new_firewall_rule_added_via_netsh.exe {
+    meta:
+        description = "Detects the addition of a new rule to the Windows firewall via netsh"
+        references = "https://web.archive.org/web/20190508165435/https://www.operationblockbuster.com/wp-content/uploads/2016/02/Operation-Blockbuster-RAT-and-Staging-Report.pdf"
+        mitre = "attack.defense-evasion, attack.t1562.004, attack.s0246"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\netsh\.exe$/ nocase or
+        $event.target.process.file.names = "netsh.exe" nocase) and
+        $event.target.process.command_line = / firewall / nocase and
+        $event.target.process.command_line = / add / nocase and
+        ($event.target.process.command_line != /advfirewall firewall add rule name=Dropbox dir=in action=allow "program=.:\\Program Files \(x86\)\\Dropbox\\Client\\Dropbox\.exe" enable=yes profile=Any/ nocase and
+        $event.target.process.command_line != /advfirewall firewall add rule name=Dropbox dir=in action=allow "program=.:\\Program Files\\Dropbox\\Client\\Dropbox\.exe" enable=yes profile=Any/ nocase))
+    condition:
+        $event
+}

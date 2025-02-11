@@ -1,0 +1,17 @@
+rule user_added_to_remote_desktop_users_group {
+    meta:
+        description = "Detects addition of users to the local Remote Desktop Users group via "Net" or "Add-LocalGroupMember"."
+        references = "https://www.microsoft.com/security/blog/2021/11/16/evolving-trends-in-iranian-threat-actor-activity-mstic-presentation-at-cyberwarcon-2021/"
+        mitre = "attack.persistence, attack.lateral-movement, attack.t1133, attack.t1136.001, attack.t1021.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ((($event.target.process.command_line = /localgroup / nocase and
+        $event.target.process.command_line = / \/add/ nocase) or
+        ($event.target.process.command_line = /Add-LocalGroupMember / nocase and
+        $event.target.process.command_line = / -Group / nocase)) and
+        $event.target.process.command_line = /Remote Desktop Users|Utilisateurs du Bureau à distance|Usuarios de escritorio remoto/ nocase)
+    condition:
+        $event
+}

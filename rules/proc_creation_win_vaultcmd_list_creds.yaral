@@ -1,0 +1,15 @@
+rule windows_credential_manager_access_via_vaultcmd {
+    meta:
+        description = "List credentials currently stored in Windows Credential Manager via the native Windows utility vaultcmd.exe"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1555.004/T1555.004.md#atomic-test-1---access-saved-credentials-via-vaultcmd"
+        mitre = "attack.credential-access, attack.t1555.004"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\VaultCmd\.exe$/ nocase or
+        $event.target.process.file.names = "VAULTCMD.EXE" nocase) and
+        $event.target.process.command_line = /\/listcreds:/ nocase)
+    condition:
+        $event
+}

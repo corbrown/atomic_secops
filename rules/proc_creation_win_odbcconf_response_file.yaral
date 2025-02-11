@@ -1,0 +1,20 @@
+rule response_file_execution_via_odbcconf.exe {
+    meta:
+        description = "Detects execution of "odbcconf" with the "-f" flag in order to load a response file which might contain a malicious action."
+        references = "https://learn.microsoft.com/en-us/sql/odbc/odbcconf-exe?view=sql-server-ver16, https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/, https://www.cybereason.com/blog/threat-analysis-report-bumblebee-loader-the-high-road-to-enterprise-domain-control, https://www.hexacorn.com/blog/2020/08/23/odbcconf-lolbin-trifecta/"
+        mitre = "attack.defense-evasion, attack.t1218.008"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\odbcconf\.exe$/ nocase or
+        $event.target.process.file.names = "odbcconf.exe" nocase) and
+        $event.target.process.command_line = / -f / nocase or
+        $event.target.process.command_line = / \/f / nocase or
+        $event.target.process.command_line = / –f / nocase or
+        $event.target.process.command_line = / —f / nocase or
+        $event.target.process.command_line = / ―f / nocase and
+        $event.target.process.command_line = /\.rsp/ nocase)
+    condition:
+        $event
+}

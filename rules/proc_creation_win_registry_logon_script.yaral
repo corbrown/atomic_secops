@@ -1,0 +1,13 @@
+rule potential_persistence_via_logon_scripts_-_commandline {
+    meta:
+        description = "Detects the addition of a new LogonScript to the registry value "UserInitMprLogonScript" for potential persistence"
+        references = "https://cocomelonc.github.io/persistence/2022/12/09/malware-pers-20.html"
+        mitre = "attack.persistence, attack.t1037.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /UserInitMprLogonScript/ nocase)
+    condition:
+        $event
+}

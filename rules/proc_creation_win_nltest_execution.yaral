@@ -1,0 +1,14 @@
+rule nltest.exe_execution {
+    meta:
+        description = "Detects nltest commands that can be used for information discovery"
+        references = "https://jpcertcc.github.io/ToolAnalysisResultSheet/details/nltest.htm"
+        mitre = "attack.discovery, attack.t1016, attack.t1018, attack.t1482"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\nltest\.exe$/ nocase or
+        $event.target.process.file.names = "nltestrk.exe" nocase))
+    condition:
+        $event
+}

@@ -1,0 +1,25 @@
+rule regsvr32_execution_from_highly_suspicious_location {
+    meta:
+        description = "Detects execution of regsvr32 where the DLL is located in a highly suspicious locations"
+        references = "Internal Research"
+        mitre = "attack.defense-evasion, attack.t1218.010"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase or
+        $event.target.process.file.names = "REGSVR32.EXE" nocase) and
+        ($event.target.process.command_line = /:\\PerfLogs\\|:\\Temp\\|\\Windows\\Registration\\CRMLog|\\Windows\\System32\\com\\dmp\\|\\Windows\\System32\\FxsTmp\\|\\Windows\\System32\\Microsoft\\Crypto\\RSA\\MachineKeys\\|\\Windows\\System32\\spool\\drivers\\color\\|\\Windows\\System32\\spool\\PRINTERS\\|\\Windows\\System32\\spool\\SERVERS\\|\\Windows\\System32\\Tasks_Migrated\\|\\Windows\\System32\\Tasks\\Microsoft\\Windows\\SyncCenter\\|\\Windows\\SysWOW64\\com\\dmp\\|\\Windows\\SysWOW64\\FxsTmp\\|\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\System\\|\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\SyncCenter\\|\\Windows\\Tasks\\|\\Windows\\Tracing\\/ nocase or
+        ($event.target.process.command_line = / "C:\\| C:\\| 'C:\\|D:\\/ nocase and
+        ($event.target.process.command_line != /C:\\Program Files \(x86\)\\/ nocase and
+        $event.target.process.command_line != /C:\\Program Files\\/ nocase and
+        $event.target.process.command_line != /C:\\ProgramData\\/ nocase and
+        $event.target.process.command_line != /C:\\Users\\/ nocase and
+        $event.target.process.command_line != / C:\\Windows\\/ nocase and
+        $event.target.process.command_line != / "C:\\Windows\\/ nocase and
+        $event.target.process.command_line != / 'C:\\Windows\\/ nocase))) and
+        ($event.target.process.command_line != "" nocase or
+        $event.target.process.command_line = ""))
+    condition:
+        $event
+}

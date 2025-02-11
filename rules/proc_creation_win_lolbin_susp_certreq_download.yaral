@@ -1,0 +1,18 @@
+rule suspicious_certreq_command_to_download {
+    meta:
+        description = "Detects a suspicious certreq execution taken from the LOLBAS examples, which can be abused to download (small) files"
+        references = "https://lolbas-project.github.io/lolbas/Binaries/Certreq/"
+        mitre = "attack.command-and-control, attack.t1105"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\certreq\.exe$/ nocase or
+        $event.target.process.file.names = "CertReq.exe" nocase) and
+        $event.target.process.command_line = / -Post / nocase and
+        $event.target.process.command_line = / -config / nocase and
+        $event.target.process.command_line = / http/ nocase and
+        $event.target.process.command_line = / C:\\windows\\win\.ini / nocase)
+    condition:
+        $event
+}

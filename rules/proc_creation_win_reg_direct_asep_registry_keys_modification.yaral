@@ -1,0 +1,15 @@
+rule direct_autorun_keys_modification {
+    meta:
+        description = "Detects direct modification of autostart extensibility point (ASEP) in registry using reg.exe."
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1547.001/T1547.001.md"
+        mitre = "attack.persistence, attack.t1547.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\\reg\.exe$/ nocase and
+        $event.target.process.command_line = /add/ nocase and
+        $event.target.process.command_line = /\\software\\Microsoft\\Windows\\CurrentVersion\\Run|\\software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit|\\software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Shell|\\software\\Microsoft\\Windows NT\\CurrentVersion\\Windows|\\software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders|\\system\\CurrentControlSet\\Control\\SafeBoot\\AlternateShell/ nocase)
+    condition:
+        $event
+}

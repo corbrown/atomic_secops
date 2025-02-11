@@ -1,0 +1,17 @@
+rule wmic_remote_command_execution {
+    meta:
+        description = "Detects the execution of WMIC to query information on a remote system"
+        references = "https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wmic"
+        mitre = "attack.execution, attack.t1047"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\WMIC\.exe$/ nocase or
+        $event.target.process.file.names = "wmic.exe" nocase) and
+        $event.target.process.command_line = /\/node:/ nocase and
+        ($event.target.process.command_line != /\/node:127\.0\.0\.1 / nocase and
+        $event.target.process.command_line != /\/node:localhost / nocase))
+    condition:
+        $event
+}

@@ -1,0 +1,14 @@
+rule chmod_suspicious_directory {
+    meta:
+        description = "Detects chmod targeting files in abnormal directory paths."
+        references = "https://www.intezer.com/blog/malware-analysis/new-backdoor-sysjoker/, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.002/T1222.002.md"
+        mitre = "attack.defense-evasion, attack.t1222.002"
+        logsource = "process_creation"
+        product = "linux"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\/chmod$/ nocase and
+        $event.target.process.command_line = /\/tmp\/|\/\.Library\/|\/etc\/|\/opt\// nocase)
+    condition:
+        $event
+}

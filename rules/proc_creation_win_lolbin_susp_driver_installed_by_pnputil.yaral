@@ -1,0 +1,14 @@
+rule suspicious_driver_install_by_pnputil.exe {
+    meta:
+        description = "Detects when a possible suspicious driver is being installed via pnputil.exe lolbin"
+        references = "https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax, https://strontic.github.io/xcyclopedia/library/pnputil.exe-60EDC5E6BDBAEE441F2E3AEACD0340D2.html"
+        mitre = "attack.persistence, attack.t1547"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /-i|\/install|-a|\/add-driver|\.inf/ nocase and
+        $event.target.process.file.full_path = /\\pnputil\.exe$/ nocase)
+    condition:
+        $event
+}

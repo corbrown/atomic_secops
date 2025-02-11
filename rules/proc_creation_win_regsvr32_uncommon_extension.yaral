@@ -1,0 +1,22 @@
+rule regsvr32_dll_execution_with_uncommon_extension {
+    meta:
+        description = "Detects a "regsvr32" execution where the DLL doesn't contain a common file extension."
+        references = "https://app.any.run/tasks/34221348-072d-4b70-93f3-aa71f6ebecad/"
+        mitre = "attack.defense-evasion, attack.t1574, attack.execution"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase or
+        $event.target.process.file.names = "REGSVR32.EXE" nocase) and
+        (($event.target.process.command_line != /\.ax/ nocase and
+        $event.target.process.command_line != /\.cpl/ nocase and
+        $event.target.process.command_line != /\.dll/ nocase and
+        $event.target.process.command_line != /\.ocx/ nocase) or
+        $event.target.process.command_line = "" or
+        $event.target.process.command_line != "" nocase) and
+        ($event.target.process.command_line != /\.ppl/ nocase and
+        $event.target.process.command_line != /\.bav/ nocase))
+    condition:
+        $event
+}

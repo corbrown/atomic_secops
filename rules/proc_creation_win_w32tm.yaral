@@ -1,0 +1,19 @@
+rule use_of_w32tm_as_timer {
+    meta:
+        description = "When configured with suitable command line arguments, w32tm can act as a delay mechanism"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/d0dad62dbcae9c60c519368e82c196a3db577055/atomics/T1124/T1124.md, https://blogs.blackberry.com/en/2022/05/dirty-deeds-done-dirt-cheap-russian-rat-offers-backdoor-bargains"
+        mitre = "attack.discovery, attack.t1124"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\w32tm\.exe$/ nocase or
+        $event.target.process.file.names = "w32time.dll" nocase) and
+        $event.target.process.command_line = /\/stripchart/ nocase and
+        $event.target.process.command_line = /\/computer:/ nocase and
+        $event.target.process.command_line = /\/period:/ nocase and
+        $event.target.process.command_line = /\/dataonly/ nocase and
+        $event.target.process.command_line = /\/samples:/ nocase)
+    condition:
+        $event
+}

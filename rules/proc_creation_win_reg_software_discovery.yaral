@@ -1,0 +1,17 @@
+rule detected_windows_software_discovery {
+    meta:
+        description = "Adversaries may attempt to enumerate software for a variety of reasons, such as figuring out what security measures are present or if the compromised system has a version of software that is vulnerable."
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1518/T1518.md, https://github.com/harleyQu1nn/AggressorScripts"
+        mitre = "attack.discovery, attack.t1518"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\\reg\.exe$/ nocase and
+        $event.target.process.command_line = /query/ nocase and
+        $event.target.process.command_line = /\\software\\/ nocase and
+        $event.target.process.command_line = /\/v/ nocase and
+        $event.target.process.command_line = /svcversion/ nocase)
+    condition:
+        $event
+}

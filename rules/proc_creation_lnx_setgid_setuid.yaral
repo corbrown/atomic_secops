@@ -1,0 +1,14 @@
+rule setuid_and_setgid {
+    meta:
+        description = "Detects suspicious change of file privileges with chown and chmod commands"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1548.001/T1548.001.md, https://attack.mitre.org/techniques/T1548/001/"
+        mitre = "attack.persistence, attack.t1548.001"
+        logsource = "process_creation"
+        product = "linux"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /chown root/ nocase and
+        $event.target.process.command_line = / chmod u\+s| chmod g\+s/ nocase)
+    condition:
+        $event
+}

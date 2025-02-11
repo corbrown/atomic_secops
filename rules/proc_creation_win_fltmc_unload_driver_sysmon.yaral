@@ -1,0 +1,16 @@
+rule sysmon_driver_unloaded_via_fltmc.exe {
+    meta:
+        description = "Detects possible Sysmon filter driver unloaded via fltmc.exe"
+        references = "https://www.darkoperator.com/blog/2018/10/5/operating-offensively-against-sysmon"
+        mitre = "attack.defense-evasion, attack.t1070, attack.t1562, attack.t1562.002"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\fltMC\.exe$/ nocase or
+        $event.target.process.file.names = "fltMC.exe" nocase) and
+        $event.target.process.command_line = /unload/ nocase and
+        $event.target.process.command_line = /sysmon/ nocase)
+    condition:
+        $event
+}

@@ -1,0 +1,14 @@
+rule hacktool_-_xordump_execution {
+    meta:
+        description = "Detects suspicious use of XORDump process memory dumping utility"
+        references = "https://github.com/audibleblink/xordump"
+        mitre = "attack.defense-evasion, attack.t1036, attack.t1003.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\xordump\.exe$/ nocase or
+        $event.target.process.command_line = / -process lsass\.exe | -m comsvcs | -m dbghelp | -m dbgcore / nocase))
+    condition:
+        $event
+}

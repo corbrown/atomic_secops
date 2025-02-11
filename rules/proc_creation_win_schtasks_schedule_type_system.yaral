@@ -1,0 +1,16 @@
+rule suspicious_schtasks_schedule_type_with_high_privileges {
+    meta:
+        description = "Detects scheduled task creations or modification to be run with high privileges on a suspicious schedule type"
+        references = "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-change, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create"
+        mitre = "attack.execution, attack.t1053.005"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase or
+        $event.target.process.file.names = "schtasks.exe" nocase) and
+        $event.target.process.command_line = / ONLOGON | ONSTART | ONCE | ONIDLE / nocase and
+        $event.target.process.command_line = /NT AUT| SYSTEM|HIGHEST/ nocase)
+    condition:
+        $event
+}

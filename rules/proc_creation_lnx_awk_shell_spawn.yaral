@@ -1,0 +1,17 @@
+rule suspicious_invocation_of_shell_via_awk_-_linux {
+    meta:
+        description = "Detects the execution of "awk" or it's sibling commands, to invoke a shell using the system() function.
+This behavior is commonly associated with attempts to execute arbitrary commands or escalate privileges, potentially leading to unauthorized access or further exploitation.
+"
+        references = "https://gtfobins.github.io/gtfobins/awk/#shell, https://gtfobins.github.io/gtfobins/gawk/#shell, https://gtfobins.github.io/gtfobins/nawk/#shell, https://gtfobins.github.io/gtfobins/mawk/#shell"
+        mitre = "attack.execution, attack.t1059"
+        logsource = "process_creation"
+        product = "linux"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\/awk|\/gawk|\/mawk|\/nawk/ nocase and
+        $event.target.process.command_line = /BEGIN \{system/ nocase and
+        $event.target.process.command_line = /\/bin\/bash|\/bin\/dash|\/bin\/fish|\/bin\/sh|\/bin\/zsh/ nocase)
+    condition:
+        $event
+}

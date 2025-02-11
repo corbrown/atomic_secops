@@ -1,0 +1,15 @@
+rule remote_chm_file_download/execution_via_hh.exe {
+    meta:
+        description = "Detects the usage of "hh.exe" to execute/download remotely hosted ".chm" files."
+        references = "https://www.splunk.com/en_us/blog/security/follina-for-protocol-handlers.html, https://github.com/redcanaryco/atomic-red-team/blob/1cf4dd51f83dcb0ebe6ade902d6157ad2dbc6ac8/atomics/T1218.001/T1218.001.md, https://www.zscaler.com/blogs/security-research/unintentional-leak-glimpse-attack-vectors-apt37"
+        mitre = "attack.defense-evasion, attack.t1218.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.names = "HH.exe" nocase or
+        $event.target.process.file.full_path = /\\hh\.exe$/ nocase) and
+        $event.target.process.command_line = /http:\/\/|https:\/\/|\\\\/ nocase)
+    condition:
+        $event
+}

@@ -1,0 +1,18 @@
+rule dism_remove_online_package {
+    meta:
+        description = "Deployment Image Servicing and Management tool. DISM is used to enumerate, install, uninstall, configure, and update features and packages in Windows images"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md#atomic-test-26---disable-windows-defender-with-dism, https://www.trendmicro.com/en_us/research/22/h/ransomware-actor-abuses-genshin-impact-anti-cheat-driver-to-kill-antivirus.html"
+        mitre = "attack.defense-evasion, attack.t1562.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\DismHost\.exe$/ nocase and
+        $event.principal.process.command_line = /\/Online/ nocase and
+        $event.principal.process.command_line = /\/Disable-Feature/ nocase) or
+        ($event.target.process.file.full_path = /\\Dism\.exe$/ nocase and
+        $event.target.process.command_line = /\/Online/ nocase and
+        $event.target.process.command_line = /\/Disable-Feature/ nocase))
+    condition:
+        $event
+}

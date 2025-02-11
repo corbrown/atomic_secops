@@ -1,0 +1,19 @@
+rule dll_call_by_ordinal_via_rundll32.exe {
+    meta:
+        description = "Detects calls of DLLs exports by ordinal numbers via rundll32.dll."
+        references = "https://web.archive.org/web/20200530031906/https://techtalk.pcmatic.com/2017/11/30/running-dll-files-malware-analysis/, https://github.com/Neo23x0/DLLRunner, https://twitter.com/cyb3rops/status/1186631731543236608, https://www.welivesecurity.com/2022/03/01/isaacwiper-hermeticwizard-wiper-worm-targeting-ukraine/"
+        mitre = "attack.defense-evasion, attack.t1218.011, detection.threat-hunting"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\rundll32\.exe$/ nocase or
+        $event.target.process.file.names = "RUNDLL32.EXE" nocase) and
+        $event.target.process.command_line = /,#|, #|\.dll #|\.ocx #/ nocase and
+        (($event.target.process.command_line = /EDGEHTML\.dll/ nocase and
+        $event.target.process.command_line = /#141/ nocase) or
+        ($event.principal.process.file.full_path = /\\Msbuild\\Current\\Bin\\|\\VC\\Tools\\MSVC\\|\\Tracker\.exe/ nocase and
+        $event.target.process.command_line = /\\FileTracker32\.dll,#1|\\FileTracker32\.dll",#1|\\FileTracker64\.dll,#1|\\FileTracker64\.dll",#1/ nocase)))
+    condition:
+        $event
+}

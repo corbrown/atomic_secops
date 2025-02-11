@@ -1,0 +1,14 @@
+rule powershell_download_and_execution_cradles {
+    meta:
+        description = "Detects PowerShell download and execution cradles."
+        references = "https://github.com/VirtualAlllocEx/Payload-Download-Cradles/blob/88e8eca34464a547c90d9140d70e9866dcbc6a12/Download-Cradles.cmd, https://labs.withsecure.com/publications/fin7-target-veeam-servers"
+        mitre = "attack.execution, attack.t1059"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /\.DownloadString\(|\.DownloadFile\(|Invoke-WebRequest |iwr / nocase and
+        $event.target.process.command_line = /;iex \$|\| IEX|\|IEX |I`E`X|I`EX|IE`X|iex |IEX \(|IEX\(|Invoke-Expression/ nocase)
+    condition:
+        $event
+}

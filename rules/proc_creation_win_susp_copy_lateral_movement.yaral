@@ -1,0 +1,21 @@
+rule copy_from_or_to_admin_share_or_sysvol_folder {
+    meta:
+        description = "Detects a copy command or a copy utility execution to or from an Admin share or remote"
+        references = "https://twitter.com/SBousseaden/status/1211636381086339073, https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view, https://www.elastic.co/guide/en/security/current/remote-file-copy-to-a-hidden-share.html, https://www.microsoft.com/en-us/security/blog/2022/10/18/defenders-beware-a-case-for-post-ransomware-investigations/"
+        mitre = "attack.lateral-movement, attack.collection, attack.exfiltration, attack.t1039, attack.t1048, attack.t1021.002"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.command_line = /\\\\.*\$|\\Sysvol\\/ nocase and
+        (($event.target.process.file.full_path = /\\robocopy\.exe|\\xcopy\.exe/ nocase or
+        $event.target.process.file.names = /robocopy.exe|XCOPY.EXE/ nocase) or
+        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
+        $event.target.process.file.names = "Cmd.Exe" nocase) and
+        $event.target.process.command_line = /copy/ nocase) or
+        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or
+        $event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase) and
+        $event.target.process.command_line = /copy-item|copy |cpi | cp |move |move-item| mi | mv / nocase)))
+    condition:
+        $event
+}

@@ -1,0 +1,16 @@
+rule add_safeboot_keys_via_reg_utility {
+    meta:
+        description = "Detects execution of "reg.exe" commands with the "add" or "copy" flags on safe boot registry keys. Often used by attacker to allow the ransomware to work in safe mode as some security products do not"
+        references = "https://redacted.com/blog/bianlian-ransomware-gang-gives-it-a-go/"
+        mitre = "attack.defense-evasion, attack.t1562.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
+        $event.target.process.file.names = "reg.exe" nocase) and
+        $event.target.process.command_line = /\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot/ nocase and
+        $event.target.process.command_line = / copy | add / nocase)
+    condition:
+        $event
+}

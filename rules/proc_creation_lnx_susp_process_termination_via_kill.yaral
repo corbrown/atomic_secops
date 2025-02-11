@@ -1,0 +1,13 @@
+rule terminate_linux_process_via_kill {
+    meta:
+        description = "Detects usage of command line tools such as "kill", "pkill" or "killall" to terminate or signal a running process."
+        references = "https://www.trendmicro.com/en_us/research/23/c/iron-tiger-sysupdate-adds-linux-targeting.html, https://www.cyberciti.biz/faq/how-force-kill-process-linux/, https://www.geeksforgeeks.org/how-to-kill-processes-on-the-linux-desktop-with-xkill/"
+        mitre = "attack.defense-evasion, attack.t1562, detection.threat-hunting"
+        logsource = "process_creation"
+        product = "linux"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        ($event.target.process.file.full_path = /\/kill|\/killall|\/pkill|\/xkill/ nocase)
+    condition:
+        $event
+}

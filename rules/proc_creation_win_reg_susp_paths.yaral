@@ -1,0 +1,15 @@
+rule reg_add_suspicious_paths {
+    meta:
+        description = "Detects when an adversary uses the reg.exe utility to add or modify new keys or subkeys"
+        references = "https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1112/T1112.md, https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1562.001/T1562.001.md, https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/"
+        mitre = "attack.defense-evasion, attack.t1112, attack.t1562.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
+        $event.target.process.file.names = "reg.exe" nocase) and
+        $event.target.process.command_line = /\\AppDataLow\\Software\\Microsoft\\|\\Policies\\Microsoft\\Windows\\OOBE|\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon|\\SOFTWARE\\Microsoft\\Windows NT\\Currentversion\\Winlogon|\\CurrentControlSet\\Control\\SecurityProviders\\WDigest|\\Microsoft\\Windows Defender\\/ nocase)
+    condition:
+        $event
+}

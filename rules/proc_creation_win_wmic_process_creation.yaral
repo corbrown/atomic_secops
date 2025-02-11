@@ -1,0 +1,17 @@
+rule new_process_created_via_wmic.exe {
+    meta:
+        description = "Detects new process creation using WMIC via the "process call create" flag"
+        references = "https://www.sans.org/blog/wmic-for-incident-response/, https://github.com/redcanaryco/atomic-red-team/blob/84215139ee5127f8e3a117e063b604812bd71928/atomics/T1047/T1047.md#atomic-test-5---wmi-execute-local-process"
+        mitre = "attack.execution, attack.t1047, car.2016-03-002"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\wmic\.exe$/ nocase or
+        $event.target.process.file.names = "wmic.exe" nocase) and
+        $event.target.process.command_line = /process/ nocase and
+        $event.target.process.command_line = /call/ nocase and
+        $event.target.process.command_line = /create/ nocase)
+    condition:
+        $event
+}

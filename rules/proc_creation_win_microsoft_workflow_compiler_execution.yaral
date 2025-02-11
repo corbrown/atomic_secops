@@ -1,0 +1,15 @@
+rule microsoft_workflow_compiler_execution {
+    meta:
+        description = "Detects the execution of Microsoft Workflow Compiler, which may permit the execution of arbitrary unsigned code.
+"
+        references = "https://posts.specterops.io/arbitrary-unsigned-code-execution-vector-in-microsoft-workflow-compiler-exe-3d9294bc5efb, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218/T1218.md, https://lolbas-project.github.io/lolbas/Binaries/Microsoft.Workflow.Compiler/"
+        mitre = "attack.defense-evasion, attack.execution, attack.t1127, attack.t1218, detection.threat-hunting"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\Microsoft\.Workflow\.Compiler\.exe$/ nocase or
+        $event.target.process.file.names = "Microsoft.Workflow.Compiler.exe" nocase))
+    condition:
+        $event
+}

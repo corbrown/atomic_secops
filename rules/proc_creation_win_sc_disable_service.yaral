@@ -1,0 +1,17 @@
+rule service_startuptype_change_via_sc.exe {
+    meta:
+        description = "Detect the use of "sc.exe" to change the startup type of a service to "disabled" or "demand""
+        references = "https://www.virustotal.com/gui/file/38283b775552da8981452941ea74191aa0d203edd3f61fb2dee7b0aea3514955"
+        mitre = "attack.execution, attack.defense-evasion, attack.t1562.001"
+        logsource = "process_creation"
+        product = "windows"
+    events:
+        ($event.metadata.event_type = "PROCESS_LAUNCH") and
+        (($event.target.process.file.full_path = /\\sc\.exe$/ nocase or
+        $event.target.process.file.names = "sc.exe" nocase) and
+        $event.target.process.command_line = / config / nocase and
+        $event.target.process.command_line = /start/ nocase and
+        $event.target.process.command_line = /disabled|demand/ nocase)
+    condition:
+        $event
+}
