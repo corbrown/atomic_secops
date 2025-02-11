@@ -1,26 +1,3 @@
-### proc_creation_win_cmd_dir_execution.yaral ###
-rule file_and_subfolder_enumeration_via_dir_command {
-    meta:
-        description = `Detects usage of the "dir" command part of Widows CMD with the "/S" command line flag in order to enumerate files in a specified directory and all subdirectories.`
-        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1217/T1217.md`
-        mitre = `attack.discovery, attack.t1217`
-        logsource = `process_creation`
-        product = `windows`
-    events:
-        ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
-        $event.target.process.file.names = "Cmd.Exe" nocase) and
-        $event.target.process.command_line = /dir.*-s/ nocase or
-        $event.target.process.command_line = /dir.*\/s/ nocase or
-        $event.target.process.command_line = /dir.*–s/ nocase or
-        $event.target.process.command_line = /dir.*—s/ nocase or
-        $event.target.process.command_line = /dir.*―s/ nocase)
-    condition:
-        $event
-}
-
-------------------------------------------------------------
-
 ### proc_creation_win_msiexec_install_quiet.yaral ###
 rule msiexec_quiet_installation {
     meta:
@@ -114,26 +91,6 @@ rule uncommon_svchost_parent_process {
 
 ------------------------------------------------------------
 
-### proc_creation_win_whoami_output.yaral ###
-rule whoami_exe_execution_with_output_option {
-    meta:
-        description = `Detects the execution of "whoami.exe" with the "/FO" flag to choose CSV as output format or with redirection options to export the results to a file for later use.`
-        references = `https://brica.de/alerts/alert/public/1247926/agent-tesla-keylogger-delivered-inside-a-power-iso-daa-archive/, https://app.any.run/tasks/7eaba74e-c1ea-400f-9c17-5e30eee89906/, https://www.youtube.com/watch?v=DsJ9ByX84o4&t=6s`
-        mitre = `attack.discovery, attack.t1033, car.2016-03-001`
-        logsource = `process_creation`
-        product = `windows`
-    events:
-        ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\whoami\.exe$/ nocase or
-        $event.target.process.file.names = "whoami.exe" nocase) and
-        $event.target.process.command_line = / \/FO CSV| -FO CSV/ nocase) or
-        $event.target.process.command_line = whoami.*> nocase)
-    condition:
-        $event
-}
-
-------------------------------------------------------------
-
 ### proc_creation_win_wlrmdr_uncommon_child_process.yaral ###
 rule wlrmdr_exe_uncommon_argument_or_child_process {
     meta:
@@ -181,25 +138,6 @@ rule wlrmdr_exe_uncommon_argument_or_child_process {
         ($event.principal.process.file.full_path != // nocase and
         $event.principal.process.file.full_path != /-/ nocase) or
         $event.principal.process.file.full_path = "")))
-    condition:
-        $event
-}
-
-------------------------------------------------------------
-
-### proc_creation_win_wmic_recon_volume.yaral ###
-rule system_disk_and_volume_reconnaissance_via_wmic_exe {
-    meta:
-        description = `An adversary might use WMI to discover information about the system, such as the volume name, size, free space, and other disk information. This can be done using the `wmic` command-line utility and has been observed being used by threat actors such as Volt Typhoon.`
-        references = `https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-144a, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wmic`
-        mitre = `attack.execution, attack.discovery, attack.t1047, attack.t1082`
-        logsource = `process_creation`
-        product = `windows`
-    events:
-        ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\WMIC\.exe$/ nocase or
-        $event.target.process.file.names = "wmic.exe" nocase) and
-        $event.target.process.command_line = /volume|path win32_logicaldisk/ nocase)
     condition:
         $event
 }
