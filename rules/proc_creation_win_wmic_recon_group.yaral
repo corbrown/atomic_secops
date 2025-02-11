@@ -1,6 +1,6 @@
 rule local_groups_reconnaissance_via_wmic_exe {
     meta:
-        description = "Detects the execution of \"wmic\" with the \"group\" flag. Adversaries may attempt to find local system groups and permission settings. The knowledge of local system permission groups can help adversaries determine which groups exist and which users belong to a particular group. Adversaries may use this information to determine which users have elevated permissions, such as the users found within the local administrators group."
+        description = "Detects the execution of 'wmic' with the 'group' flag. Adversaries may attempt to find local system groups and permission settings. The knowledge of local system permission groups can help adversaries determine which groups exist and which users belong to a particular group. Adversaries may use this information to determine which users have elevated permissions, such as the users found within the local administrators group."
         references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1069.001/T1069.001.md"
         mitre = "attack.discovery, attack.t1069.001"
         logsource = "process_creation"

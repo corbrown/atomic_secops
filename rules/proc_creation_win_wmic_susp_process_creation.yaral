@@ -1,6 +1,6 @@
 rule suspicious_process_created_via_wmic_exe {
     meta:
-        description = "Detects WMIC executing \"process call create\" with suspicious calls to processes such as \"rundll32\", \"regsrv32\", etc."
+        description = "Detects WMIC executing 'process call create' with suspicious calls to processes such as 'rundll32', 'regsrv32', etc."
         references = "https://thedfirreport.com/2020/10/08/ryuks-return/, https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/ransomware-hive-conti-avoslocker"
         mitre = "attack.execution, attack.t1047"
         logsource = "process_creation"

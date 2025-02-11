@@ -1,6 +1,6 @@
 rule folder_compress_to_potentially_suspicious_output_via_compress_archive_cmdlet {
     meta:
-        description = "Detects PowerShell scripts that make use of the \"Compress-Archive\" Cmdlet in order to compress folders and files where the output is stored in a potentially suspicious location that is used often by malware for exfiltration. An adversary might compress data (e.g., sensitive documents) that is collected prior to exfiltration in order to make it portable and minimize the amount of data sent over the network."
+        description = "Detects PowerShell scripts that make use of the 'Compress-Archive' Cmdlet in order to compress folders and files where the output is stored in a potentially suspicious location that is used often by malware for exfiltration. An adversary might compress data (e.g., sensitive documents) that is collected prior to exfiltration in order to make it portable and minimize the amount of data sent over the network."
         references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1074.001/T1074.001.md, https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-347a"
         mitre = "attack.collection, attack.t1074.001"
         logsource = "process_creation"

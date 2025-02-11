@@ -1,6 +1,6 @@
 rule use_of_scriptrunner_exe {
     meta:
-        description = "The \"ScriptRunner.exe\" binary can be abused to proxy execution through it and bypass possible whitelisting"
+        description = "The 'ScriptRunner.exe' binary can be abused to proxy execution through it and bypass possible whitelisting"
         references = "https://lolbas-project.github.io/lolbas/Binaries/Scriptrunner/"
         mitre = "attack.defense-evasion, attack.execution, attack.t1218"
         logsource = "process_creation"

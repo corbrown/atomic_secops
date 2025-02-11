@@ -1,6 +1,6 @@
 rule persistence_via_sticky_key_backdoor {
     meta:
-        description = "By replacing the sticky keys executable with the local admins CMD executable, an attacker is able to access a privileged windows console session without authenticating to the system. When the sticky keys are \"activated\" the privilleged shell is launched."
+        description = "By replacing the sticky keys executable with the local admins CMD executable, an attacker is able to access a privileged windows console session without authenticating to the system. When the sticky keys are 'activated' the privilleged shell is launched."
         references = "https://www.fireeye.com/blog/threat-research/2017/03/apt29_domain_frontin.html, https://www.clearskysec.com/wp-content/uploads/2020/02/ClearSky-Fox-Kitten-Campaign-v1.pdf, https://learn.microsoft.com/en-us/archive/blogs/jonathantrull/detecting-sticky-key-backdoors"
         mitre = "attack.t1546.008, attack.privilege-escalation"
         logsource = "process_creation"

@@ -1,6 +1,6 @@
 rule potential_configuration_and_service_reconnaissance_via_reg_exe {
     meta:
-        description = "Detects the usage of \"reg.exe\" in order to query reconnaissance information from the registry. Adversaries may interact with the Windows registry to gather information about credentials, the system, configuration, and installed software."
+        description = "Detects the usage of 'reg.exe' in order to query reconnaissance information from the registry. Adversaries may interact with the Windows registry to gather information about credentials, the system, configuration, and installed software."
         references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1012/T1012.md"
         mitre = "attack.discovery, attack.t1012, attack.t1007"
         logsource = "process_creation"

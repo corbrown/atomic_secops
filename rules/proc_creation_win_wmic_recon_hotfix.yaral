@@ -1,6 +1,6 @@
 rule windows_hotfix_updates_reconnaissance_via_wmic_exe {
     meta:
-        description = "Detects the execution of wmic with the \"qfe\" flag in order to obtain information about installed hotfix updates on the system. This is often used by pentester and attacker enumeration scripts"
+        description = "Detects the execution of wmic with the 'qfe' flag in order to obtain information about installed hotfix updates on the system. This is often used by pentester and attacker enumeration scripts"
         references = "https://github.com/carlospolop/PEASS-ng/blob/fa0f2e17fbc1d86f1fd66338a40e665e7182501d/winPEAS/winPEASbat/winPEAS.bat, https://sushant747.gitbooks.io/total-oscp-guide/content/privilege_escalation_windows.html"
         mitre = "attack.execution, attack.t1047"
         logsource = "process_creation"

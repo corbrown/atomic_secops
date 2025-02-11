@@ -1,6 +1,6 @@
 rule new_service_creation_using_sc_exe {
     meta:
-        description = "Detects the creation of a new service using the \"sc.exe\" utility."
+        description = "Detects the creation of a new service using the 'sc.exe' utility."
         references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1543.003/T1543.003.md"
         mitre = "attack.persistence, attack.privilege-escalation, attack.t1543.003"
         logsource = "process_creation"

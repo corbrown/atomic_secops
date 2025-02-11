@@ -1,6 +1,6 @@
 rule scripting_commandline_process_spawned_regsvr32 {
     meta:
-        description = "Detects various command line and scripting engines/processes such as \"PowerShell\", \"Wscript\", \"Cmd\", etc. spawning a \"regsvr32\" instance."
+        description = "Detects various command line and scripting engines/processes such as 'PowerShell', 'Wscript', 'Cmd', etc. spawning a 'regsvr32' instance."
         references = "https://web.archive.org/web/20171001085340/https://subt0x10.blogspot.com/2017/04/bypass-application-whitelisting-script.html, https://app.any.run/tasks/34221348-072d-4b70-93f3-aa71f6ebecad/"
         mitre = "attack.defense-evasion, attack.t1218.010"
         logsource = "process_creation"

@@ -1,6 +1,6 @@
 rule suspicious_service_path_modification {
     meta:
-        description = "Detects service path modification via the \"sc\" binary to a suspicious command or path"
+        description = "Detects service path modification via the 'sc' binary to a suspicious command or path"
         references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1543.003/T1543.003.md, https://web.archive.org/web/20180331144337/https://www.fireeye.com/blog/threat-research/2018/03/sanny-malware-delivery-method-updated-in-recently-observed-attacks.html"
         mitre = "attack.persistence, attack.privilege-escalation, attack.t1543.003"
         logsource = "process_creation"

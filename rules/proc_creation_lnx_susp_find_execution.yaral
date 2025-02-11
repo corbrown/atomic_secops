@@ -1,6 +1,6 @@
 rule potential_discovery_activity_using_find___linux {
     meta:
-        description = "Detects usage of \"find\" binary in a suspicious manner to perform discovery"
+        description = "Detects usage of 'find' binary in a suspicious manner to perform discovery"
         references = "https://github.com/SaiSathvik1/Linux-Privilege-Escalation-Notes"
         mitre = "attack.discovery, attack.t1083"
         logsource = "process_creation"
