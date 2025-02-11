@@ -1,4 +1,4 @@
-rule iis_native-code_module_command_line_installation {
+rule iis_native_code_module_command_line_installation {
     meta:
         description = "Detects suspicious IIS native-code module installations via command line"
         references = "https://researchcenter.paloaltonetworks.com/2018/01/unit42-oilrig-uses-rgdoor-iis-backdoor-targets-middle-east/, https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/"

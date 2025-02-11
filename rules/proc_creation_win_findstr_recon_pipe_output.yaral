@@ -1,4 +1,4 @@
-rule recon_command_output_piped_to_findstr.exe {
+rule recon_command_output_piped_to_findstr_exe {
     meta:
         description = "Detects the execution of a potential recon command where the results are piped to \"findstr\". This is meant to trigger on inline calls of \"cmd.exe\" via the \"/c\" or \"/k\" for example. Attackers often time use this technique to extract specific information they require in their reconnaissance phase."
         references = "https://github.com/redcanaryco/atomic-red-team/blob/02cb591f75064ffe1e0df9ac3ed5972a2e491c97/atomics/T1057/T1057.md#atomic-test-6---discover-specific-process---tasklist, https://www.hhs.gov/sites/default/files/manage-engine-vulnerability-sector-alert-tlpclear.pdf, https://www.trendmicro.com/en_us/research/22/d/spring4shell-exploited-to-deploy-cryptocurrency-miners.html"

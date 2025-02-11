@@ -1,4 +1,4 @@
-rule powershell_get-process_lsass {
+rule powershell_get_process_lsass {
     meta:
         description = "Detects a \"Get-Process\" cmdlet and it's aliases on lsass process, which is in almost all cases a sign of malicious activity"
         references = "https://web.archive.org/web/20220205033028/https://twitter.com/PythonResponder/status/1385064506049630211"

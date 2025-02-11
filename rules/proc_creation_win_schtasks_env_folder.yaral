@@ -1,4 +1,4 @@
-rule schedule_task_creation_from_env_variable_or_potentially_suspicious_path_via_schtasks.exe {
+rule schedule_task_creation_from_env_variable_or_potentially_suspicious_path_via_schtasks_exe {
     meta:
         description = "Detects Schtask creations that point to a suspicious folder or an environment variable often used by malware"
         references = "https://www.welivesecurity.com/2022/01/18/donot-go-do-not-respawn/, https://www.joesandbox.com/analysis/514608/0/html#324415FF7D8324231381BAD48A052F85DF04, https://blog.talosintelligence.com/gophish-powerrat-dcrat/"

@@ -1,4 +1,4 @@
-rule hacktool_-_xordump_execution {
+rule hacktool___xordump_execution {
     meta:
         description = "Detects suspicious use of XORDump process memory dumping utility"
         references = "https://github.com/audibleblink/xordump"

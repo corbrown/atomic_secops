@@ -1,4 +1,4 @@
-rule sysmon_driver_unloaded_via_fltmc.exe {
+rule sysmon_driver_unloaded_via_fltmc_exe {
     meta:
         description = "Detects possible Sysmon filter driver unloaded via fltmc.exe"
         references = "https://www.darkoperator.com/blog/2018/10/5/operating-offensively-against-sysmon"

@@ -1,4 +1,4 @@
-rule lsass_process_reconnaissance_via_findstr.exe {
+rule lsass_process_reconnaissance_via_findstr_exe {
     meta:
         description = "Detects findstring commands that include the keyword lsass, which indicates recon actviity for the LSASS process PID"
         references = "https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1"

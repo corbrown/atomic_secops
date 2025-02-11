@@ -1,4 +1,4 @@
-rule use_of_scriptrunner.exe {
+rule use_of_scriptrunner_exe {
     meta:
         description = "The \"ScriptRunner.exe\" binary can be abused to proxy execution through it and bypass possible whitelisting"
         references = "https://lolbas-project.github.io/lolbas/Binaries/Scriptrunner/"

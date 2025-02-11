@@ -1,4 +1,4 @@
-rule suspicious_driver_install_by_pnputil.exe {
+rule suspicious_driver_install_by_pnputil_exe {
     meta:
         description = "Detects when a possible suspicious driver is being installed via pnputil.exe lolbin"
         references = "https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax, https://strontic.github.io/xcyclopedia/library/pnputil.exe-60EDC5E6BDBAEE441F2E3AEACD0340D2.html"

@@ -1,4 +1,4 @@
-rule pktmon.exe_execution {
+rule pktmon_exe_execution {
     meta:
         description = "Detects execution of PktMon, a tool that captures network packets."
         references = "https://lolbas-project.github.io/lolbas/Binaries/Pktmon/"

@@ -1,4 +1,4 @@
-rule allow_service_access_using_security_descriptor_tampering_via_sc.exe {
+rule allow_service_access_using_security_descriptor_tampering_via_sc_exe {
     meta:
         description = "Detects suspicious DACL modifications to allow access to a service from a suspicious trustee. This can be used to override access restrictions set by previous ACLs."
         references = "https://twitter.com/0gtweet/status/1628720819537936386, https://itconnect.uw.edu/tools-services-support/it-systems-infrastructure/msinf/other-help/understanding-sddl-syntax/, https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings"

@@ -1,4 +1,4 @@
-rule replace.exe_usage {
+rule replace_exe_usage {
     meta:
         description = "Detects the use of Replace.exe which can be used to replace file with another file"
         references = "https://lolbas-project.github.io/lolbas/Binaries/Replace/, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/replace"

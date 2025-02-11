@@ -1,4 +1,4 @@
-rule hacktool_-_lazagne_execution {
+rule hacktool___lazagne_execution {
     meta:
         description = "Detects the execution of the LaZagne. A utility used to retrieve multiple types of passwords stored on a local computer. LaZagne has been leveraged multiple times by threat actors in order to dump credentials."
         references = "https://github.com/AlessandroZ/LaZagne/tree/master, https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/, https://cloud.google.com/blog/topics/threat-intelligence/alphv-ransomware-backup/, https://securelist.com/defttorero-tactics-techniques-and-procedures/107610/, https://github.com/CyberMonitor/APT_CyberCriminal_Campagin_Collections/raw/800c0e06571993a54e39571cf27fd474dcc5c0bc/2017/2017.11.14.Muddying_the_Water/muddying-the-water-targeted-attacks.pdf"

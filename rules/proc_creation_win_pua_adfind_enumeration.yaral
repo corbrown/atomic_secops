@@ -1,4 +1,4 @@
-rule pua_-_suspicious_activedirectory_enumeration_via_adfind.exe {
+rule pua___suspicious_activedirectory_enumeration_via_adfind_exe {
     meta:
         description = "Detects active directory enumeration activity using known AdFind CLI flags"
         references = "https://www.joeware.net/freetools/tools/adfind/, https://social.technet.microsoft.com/wiki/contents/articles/7535.adfind-command-examples.aspx, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1087.002/T1087.002.md"

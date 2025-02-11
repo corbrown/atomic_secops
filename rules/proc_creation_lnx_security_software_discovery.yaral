@@ -1,4 +1,4 @@
-rule security_software_discovery_-_linux {
+rule security_software_discovery___linux {
     meta:
         description = "Detects usage of system utilities (only grep and egrep for now) to discover security software discovery"
         references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1518.001/T1518.001.md"

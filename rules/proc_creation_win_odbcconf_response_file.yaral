@@ -1,4 +1,4 @@
-rule response_file_execution_via_odbcconf.exe {
+rule response_file_execution_via_odbcconf_exe {
     meta:
         description = "Detects execution of \"odbcconf\" with the \"-f\" flag in order to load a response file which might contain a malicious action."
         references = "https://learn.microsoft.com/en-us/sql/odbc/odbcconf-exe?view=sql-server-ver16, https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/, https://www.cybereason.com/blog/threat-analysis-report-bumblebee-loader-the-high-road-to-enterprise-domain-control, https://www.hexacorn.com/blog/2020/08/23/odbcconf-lolbin-trifecta/"

@@ -1,4 +1,4 @@
-rule hacktool_-_crackmapexec_execution_patterns {
+rule hacktool___crackmapexec_execution_patterns {
     meta:
         description = "Detects various execution patterns of the CrackMapExec pentesting framework"
         references = "https://github.com/byt3bl33d3r/CrackMapExec"

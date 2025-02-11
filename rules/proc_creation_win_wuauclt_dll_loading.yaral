@@ -1,4 +1,4 @@
-rule proxy_execution_via_wuauclt.exe {
+rule proxy_execution_via_wuauclt_exe {
     meta:
         description = "Detects the use of the Windows Update Client binary (wuauclt.exe) for proxy execution."
         references = "https://dtm.uk/wuauclt/, https://blog.malwarebytes.com/threat-intelligence/2022/01/north-koreas-lazarus-apt-leverages-windows-update-client-github-in-latest-campaign/"

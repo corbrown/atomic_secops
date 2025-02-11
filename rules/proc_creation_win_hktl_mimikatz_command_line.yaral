@@ -1,4 +1,4 @@
-rule hacktool_-_mimikatz_execution {
+rule hacktool___mimikatz_execution {
     meta:
         description = "Detection well-known mimikatz command line arguments"
         references = "https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment, https://tools.thehacker.recipes/mimikatz/modules"

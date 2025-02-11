@@ -1,4 +1,4 @@
-rule filter_driver_unloaded_via_fltmc.exe {
+rule filter_driver_unloaded_via_fltmc_exe {
     meta:
         description = "Detect filter driver unloading activity via fltmc.exe"
         references = "https://www.darkoperator.com/blog/2018/10/5/operating-offensively-against-sysmon, https://www.cybereason.com/blog/threat-analysis-report-lockbit-2.0-all-paths-lead-to-ransom"

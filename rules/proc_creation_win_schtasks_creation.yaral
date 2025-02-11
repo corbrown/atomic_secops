@@ -1,4 +1,4 @@
-rule scheduled_task_creation_via_schtasks.exe {
+rule scheduled_task_creation_via_schtasks_exe {
     meta:
         description = "Detects the creation of scheduled tasks by user accounts via the \"schtasks\" utility."
         references = "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create"

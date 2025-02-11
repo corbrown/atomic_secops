@@ -1,4 +1,4 @@
-rule potential_product_reconnaissance_via_wmic.exe {
+rule potential_product_reconnaissance_via_wmic_exe {
     meta:
         description = "Detects the execution of WMIC in order to get a list of firewall and antivirus products"
         references = "https://thedfirreport.com/2023/03/06/2022-year-in-review/, https://www.yeahhub.com/list-installed-programs-version-path-windows/, https://learn.microsoft.com/en-us/answers/questions/253555/software-list-inventory-wmic-product"

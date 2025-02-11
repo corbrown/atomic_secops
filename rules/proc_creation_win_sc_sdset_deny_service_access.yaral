@@ -1,4 +1,4 @@
-rule deny_service_access_using_security_descriptor_tampering_via_sc.exe {
+rule deny_service_access_using_security_descriptor_tampering_via_sc_exe {
     meta:
         description = "Detects suspicious DACL modifications to deny access to a service that affects critical trustees. This can be used to hide services or make them unstoppable."
         references = "https://www.sans.org/blog/red-team-tactics-hiding-windows-services/, https://itconnect.uw.edu/tools-services-support/it-systems-infrastructure/msinf/other-help/understanding-sddl-syntax/, https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings"

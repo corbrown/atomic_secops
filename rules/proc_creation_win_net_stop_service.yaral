@@ -1,4 +1,4 @@
-rule stop_windows_service_via_net.exe {
+rule stop_windows_service_via_net_exe {
     meta:
         description = "Detects the stopping of a Windows service via the \"net\" utility."
         references = "https://ss64.com/nt/net-service.html"

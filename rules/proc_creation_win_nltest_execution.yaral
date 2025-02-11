@@ -1,4 +1,4 @@
-rule nltest.exe_execution {
+rule nltest_exe_execution {
     meta:
         description = "Detects nltest commands that can be used for information discovery"
         references = "https://jpcertcc.github.io/ToolAnalysisResultSheet/details/nltest.htm"

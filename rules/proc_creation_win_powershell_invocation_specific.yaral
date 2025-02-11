@@ -1,4 +1,4 @@
-rule suspicious_powershell_invocations_-_specific_-_processcreation {
+rule suspicious_powershell_invocations___specific___processcreation {
     meta:
         description = "Detects suspicious PowerShell invocation command parameters"
         references = "Internal Research"

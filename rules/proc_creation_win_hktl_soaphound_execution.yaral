@@ -1,4 +1,4 @@
-rule hacktool_-_soaphound_execution {
+rule hacktool___soaphound_execution {
     meta:
         description = "Detects the execution of SOAPHound, a .NET tool for collecting Active Directory data, using specific command-line arguments that may indicate an attempt to extract sensitive AD information."
         references = "https://github.com/FalconForceTeam/SOAPHound, https://medium.com/falconforce/soaphound-tool-to-collect-active-directory-data-via-adws-165aca78288c"

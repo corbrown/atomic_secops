@@ -1,4 +1,4 @@
-rule whoami.exe_execution_with_output_option {
+rule whoami_exe_execution_with_output_option {
     meta:
         description = "Detects the execution of \"whoami.exe\" with the \"/FO\" flag to choose CSV as output format or with redirection options to export the results to a file for later use."
         references = "https://brica.de/alerts/alert/public/1247926/agent-tesla-keylogger-delivered-inside-a-power-iso-daa-archive/, https://app.any.run/tasks/7eaba74e-c1ea-400f-9c17-5e30eee89906/, https://www.youtube.com/watch?v=DsJ9ByX84o4&t=6s"

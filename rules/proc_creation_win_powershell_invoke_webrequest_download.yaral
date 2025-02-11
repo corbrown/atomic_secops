@@ -1,4 +1,4 @@
-rule suspicious_invoke-webrequest_execution {
+rule suspicious_invoke_webrequest_execution {
     meta:
         description = "Detects a suspicious call to Invoke-WebRequest cmdlet where the and output is located in a suspicious location"
         references = "https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool/"
