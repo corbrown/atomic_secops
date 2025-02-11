@@ -1,8 +1,6 @@
 rule potential_shim_database_persistence_via_sdbinst.exe {
     meta:
-        description = "Detects installation of a new shim using sdbinst.exe.
-Adversaries may establish persistence and/or elevate privileges by executing malicious content triggered by application shims
-"
+        description = "Detects installation of a new shim using sdbinst.exe. Adversaries may establish persistence and/or elevate privileges by executing malicious content triggered by application shims"
         references = "https://www.mandiant.com/resources/blog/fin7-shim-databases-persistence"
         mitre = "attack.persistence, attack.privilege-escalation, attack.t1546.011"
         logsource = "process_creation"

@@ -1,7 +1,6 @@
 rule system_file_execution_location_anomaly {
     meta:
-        description = "Detects the execution of a Windows system binary that is usually located in the system folder from an uncommon location.
-"
+        description = "Detects the execution of a Windows system binary that is usually located in the system folder from an uncommon location."
         references = "https://twitter.com/GelosSnake/status/934900723426439170, https://asec.ahnlab.com/en/39828/"
         mitre = "attack.defense-evasion, attack.t1036"
         logsource = "process_creation"

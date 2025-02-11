@@ -1,8 +1,6 @@
 rule renamed_procdump_execution {
     meta:
-        description = "Detects the execution of a renamed ProcDump executable.
-This often done by attackers or malware in order to evade defensive mechanisms.
-"
+        description = "Detects the execution of a renamed ProcDump executable. This often done by attackers or malware in order to evade defensive mechanisms."
         references = "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump"
         mitre = "attack.defense-evasion, attack.t1036.003"
         logsource = "process_creation"

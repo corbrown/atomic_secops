@@ -1,8 +1,6 @@
 rule suspicious_group_and_account_reconnaissance_activity_using_net.exe {
     meta:
-        description = "Detects suspicious reconnaissance command line activity on Windows systems using Net.EXE
-Check if the user that executed the commands is suspicious (e.g. service accounts, LOCAL_SYSTEM)
-"
+        description = "Detects suspicious reconnaissance command line activity on Windows systems using Net.EXE Check if the user that executed the commands is suspicious (e.g. service accounts, LOCAL_SYSTEM)"
         references = "https://redcanary.com/blog/how-one-hospital-thwarted-a-ryuk-ransomware-outbreak/, https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/, https://research.nccgroup.com/2022/08/19/back-in-black-unlocking-a-lockbit-3-0-ransomware-attack/"
         mitre = "attack.discovery, attack.t1087.001, attack.t1087.002"
         logsource = "process_creation"
