@@ -41,7 +41,7 @@ rule wlrmdr_exe_uncommon_argument_or_child_process {
         $event.target.process.command_line = /—u / nocase or
         $event.target.process.command_line = /―u / nocase and
         ($event.principal.process.file.full_path != "C:\\Windows\\System32\\winlogon.exe" nocase or
-        ($event.principal.process.file.full_path != // nocase and
+        ($event.principal.process.file.full_path !=
         $event.principal.process.file.full_path != /-/ nocase) or
         $event.principal.process.file.full_path = "")))
     condition:
