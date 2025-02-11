@@ -8,8 +8,8 @@ rule remote_chm_file_download_execution_via_hh_exe {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "HH.exe" nocase or
-        $event.target.process.file.full_path = /\\hh\.exe$/ nocase) and
-        $event.target.process.command_line = /http:\/\/|https:\/\/|\\\\/ nocase)
+        $event.target.process.file.full_path = /\\\\hh\\.exe$/ nocase) and
+        $event.target.process.command_line = /http:\\/\\/|https:\\/\\/|\\\\\\\\/ nocase)
     condition:
         $event
 }

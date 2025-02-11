@@ -7,8 +7,8 @@ rule infdefaultinstall_exe__inf_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /InfDefaultInstall\.exe / nocase and
-        $event.target.process.command_line = /\.inf/ nocase)
+        ($event.target.process.command_line = /InfDefaultInstall\\.exe / nocase and
+        $event.target.process.command_line = /\\.inf/ nocase)
     condition:
         $event
 }

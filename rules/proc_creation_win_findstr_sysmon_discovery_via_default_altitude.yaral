@@ -7,7 +7,7 @@ rule sysmon_discovery_via_default_driver_altitude_using_findstr_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\find\.exe|\\findstr\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\\\find\\.exe|\\\\findstr\\.exe/ nocase or
         $event.target.process.file.names = /FIND.EXE|FINDSTR.EXE/ nocase) and
         $event.target.process.command_line = / 385201/ nocase)
     condition:

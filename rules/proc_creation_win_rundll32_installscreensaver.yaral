@@ -7,7 +7,7 @@ rule rundll32_installscreensaver_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\rundll32\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\rundll32\\.exe$/ nocase or
         $event.target.process.file.names = "RUNDLL32.EXE" nocase) and
         $event.target.process.command_line = /InstallScreenSaver/ nocase)
     condition:

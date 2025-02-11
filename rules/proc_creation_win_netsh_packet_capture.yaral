@@ -7,7 +7,7 @@ rule new_network_trace_capture_started_via_netsh_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\netsh\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\netsh\\.exe$/ nocase or
         $event.target.process.file.names = "netsh.exe" nocase) and
         $event.target.process.command_line = /trace/ nocase and
         $event.target.process.command_line = /start/ nocase)

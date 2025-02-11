@@ -7,13 +7,13 @@ rule suspicious_script_execution_from_temp_folder {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe|\\mshta\.exe|\\wscript\.exe|\\cscript\.exe/ nocase and
-        $event.target.process.command_line = /\\Windows\\Temp|\\Temporary Internet|\\AppData\\Local\\Temp|\\AppData\\Roaming\\Temp|%TEMP%|%TMP%|%LocalAppData%\\Temp/ nocase and
+        ($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe|\\\\mshta\\.exe|\\\\wscript\\.exe|\\\\cscript\\.exe/ nocase and
+        $event.target.process.command_line = /\\\\Windows\\\\Temp|\\\\Temporary Internet|\\\\AppData\\\\Local\\\\Temp|\\\\AppData\\\\Roaming\\\\Temp|%TEMP%|%TMP%|%LocalAppData%\\\\Temp/ nocase and
         ($event.target.process.command_line != / >/ nocase and
         $event.target.process.command_line != /Out-File/ nocase and
         $event.target.process.command_line != /ConvertTo-Json/ nocase and
         $event.target.process.command_line != /-WindowStyle hidden -Verb runAs/ nocase and
-        $event.target.process.command_line != /\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Temp\\Amazon\\EC2-Windows\\/ nocase))
+        $event.target.process.command_line != /\\\\Windows\\\\system32\\\\config\\\\systemprofile\\\\AppData\\\\Local\\\\Temp\\\\Amazon\\\\EC2-Windows\\\\/ nocase))
     condition:
         $event
 }

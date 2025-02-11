@@ -7,8 +7,8 @@ rule scheduled_task_creation_via_schtasks_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase and
-        $event.target.process.command_line = / \/create / nocase and
+        ($event.target.process.file.full_path = /\\\\schtasks\\.exe$/ nocase and
+        $event.target.process.command_line = / \\/create / nocase and
         ($event.target.user.userid != /AUTHORI/ nocase and
         $event.target.user.userid != /AUTORI/ nocase))
     condition:

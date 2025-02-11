@@ -7,14 +7,14 @@ rule response_file_execution_via_odbcconf_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\odbcconf\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\odbcconf\\.exe$/ nocase or
         $event.target.process.file.names = "odbcconf.exe" nocase) and
         $event.target.process.command_line = / -f / nocase or
-        $event.target.process.command_line = / \/f / nocase or
+        $event.target.process.command_line = / \\/f / nocase or
         $event.target.process.command_line = / –f / nocase or
         $event.target.process.command_line = / —f / nocase or
         $event.target.process.command_line = / ―f / nocase and
-        $event.target.process.command_line = /\.rsp/ nocase)
+        $event.target.process.command_line = /\\.rsp/ nocase)
     condition:
         $event
 }

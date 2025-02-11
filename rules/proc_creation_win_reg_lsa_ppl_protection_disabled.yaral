@@ -7,12 +7,12 @@ rule lsa_ppl_protection_disabled_via_reg_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase or
         $event.target.process.file.names = "reg.exe" nocase) and
-        $event.target.process.command_line = /SYSTEM\\CurrentControlSet\\Control\\Lsa/ nocase and
+        $event.target.process.command_line = /SYSTEM\\\\CurrentControlSet\\\\Control\\\\Lsa/ nocase and
         $event.target.process.command_line = / add / nocase and
-        $event.target.process.command_line = / \/d 0/ nocase and
-        $event.target.process.command_line = / \/v RunAsPPL / nocase)
+        $event.target.process.command_line = / \\/d 0/ nocase and
+        $event.target.process.command_line = / \\/v RunAsPPL / nocase)
     condition:
         $event
 }

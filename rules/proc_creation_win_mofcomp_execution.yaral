@@ -7,15 +7,15 @@ rule potential_suspicious_mofcomp_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\mofcomp\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\mofcomp\\.exe$/ nocase or
         $event.target.process.file.names = "mofcomp.exe" nocase) and
-        ($event.principal.process.file.full_path = /\\cmd\.exe|\\powershell\.exe|\\pwsh\.exe|\\wsl\.exe|\\wscript\.exe|\\cscript\.exe/ nocase or
-        $event.target.process.command_line = /\\AppData\\Local\\Temp|\\Users\\Public\\|\\WINDOWS\\Temp\\|%temp%|%tmp%|%appdata%/ nocase) and
-        $event.principal.process.file.full_path = "C:\\Windows\\System32\\wbem\\WmiPrvSE.exe" nocase and
-        $event.target.process.command_line = /C:\\Windows\\TEMP\\/ nocase and
-        $event.target.process.command_line = /\.mof$/ nocase and
-        $event.target.process.command_line = /C:\\Windows\\TEMP\\/ nocase and
-        $event.target.process.command_line = /\.mof$/ nocase)
+        ($event.principal.process.file.full_path = /\\\\cmd\\.exe|\\\\powershell\\.exe|\\\\pwsh\\.exe|\\\\wsl\\.exe|\\\\wscript\\.exe|\\\\cscript\\.exe/ nocase or
+        $event.target.process.command_line = /\\\\AppData\\\\Local\\\\Temp|\\\\Users\\\\Public\\\\|\\\\WINDOWS\\\\Temp\\\\|%temp%|%tmp%|%appdata%/ nocase) and
+        $event.principal.process.file.full_path = "C:\\\\Windows\\\\System32\\\\wbem\\\\WmiPrvSE.exe" nocase and
+        $event.target.process.command_line = /C:\\\\Windows\\\\TEMP\\\\/ nocase and
+        $event.target.process.command_line = /\\.mof$/ nocase and
+        $event.target.process.command_line = /C:\\\\Windows\\\\TEMP\\\\/ nocase and
+        $event.target.process.command_line = /\\.mof$/ nocase)
     condition:
         $event
 }

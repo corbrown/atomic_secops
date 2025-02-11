@@ -7,11 +7,11 @@ rule potential_shim_database_persistence_via_sdbinst_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\sdbinst\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\sdbinst\\.exe$/ nocase or
         $event.target.process.file.names = "sdbinst.exe" nocase) and
-        $event.target.process.command_line = /\.sdb/ nocase and
-        $event.principal.process.file.full_path = /\\msiexec\.exe$/ nocase and
-        $event.target.process.command_line = /:\\Program Files \(x86\)\\IIS Express\\iisexpressshim\.sdb|:\\Program Files\\IIS Express\\iisexpressshim\.sdb/ nocase)
+        $event.target.process.command_line = /\\.sdb/ nocase and
+        $event.principal.process.file.full_path = /\\\\msiexec\\.exe$/ nocase and
+        $event.target.process.command_line = /:\\\\Program Files \\(x86\\)\\\\IIS Express\\\\iisexpressshim\\.sdb|:\\\\Program Files\\\\IIS Express\\\\iisexpressshim\\.sdb/ nocase)
     condition:
         $event
 }

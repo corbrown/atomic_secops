@@ -8,8 +8,8 @@ rule linux_shell_pipe_to_shell {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /sh -c |bash -c / nocase and
-        ($event.target.process.command_line = /\| bash |\| sh |\|bash |\|sh / nocase or
-        $event.target.process.command_line = /\| bash|\| sh|\|bash| \|sh/ nocase))
+        ($event.target.process.command_line = /\\| bash |\\| sh |\\|bash |\\|sh / nocase or
+        $event.target.process.command_line = /\\| bash|\\| sh|\\|bash| \\|sh/ nocase))
     condition:
         $event
 }

@@ -7,7 +7,7 @@ rule use_of_scriptrunner_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\ScriptRunner\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\ScriptRunner\\.exe$/ nocase or
         $event.target.process.file.names = "ScriptRunner.exe" nocase) and
         $event.target.process.command_line = / -appvscript / nocase)
     condition:

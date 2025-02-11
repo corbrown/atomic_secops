@@ -7,7 +7,7 @@ rule fsutil_drive_enumeration {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\fsutil\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\fsutil\\.exe$/ nocase or
         $event.target.process.file.names = "fsutil.exe" nocase) and
         $event.target.process.command_line = /drives/ nocase)
     condition:

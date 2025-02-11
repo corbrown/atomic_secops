@@ -8,7 +8,7 @@ rule setuid_and_setgid {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /chown root/ nocase and
-        $event.target.process.command_line = / chmod u\+s| chmod g\+s/ nocase)
+        $event.target.process.command_line = / chmod u\\+s| chmod g\\+s/ nocase)
     condition:
         $event
 }

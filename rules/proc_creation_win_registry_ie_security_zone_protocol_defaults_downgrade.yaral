@@ -7,7 +7,7 @@ rule ie_zonemap_setting_downgraded_to_mycomputer_zone_for_http_protocols_via_cli
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults/ nocase and
+        ($event.target.process.command_line = /\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings\\\\ZoneMap\\\\ProtocolDefaults/ nocase and
         $event.target.process.command_line = /http/ nocase and
         $event.target.process.command_line = / 0/ nocase)
     condition:

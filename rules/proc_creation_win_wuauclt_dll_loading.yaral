@@ -7,16 +7,16 @@ rule proxy_execution_via_wuauclt_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\wuauclt\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\wuauclt\\.exe$/ nocase or
         $event.target.process.file.names = "wuauclt.exe" nocase) and
         $event.target.process.command_line = /UpdateDeploymentProvider/ nocase and
         $event.target.process.command_line = /RunHandlerComServer/ nocase and
-        ($event.target.process.command_line != / \/UpdateDeploymentProvider UpdateDeploymentProvider\.dll / nocase or
-        $event.target.process.command_line != / wuaueng\.dll / nocase or
-        ($event.target.process.command_line != /:\\Windows\\UUS\\Packages\\Preview\\amd64\\updatedeploy\.dll \/ClassId/ nocase and
-        $event.target.process.command_line != /:\\Windows\\UUS\\amd64\\UpdateDeploy\.dll \/ClassId/ nocase) or
-        ($event.target.process.command_line = /:\\Windows\\WinSxS\\/ nocase and
-        $event.target.process.command_line = /\\UpdateDeploy\.dll \/ClassId / nocase)))
+        ($event.target.process.command_line != / \\/UpdateDeploymentProvider UpdateDeploymentProvider\\.dll / nocase or
+        $event.target.process.command_line != / wuaueng\\.dll / nocase or
+        ($event.target.process.command_line != /:\\\\Windows\\\\UUS\\\\Packages\\\\Preview\\\\amd64\\\\updatedeploy\\.dll \\/ClassId/ nocase and
+        $event.target.process.command_line != /:\\\\Windows\\\\UUS\\\\amd64\\\\UpdateDeploy\\.dll \\/ClassId/ nocase) or
+        ($event.target.process.command_line = /:\\\\Windows\\\\WinSxS\\\\/ nocase and
+        $event.target.process.command_line = /\\\\UpdateDeploy\\.dll \\/ClassId / nocase)))
     condition:
         $event
 }

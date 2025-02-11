@@ -7,7 +7,7 @@ rule boot_configuration_tampering_via_bcdedit_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\bcdedit\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\bcdedit\\.exe$/ nocase or
         $event.target.process.file.names = "bcdedit.exe" nocase) and
         $event.target.process.command_line = /set/ nocase and
         (($event.target.process.command_line = /bootstatuspolicy/ nocase and

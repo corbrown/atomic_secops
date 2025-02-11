@@ -8,7 +8,7 @@ rule copy_from_volumeshadowcopy_via_cmd_exe {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /copy / nocase and
-        $event.target.process.command_line = /\\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy/ nocase)
+        $event.target.process.command_line = /\\\\\\\\\\?\\\\GLOBALROOT\\\\Device\\\\HarddiskVolumeShadowCopy/ nocase)
     condition:
         $event
 }

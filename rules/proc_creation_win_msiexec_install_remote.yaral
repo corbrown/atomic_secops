@@ -7,34 +7,34 @@ rule suspicious_msiexec_quiet_install_from_remote_location {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\msiexec\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\msiexec\\.exe$/ nocase or
         $event.target.process.file.names = "msiexec.exe" nocase) and
         ($event.target.process.command_line = /-i/ nocase or
-        $event.target.process.command_line = /\/i/ nocase or
+        $event.target.process.command_line = /\\/i/ nocase or
         $event.target.process.command_line = /–i/ nocase or
         $event.target.process.command_line = /—i/ nocase or
         $event.target.process.command_line = /―i/ nocase or
         $event.target.process.command_line = /-package/ nocase or
-        $event.target.process.command_line = /\/package/ nocase or
+        $event.target.process.command_line = /\\/package/ nocase or
         $event.target.process.command_line = /–package/ nocase or
         $event.target.process.command_line = /—package/ nocase or
         $event.target.process.command_line = /―package/ nocase or
         $event.target.process.command_line = /-a/ nocase or
-        $event.target.process.command_line = /\/a/ nocase or
+        $event.target.process.command_line = /\\/a/ nocase or
         $event.target.process.command_line = /–a/ nocase or
         $event.target.process.command_line = /—a/ nocase or
         $event.target.process.command_line = /―a/ nocase or
         $event.target.process.command_line = /-j/ nocase or
-        $event.target.process.command_line = /\/j/ nocase or
+        $event.target.process.command_line = /\\/j/ nocase or
         $event.target.process.command_line = /–j/ nocase or
         $event.target.process.command_line = /—j/ nocase or
         $event.target.process.command_line = /―j/ nocase) and
         $event.target.process.command_line = /-q/ nocase or
-        $event.target.process.command_line = /\/q/ nocase or
+        $event.target.process.command_line = /\\/q/ nocase or
         $event.target.process.command_line = /–q/ nocase or
         $event.target.process.command_line = /—q/ nocase or
         $event.target.process.command_line = /―q/ nocase and
-        $event.target.process.command_line = /http|\\\\/ nocase)
+        $event.target.process.command_line = /http|\\\\\\\\/ nocase)
     condition:
         $event
 }

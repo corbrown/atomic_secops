@@ -7,7 +7,7 @@ rule folder_compress_to_potentially_suspicious_output_via_compress_archive_cmdle
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /Compress-Archive -Path.*-DestinationPath \$env:TEMP|Compress-Archive -Path.*-DestinationPath.*\\AppData\\Local\\Temp\\|Compress-Archive -Path.*-DestinationPath.*:\\Windows\\Temp\\/ nocase)
+        ($event.target.process.command_line = /Compress-Archive -Path.*-DestinationPath \\$env:TEMP|Compress-Archive -Path.*-DestinationPath.*\\\\AppData\\\\Local\\\\Temp\\\\|Compress-Archive -Path.*-DestinationPath.*:\\\\Windows\\\\Temp\\\\/ nocase)
     condition:
         $event
 }

@@ -7,7 +7,7 @@ rule pubprn_vbs_proxy_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\pubprn\.vbs/ nocase and
+        ($event.target.process.command_line = /\\\\pubprn\\.vbs/ nocase and
         $event.target.process.command_line = /script:/ nocase)
     condition:
         $event

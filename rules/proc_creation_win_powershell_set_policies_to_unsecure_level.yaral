@@ -8,7 +8,7 @@ rule change_powershell_policies_to_an_insecure_level {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase or
-        $event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase) and
+        $event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase) and
         $event.target.process.command_line = /-executionpolicy | -ep | -exec / nocase and
         $event.target.process.command_line = /Bypass|Unrestricted/ nocase)
     condition:

@@ -7,9 +7,9 @@ rule wscript_shell_run_in_commandline {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /Wscript\./ nocase and
-        $event.target.process.command_line = /\.Shell/ nocase and
-        $event.target.process.command_line = /\.Run/ nocase)
+        ($event.target.process.command_line = /Wscript\\./ nocase and
+        $event.target.process.command_line = /\\.Shell/ nocase and
+        $event.target.process.command_line = /\\.Run/ nocase)
     condition:
         $event
 }

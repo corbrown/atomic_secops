@@ -7,10 +7,10 @@ rule suspicious_service_path_modification {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\sc\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\\\sc\\.exe$/ nocase and
         $event.target.process.command_line = /config/ nocase and
         $event.target.process.command_line = /binPath/ nocase and
-        $event.target.process.command_line = /powershell|cmd |mshta|wscript|cscript|rundll32|svchost|dllhost|cmd\.exe \/c|cmd\.exe \/k|cmd\.exe \/r|cmd \/c|cmd \/k|cmd \/r|C:\\Users\\Public|\\Downloads\\|\\Desktop\\|\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\|C:\\Windows\\TEMP\\|\\AppData\\Local\\Temp/ nocase)
+        $event.target.process.command_line = /powershell|cmd |mshta|wscript|cscript|rundll32|svchost|dllhost|cmd\\.exe \\/c|cmd\\.exe \\/k|cmd\\.exe \\/r|cmd \\/c|cmd \\/k|cmd \\/r|C:\\\\Users\\\\Public|\\\\Downloads\\\\|\\\\Desktop\\\\|\\\\Microsoft\\\\Windows\\\\Start Menu\\\\Programs\\\\Startup\\\\|C:\\\\Windows\\\\TEMP\\\\|\\\\AppData\\\\Local\\\\Temp/ nocase)
     condition:
         $event
 }

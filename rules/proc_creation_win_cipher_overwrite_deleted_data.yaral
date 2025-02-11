@@ -8,8 +8,8 @@ rule deleted_data_overwritten_via_cipher_exe {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "CIPHER.EXE" nocase or
-        $event.target.process.file.full_path = /\\cipher\.exe$/ nocase) and
-        $event.target.process.command_line = / \/w:/ nocase)
+        $event.target.process.file.full_path = /\\\\cipher\\.exe$/ nocase) and
+        $event.target.process.command_line = / \\/w:/ nocase)
     condition:
         $event
 }

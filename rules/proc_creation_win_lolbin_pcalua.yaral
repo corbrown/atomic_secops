@@ -7,7 +7,7 @@ rule use_of_pcalua_for_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\pcalua\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\\\pcalua\\.exe$/ nocase and
         $event.target.process.command_line = / -a/ nocase)
     condition:
         $event

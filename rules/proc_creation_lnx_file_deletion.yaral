@@ -7,7 +7,7 @@ rule file_deletion {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\/rm|\/shred|\/unlink/ nocase)
+        ($event.target.process.file.full_path = /\\/rm|\\/shred|\\/unlink/ nocase)
     condition:
         $event
 }

@@ -7,13 +7,13 @@ rule use_of_w32tm_as_timer {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\w32tm\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\w32tm\\.exe$/ nocase or
         $event.target.process.file.names = "w32time.dll" nocase) and
-        $event.target.process.command_line = /\/stripchart/ nocase and
-        $event.target.process.command_line = /\/computer:/ nocase and
-        $event.target.process.command_line = /\/period:/ nocase and
-        $event.target.process.command_line = /\/dataonly/ nocase and
-        $event.target.process.command_line = /\/samples:/ nocase)
+        $event.target.process.command_line = /\\/stripchart/ nocase and
+        $event.target.process.command_line = /\\/computer:/ nocase and
+        $event.target.process.command_line = /\\/period:/ nocase and
+        $event.target.process.command_line = /\\/dataonly/ nocase and
+        $event.target.process.command_line = /\\/samples:/ nocase)
     condition:
         $event
 }

@@ -7,8 +7,8 @@ rule mshta_suspicious_execution_01 {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\mshta\.exe$/ nocase and
-        $event.target.process.command_line = /vbscript|\.jpg|\.png|\.lnk|\.xls|\.doc|\.zip|\.dll/ nocase)
+        ($event.target.process.file.full_path = /\\\\mshta\\.exe$/ nocase and
+        $event.target.process.command_line = /vbscript|\\.jpg|\\.png|\\.lnk|\\.xls|\\.doc|\\.zip|\\.dll/ nocase)
     condition:
         $event
 }

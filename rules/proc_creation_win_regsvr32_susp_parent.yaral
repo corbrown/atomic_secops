@@ -7,10 +7,10 @@ rule scripting_commandline_process_spawned_regsvr32 {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.principal.process.file.full_path = /\\cmd\.exe|\\cscript\.exe|\\mshta\.exe|\\powershell_ise\.exe|\\powershell\.exe|\\pwsh\.exe|\\wscript\.exe/ nocase and
-        $event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase and
-        $event.principal.process.file.full_path = "C:\\Windows\\System32\\cmd.exe" nocase and
-        $event.target.process.command_line = / \/s C:\\Windows\\System32\\RpcProxy\\RpcProxy\.dll$/ nocase)
+        ($event.principal.process.file.full_path = /\\\\cmd\\.exe|\\\\cscript\\.exe|\\\\mshta\\.exe|\\\\powershell_ise\\.exe|\\\\powershell\\.exe|\\\\pwsh\\.exe|\\\\wscript\\.exe/ nocase and
+        $event.target.process.file.full_path = /\\\\regsvr32\\.exe$/ nocase and
+        $event.principal.process.file.full_path = "C:\\\\Windows\\\\System32\\\\cmd.exe" nocase and
+        $event.target.process.command_line = / \\/s C:\\\\Windows\\\\System32\\\\RpcProxy\\\\RpcProxy\\.dll$/ nocase)
     condition:
         $event
 }

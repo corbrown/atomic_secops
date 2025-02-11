@@ -7,14 +7,14 @@ rule filter_driver_unloaded_via_fltmc_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\fltMC\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\fltMC\\.exe$/ nocase or
         $event.target.process.file.names = "fltMC.exe" nocase) and
         $event.target.process.command_line = /unload/ nocase and
-        (($event.principal.process.file.full_path = /^C:\\Users\\/ nocase and
-        $event.principal.process.file.full_path = /\\AppData\\Local\\Temp\\/ nocase and
-        $event.principal.process.file.full_path = /\\endpoint-protection-installer-x64\.tmp$/ nocase and
+        (($event.principal.process.file.full_path = /^C:\\\\Users\\\\/ nocase and
+        $event.principal.process.file.full_path = /\\\\AppData\\\\Local\\\\Temp\\\\/ nocase and
+        $event.principal.process.file.full_path = /\\\\endpoint-protection-installer-x64\\.tmp$/ nocase and
         $event.target.process.command_line = /unload rtp_filesystem_filter$/ nocase) or
-        ($event.principal.process.file.full_path = "C:\\Program Files (x86)\\ManageEngine\\uems_agent\\bin\\dcfaservice64.exe" nocase and
+        ($event.principal.process.file.full_path = "C:\\\\Program Files (x86)\\\\ManageEngine\\\\uems_agent\\\\bin\\\\dcfaservice64.exe" nocase and
         $event.target.process.command_line = /unload DFMFilter$/ nocase)))
     condition:
         $event

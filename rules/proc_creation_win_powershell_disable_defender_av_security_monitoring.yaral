@@ -7,10 +7,10 @@ rule disable_windows_defender_av_security_monitoring {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or
+        ((($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase or
         $event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase) and
-        $event.target.process.command_line = /-DisableBehaviorMonitoring \$true|-DisableRuntimeMonitoring \$true/ nocase) or
-        (($event.target.process.file.full_path = /\\sc\.exe$/ nocase or
+        $event.target.process.command_line = /-DisableBehaviorMonitoring \\$true|-DisableRuntimeMonitoring \\$true/ nocase) or
+        (($event.target.process.file.full_path = /\\\\sc\\.exe$/ nocase or
         $event.target.process.file.names = "sc.exe" nocase) and
         (($event.target.process.command_line = /stop/ nocase and
         $event.target.process.command_line = /WinDefend/ nocase) or

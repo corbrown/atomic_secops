@@ -7,11 +7,11 @@ rule disable_important_scheduled_task {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase and
-        $event.target.process.command_line = /\/Change/ nocase and
-        $event.target.process.command_line = /\/TN/ nocase and
-        $event.target.process.command_line = /\/disable/ nocase and
-        $event.target.process.command_line = /\\Windows\\BitLocker|\\Windows\\ExploitGuard|\\Windows\\ExploitGuard\\ExploitGuard MDM policy Refresh|\\Windows\\SystemRestore\\SR|\\Windows\\UpdateOrchestrator\\|\\Windows\\Windows Defender\\|\\Windows\\WindowsBackup\\|\\Windows\\WindowsUpdate\\/ nocase)
+        ($event.target.process.file.full_path = /\\\\schtasks\\.exe$/ nocase and
+        $event.target.process.command_line = /\\/Change/ nocase and
+        $event.target.process.command_line = /\\/TN/ nocase and
+        $event.target.process.command_line = /\\/disable/ nocase and
+        $event.target.process.command_line = /\\\\Windows\\\\BitLocker|\\\\Windows\\\\ExploitGuard|\\\\Windows\\\\ExploitGuard\\\\ExploitGuard MDM policy Refresh|\\\\Windows\\\\SystemRestore\\\\SR|\\\\Windows\\\\UpdateOrchestrator\\\\|\\\\Windows\\\\Windows Defender\\\\|\\\\Windows\\\\WindowsBackup\\\\|\\\\Windows\\\\WindowsUpdate\\\\/ nocase)
     condition:
         $event
 }

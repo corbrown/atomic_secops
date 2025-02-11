@@ -8,8 +8,8 @@ rule operator_bloopers_cobalt_strike_commands {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "Cmd.Exe" nocase or
-        $event.target.process.file.full_path = /\\cmd\.exe$/ nocase) and
-        $event.target.process.command_line = /cmd |cmd\.exe|c:\\windows\\system32\\cmd\.exe/ nocase and
+        $event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase) and
+        $event.target.process.command_line = /cmd |cmd\\.exe|c:\\\\windows\\\\system32\\\\cmd\\.exe/ nocase and
         $event.target.process.command_line = /psinject|spawnas|make_token|remote-exec|rev2self|dcsync|logonpasswords|execute-assembly|getsystem/ nocase)
     condition:
         $event

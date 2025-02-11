@@ -7,10 +7,10 @@ rule file_download_via_bitsadmin_to_an_uncommon_target_folder {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\bitsadmin\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\bitsadmin\\.exe$/ nocase or
         $event.target.process.file.names = "bitsadmin.exe" nocase) and
-        $event.target.process.command_line = / \/transfer | \/create | \/addfile / nocase and
-        $event.target.process.command_line = /%AppData%|%temp%|%tmp%|\\AppData\\Local\\|C:\\Windows\\Temp\\/ nocase)
+        $event.target.process.command_line = / \\/transfer | \\/create | \\/addfile / nocase and
+        $event.target.process.command_line = /%AppData%|%temp%|%tmp%|\\\\AppData\\\\Local\\\\|C:\\\\Windows\\\\Temp\\\\/ nocase)
     condition:
         $event
 }

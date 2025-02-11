@@ -8,10 +8,10 @@ rule shimcache_flush {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.command_line = /rundll32/ nocase and
-        $event.target.process.command_line = /apphelp\.dll/ nocase and
+        $event.target.process.command_line = /apphelp\\.dll/ nocase and
         $event.target.process.command_line = /ShimFlushCache|#250/ nocase) or
         ($event.target.process.command_line = /rundll32/ nocase and
-        $event.target.process.command_line = /kernel32\.dll/ nocase and
+        $event.target.process.command_line = /kernel32\\.dll/ nocase and
         $event.target.process.command_line = /BaseFlushAppcompatCache|#46/ nocase))
     condition:
         $event

@@ -8,7 +8,7 @@ rule suspicious_tasklist_discovery_command {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.command_line = /tasklist/ nocase or
-        $event.target.process.file.full_path = /\\tasklist\.exe$/ nocase or
+        $event.target.process.file.full_path = /\\\\tasklist\\.exe$/ nocase or
         $event.target.process.file.names = "tasklist.exe" nocase))
     condition:
         $event

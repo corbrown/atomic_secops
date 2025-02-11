@@ -7,12 +7,12 @@ rule dism_remove_online_package {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\DismHost\.exe$/ nocase and
-        $event.principal.process.command_line = /\/Online/ nocase and
-        $event.principal.process.command_line = /\/Disable-Feature/ nocase) or
-        ($event.target.process.file.full_path = /\\Dism\.exe$/ nocase and
-        $event.target.process.command_line = /\/Online/ nocase and
-        $event.target.process.command_line = /\/Disable-Feature/ nocase))
+        (($event.target.process.file.full_path = /\\\\DismHost\\.exe$/ nocase and
+        $event.principal.process.command_line = /\\/Online/ nocase and
+        $event.principal.process.command_line = /\\/Disable-Feature/ nocase) or
+        ($event.target.process.file.full_path = /\\\\Dism\\.exe$/ nocase and
+        $event.target.process.command_line = /\\/Online/ nocase and
+        $event.target.process.command_line = /\\/Disable-Feature/ nocase))
     condition:
         $event
 }

@@ -7,7 +7,7 @@ rule suspicious_schtasks_schedule_types {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\schtasks\\.exe$/ nocase or
         $event.target.process.file.names = "schtasks.exe" nocase) and
         $event.target.process.command_line = / ONLOGON | ONSTART | ONCE | ONIDLE / nocase and
         ($event.target.process.command_line != /NT AUT/ nocase and

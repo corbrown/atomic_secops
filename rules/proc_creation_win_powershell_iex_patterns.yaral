@@ -7,10 +7,10 @@ rule suspicious_powershell_iex_execution_patterns {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase and
-        $event.target.process.command_line = / \| iex;| \| iex | \| iex\}| \| IEX ;| \| IEX -Error| \| IEX \(new|\);IEX / nocase and
-        $event.target.process.command_line = /::FromBase64String|\.GetString\(\[System\.Convert\]::/ nocase) or
-        $event.target.process.command_line = /\)\|iex;\$|\);iex\(\$|\);iex \$| \| IEX \| | \| iex\\"/ nocase)
+        (($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe/ nocase and
+        $event.target.process.command_line = / \\| iex;| \\| iex | \\| iex\\}| \\| IEX ;| \\| IEX -Error| \\| IEX \\(new|\\);IEX / nocase and
+        $event.target.process.command_line = /::FromBase64String|\\.GetString\\(\\[System\\.Convert\\]::/ nocase) or
+        $event.target.process.command_line = /\\)\\|iex;\\$|\\);iex\\(\\$|\\);iex \\$| \\| IEX \\| | \\| iex\\\\"/ nocase)
     condition:
         $event
 }

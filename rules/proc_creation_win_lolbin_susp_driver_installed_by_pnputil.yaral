@@ -7,8 +7,8 @@ rule suspicious_driver_install_by_pnputil_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /-i|\/install|-a|\/add-driver|\.inf/ nocase and
-        $event.target.process.file.full_path = /\\pnputil\.exe$/ nocase)
+        ($event.target.process.command_line = /-i|\\/install|-a|\\/add-driver|\\.inf/ nocase and
+        $event.target.process.file.full_path = /\\\\pnputil\\.exe$/ nocase)
     condition:
         $event
 }

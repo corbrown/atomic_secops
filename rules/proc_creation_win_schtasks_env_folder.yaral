@@ -7,25 +7,25 @@ rule schedule_task_creation_from_env_variable_or_potentially_suspicious_path_via
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase and
-        $event.target.process.command_line = / \/create / nocase and
-        $event.target.process.command_line = /:\\Perflogs|:\\Users\\All Users\\|:\\Users\\Default\\|:\\Users\\Public|:\\Windows\\Temp|\\AppData\\Local\\|\\AppData\\Roaming\\|%AppData%|%Public%/ nocase) or
-        ($event.principal.process.command_line = /\\svchost\.exe -k netsvcs -p -s Schedule$/ nocase and
-        $event.target.process.command_line = /:\\Perflogs|:\\Windows\\Temp|\\Users\\Public|%Public%/ nocase)) and
-        (($event.principal.process.command_line = /unattended\.ini/ nocase or
-        $event.target.process.command_line = /update_task\.xml/ nocase) or
-        $event.target.process.command_line != /\/Create \/TN TVInstallRestore \/TR/ nocase or
-        ($event.target.process.command_line = /\/Create \/Xml "C:\\Users\\/ nocase and
-        $event.target.process.command_line = /\\AppData\\Local\\Temp\\\.CR\./ nocase and
-        $event.target.process.command_line = /Avira_Security_Installation\.xml/ nocase) or
-        ($event.target.process.command_line = /\/Create \/F \/TN/ nocase and
-        $event.target.process.command_line = /\/Xml / nocase and
-        $event.target.process.command_line = /\\AppData\\Local\\Temp\\is-/ nocase and
+        ((($event.target.process.file.full_path = /\\\\schtasks\\.exe$/ nocase and
+        $event.target.process.command_line = / \\/create / nocase and
+        $event.target.process.command_line = /:\\\\Perflogs|:\\\\Users\\\\All Users\\\\|:\\\\Users\\\\Default\\\\|:\\\\Users\\\\Public|:\\\\Windows\\\\Temp|\\\\AppData\\\\Local\\\\|\\\\AppData\\\\Roaming\\\\|%AppData%|%Public%/ nocase) or
+        ($event.principal.process.command_line = /\\\\svchost\\.exe -k netsvcs -p -s Schedule$/ nocase and
+        $event.target.process.command_line = /:\\\\Perflogs|:\\\\Windows\\\\Temp|\\\\Users\\\\Public|%Public%/ nocase)) and
+        (($event.principal.process.command_line = /unattended\\.ini/ nocase or
+        $event.target.process.command_line = /update_task\\.xml/ nocase) or
+        $event.target.process.command_line != /\\/Create \\/TN TVInstallRestore \\/TR/ nocase or
+        ($event.target.process.command_line = /\\/Create \\/Xml "C:\\\\Users\\\\/ nocase and
+        $event.target.process.command_line = /\\\\AppData\\\\Local\\\\Temp\\\\\\.CR\\./ nocase and
+        $event.target.process.command_line = /Avira_Security_Installation\\.xml/ nocase) or
+        ($event.target.process.command_line = /\\/Create \\/F \\/TN/ nocase and
+        $event.target.process.command_line = /\\/Xml / nocase and
+        $event.target.process.command_line = /\\\\AppData\\\\Local\\\\Temp\\\\is-/ nocase and
         $event.target.process.command_line = /Avira_/ nocase and
-        $event.target.process.command_line = /\.tmp\\UpdateFallbackTask\.xml|\.tmp\\WatchdogServiceControlManagerTimeout\.xml|\.tmp\\SystrayAutostart\.xml|\.tmp\\MaintenanceTask\.xml/ nocase) or
-        ($event.target.process.command_line = /\\AppData\\Local\\Temp\\/ nocase and
-        $event.target.process.command_line = /\/Create \/TN "klcp_update" \/XML / nocase and
-        $event.target.process.command_line = /\\klcp_update_task\.xml/ nocase)))
+        $event.target.process.command_line = /\\.tmp\\\\UpdateFallbackTask\\.xml|\\.tmp\\\\WatchdogServiceControlManagerTimeout\\.xml|\\.tmp\\\\SystrayAutostart\\.xml|\\.tmp\\\\MaintenanceTask\\.xml/ nocase) or
+        ($event.target.process.command_line = /\\\\AppData\\\\Local\\\\Temp\\\\/ nocase and
+        $event.target.process.command_line = /\\/Create \\/TN "klcp_update" \\/XML / nocase and
+        $event.target.process.command_line = /\\\\klcp_update_task\\.xml/ nocase)))
     condition:
         $event
 }

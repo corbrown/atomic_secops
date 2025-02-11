@@ -7,7 +7,7 @@ rule terminate_linux_process_via_kill {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\/kill|\/killall|\/pkill|\/xkill/ nocase)
+        ($event.target.process.file.full_path = /\\/kill|\\/killall|\\/pkill|\\/xkill/ nocase)
     condition:
         $event
 }

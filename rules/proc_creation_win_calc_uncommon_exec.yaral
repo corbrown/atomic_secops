@@ -7,11 +7,11 @@ rule suspicious_calculator_usage {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\calc\.exe / nocase or
-        ($event.target.process.file.full_path = /\\calc\.exe$/ nocase and
-        ($event.target.process.file.full_path != /:\\Windows\\System32\\/ nocase and
-        $event.target.process.file.full_path != /:\\Windows\\SysWOW64\\/ nocase and
-        $event.target.process.file.full_path != /:\\Windows\\WinSxS\\/ nocase)))
+        ($event.target.process.command_line = /\\\\calc\\.exe / nocase or
+        ($event.target.process.file.full_path = /\\\\calc\\.exe$/ nocase and
+        ($event.target.process.file.full_path != /:\\\\Windows\\\\System32\\\\/ nocase and
+        $event.target.process.file.full_path != /:\\\\Windows\\\\SysWOW64\\\\/ nocase and
+        $event.target.process.file.full_path != /:\\\\Windows\\\\WinSxS\\\\/ nocase)))
     condition:
         $event
 }

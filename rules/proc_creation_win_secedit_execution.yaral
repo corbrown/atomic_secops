@@ -7,12 +7,12 @@ rule potential_suspicious_activity_using_secedit {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\secedit\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\secedit\\.exe$/ nocase or
         $event.target.process.file.names = "SeCEdit" nocase) and
-        (($event.target.process.command_line = /\/export/ nocase and
-        $event.target.process.command_line = /\/cfg/ nocase) or
-        ($event.target.process.command_line = /\/configure/ nocase and
-        $event.target.process.command_line = /\/db/ nocase)))
+        (($event.target.process.command_line = /\\/export/ nocase and
+        $event.target.process.command_line = /\\/cfg/ nocase) or
+        ($event.target.process.command_line = /\\/configure/ nocase and
+        $event.target.process.command_line = /\\/db/ nocase)))
     condition:
         $event
 }

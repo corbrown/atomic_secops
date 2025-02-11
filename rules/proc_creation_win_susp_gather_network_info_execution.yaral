@@ -1,15 +1,15 @@
 rule suspicious_reconnaissance_activity_via_gathernetworkinfo_vbs {
     meta:
-        description = "Detects execution of the built-in script located in 'C:\Windows\System32\gatherNetworkInfo.vbs'. Which can be used to gather information about the target machine"
+        description = "Detects execution of the built-in script located in 'C:\\Windows\\System32\\gatherNetworkInfo.vbs'. Which can be used to gather information about the target machine"
         references = "https://posts.slayerlabs.com/living-off-the-land/#gathernetworkinfovbs, https://www.mandiant.com/resources/blog/trojanized-windows-installers-ukrainian-government"
         mitre = "attack.discovery, attack.execution, attack.t1615, attack.t1059.005"
         logsource = "process_creation"
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /gatherNetworkInfo\.vbs/ nocase and
-        ($event.target.process.file.full_path != /\\cscript\.exe/ nocase and
-        $event.target.process.file.full_path != /\\wscript\.exe/ nocase))
+        ($event.target.process.command_line = /gatherNetworkInfo\\.vbs/ nocase and
+        ($event.target.process.file.full_path != /\\\\cscript\\.exe/ nocase and
+        $event.target.process.file.full_path != /\\\\wscript\\.exe/ nocase))
     condition:
         $event
 }

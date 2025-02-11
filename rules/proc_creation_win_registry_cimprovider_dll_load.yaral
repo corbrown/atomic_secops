@@ -7,7 +7,7 @@ rule dll_execution_via_register_cimprovider_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\register-cimprovider\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\\\register-cimprovider\\.exe$/ nocase and
         $event.target.process.command_line = /-path/ nocase and
         $event.target.process.command_line = /dll/ nocase)
     condition:

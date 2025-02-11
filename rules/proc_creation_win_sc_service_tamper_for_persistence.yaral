@@ -19,7 +19,7 @@ rule potential_persistence_attempt_via_existing_service_tampering {
         ($event.target.process.command_line = /reg / nocase and
         $event.target.process.command_line = /add / nocase and
         $event.target.process.command_line = /ImagePath/ nocase)) and
-        $event.target.process.command_line = /\.sh|\.exe|\.dll|\.bin\$|\.bat|\.cmd|\.js|\.msh\$|\.reg\$|\.scr|\.ps|\.vb|\.jar|\.pl/ nocase))
+        $event.target.process.command_line = /\\.sh|\\.exe|\\.dll|\\.bin\\$|\\.bat|\\.cmd|\\.js|\\.msh\\$|\\.reg\\$|\\.scr|\\.ps|\\.vb|\\.jar|\\.pl/ nocase))
     condition:
         $event
 }

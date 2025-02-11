@@ -7,10 +7,10 @@ rule potential_configuration_and_service_reconnaissance_via_reg_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase or
         $event.target.process.file.names = "reg.exe" nocase) and
         $event.target.process.command_line = /query/ nocase and
-        $event.target.process.command_line = /currentVersion\\windows|winlogon\\|currentVersion\\shellServiceObjectDelayLoad|currentVersion\\run|currentVersion\\policies\\explorer\\run|currentcontrolset\\services/ nocase)
+        $event.target.process.command_line = /currentVersion\\\\windows|winlogon\\\\|currentVersion\\\\shellServiceObjectDelayLoad|currentVersion\\\\run|currentVersion\\\\policies\\\\explorer\\\\run|currentcontrolset\\\\services/ nocase)
     condition:
         $event
 }

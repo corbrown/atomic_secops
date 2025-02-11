@@ -7,13 +7,13 @@ rule uncommon_svchost_parent_process {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\svchost\.exe$/ nocase and
-        (($event.principal.process.file.full_path != /\\Mrt\.exe/ nocase and
-        $event.principal.process.file.full_path != /\\MsMpEng\.exe/ nocase and
-        $event.principal.process.file.full_path != /\\ngen\.exe/ nocase and
-        $event.principal.process.file.full_path != /\\rpcnet\.exe/ nocase and
-        $event.principal.process.file.full_path != /\\services\.exe/ nocase and
-        $event.principal.process.file.full_path != /\\TiWorker\.exe/ nocase) or
+        ($event.target.process.file.full_path = /\\\\svchost\\.exe$/ nocase and
+        (($event.principal.process.file.full_path != /\\\\Mrt\\.exe/ nocase and
+        $event.principal.process.file.full_path != /\\\\MsMpEng\\.exe/ nocase and
+        $event.principal.process.file.full_path != /\\\\ngen\\.exe/ nocase and
+        $event.principal.process.file.full_path != /\\\\rpcnet\\.exe/ nocase and
+        $event.principal.process.file.full_path != /\\\\services\\.exe/ nocase and
+        $event.principal.process.file.full_path != /\\\\TiWorker\\.exe/ nocase) or
         $event.principal.process.file.full_path = "" or
         ($event.principal.process.file.full_path != /-/ nocase and
         $event.principal.process.file.full_path != // nocase)))

@@ -7,11 +7,11 @@ rule potential_privilege_escalation_using_symlink_between_osk_and_cmd {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase or
         $event.target.process.file.names = "Cmd.Exe" nocase) and
         $event.target.process.command_line = /mklink/ nocase and
-        $event.target.process.command_line = /\\osk\.exe/ nocase and
-        $event.target.process.command_line = /\\cmd\.exe/ nocase)
+        $event.target.process.command_line = /\\\\osk\\.exe/ nocase and
+        $event.target.process.command_line = /\\\\cmd\\.exe/ nocase)
     condition:
         $event
 }

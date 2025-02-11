@@ -7,7 +7,7 @@ rule application_removed_via_wmic_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\WMIC\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\WMIC\\.exe$/ nocase or
         $event.target.process.file.names = "wmic.exe" nocase) and
         $event.target.process.command_line = /call/ nocase and
         $event.target.process.command_line = /uninstall/ nocase)

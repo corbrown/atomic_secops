@@ -7,9 +7,9 @@ rule hacktool___lazagne_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\lazagne\.exe$/ nocase or
-        ($event.target.process.file.full_path = /:\\PerfLogs\\|:\\ProgramData\\|:\\Temp\\|:\\Tmp\\|:\\Windows\\Temp\\|\\AppData\\|\\Downloads\\|\\Users\\Public\\/ nocase and
-        $event.target.process.command_line = /\.exe all|\.exe browsers|\.exe chats|\.exe databases|\.exe games|\.exe git|\.exe mails|\.exe maven|\.exe memory|\.exe multimedia|\.exe sysadmin|\.exe unused|\.exe wifi|\.exe windows/ nocase) or
+        ($event.target.process.file.full_path = /\\\\lazagne\\.exe$/ nocase or
+        ($event.target.process.file.full_path = /:\\\\PerfLogs\\\\|:\\\\ProgramData\\\\|:\\\\Temp\\\\|:\\\\Tmp\\\\|:\\\\Windows\\\\Temp\\\\|\\\\AppData\\\\|\\\\Downloads\\\\|\\\\Users\\\\Public\\\\/ nocase and
+        $event.target.process.command_line = /\\.exe all|\\.exe browsers|\\.exe chats|\\.exe databases|\\.exe games|\\.exe git|\\.exe mails|\\.exe maven|\\.exe memory|\\.exe multimedia|\\.exe sysadmin|\\.exe unused|\\.exe wifi|\\.exe windows/ nocase) or
         ($event.target.process.command_line = /all |browsers |chats |databases |games |git |mails |maven |memory |multimedia |php |svn |sysadmin |unused |wifi |windows / nocase and
         $event.target.process.command_line = /-oA|-oJ|-oN|-output|-password|-1Password|-apachedirectorystudio|-autologon|-ChromiumBased|-composer|-coreftp|-credfiles|-credman|-cyberduck|-dbvis|-EyeCon|-filezilla|-filezillaserver|-ftpnavigator|-galconfusion|-gitforwindows|-hashdump|-iisapppool|-IISCentralCertP|-kalypsomedia|-keepass|-keepassconfig|-lsa_secrets|-mavenrepositories|-memory_dump|-Mozilla|-mRemoteNG|-mscache|-opensshforwindows|-openvpn|-outlook|-pidgin|-postgresql|-psi-im|-puttycm|-pypykatz|-Rclone|-rdpmanager|-robomongo|-roguestale|-skype|-SQLDeveloper|-squirrel|-tortoise|-turba|-UCBrowser|-unattended|-vault|-vaultfiles|-vnc|-windows|-winscp|-wsl/ nocase))
     condition:

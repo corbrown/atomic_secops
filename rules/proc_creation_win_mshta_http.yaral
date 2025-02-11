@@ -7,9 +7,9 @@ rule remotely_hosted_hta_file_executed_via_mshta_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\mshta\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\mshta\\.exe$/ nocase or
         $event.target.process.file.names = "MSHTA.EXE" nocase) and
-        $event.target.process.command_line = /http:\/\/|https:\/\/|ftp:\/\// nocase)
+        $event.target.process.command_line = /http:\\/\\/|https:\\/\\/|ftp:\\/\\// nocase)
     condition:
         $event
 }

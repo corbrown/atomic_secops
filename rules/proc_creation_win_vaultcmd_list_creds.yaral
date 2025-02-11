@@ -7,9 +7,9 @@ rule windows_credential_manager_access_via_vaultcmd {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\VaultCmd\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\VaultCmd\\.exe$/ nocase or
         $event.target.process.file.names = "VAULTCMD.EXE" nocase) and
-        $event.target.process.command_line = /\/listcreds:/ nocase)
+        $event.target.process.command_line = /\\/listcreds:/ nocase)
     condition:
         $event
 }

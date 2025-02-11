@@ -7,10 +7,10 @@ rule share_and_session_enumeration_using_net_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\net\.exe|\\net1\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\\\net\\.exe|\\\\net1\\.exe/ nocase or
         $event.target.process.file.names = /net.exe|net1.exe/ nocase) and
         $event.target.process.command_line = /view/ nocase and
-        $event.target.process.command_line != /\\\\/ nocase)
+        $event.target.process.command_line != /\\\\\\\\/ nocase)
     condition:
         $event
 }

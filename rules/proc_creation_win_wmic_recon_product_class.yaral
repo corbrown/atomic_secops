@@ -7,7 +7,7 @@ rule potential_product_class_reconnaissance_via_wmic_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\wmic\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\wmic\\.exe$/ nocase or
         $event.target.process.file.names = "wmic.exe" nocase) and
         $event.target.process.command_line = /AntiVirusProduct|FirewallProduct/ nocase)
     condition:

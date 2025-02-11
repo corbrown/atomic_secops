@@ -7,9 +7,9 @@ rule suspicious_invocation_of_shell_via_awk___linux {
         product = "linux"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\/awk|\/gawk|\/mawk|\/nawk/ nocase and
-        $event.target.process.command_line = /BEGIN \{system/ nocase and
-        $event.target.process.command_line = /\/bin\/bash|\/bin\/dash|\/bin\/fish|\/bin\/sh|\/bin\/zsh/ nocase)
+        ($event.target.process.file.full_path = /\\/awk|\\/gawk|\\/mawk|\\/nawk/ nocase and
+        $event.target.process.command_line = /BEGIN \\{system/ nocase and
+        $event.target.process.command_line = /\\/bin\\/bash|\\/bin\\/dash|\\/bin\\/fish|\\/bin\\/sh|\\/bin\\/zsh/ nocase)
     condition:
         $event
 }

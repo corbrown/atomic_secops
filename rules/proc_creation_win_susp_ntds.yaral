@@ -7,21 +7,21 @@ rule suspicious_process_patterns_ntds_dit_exfil {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ((($event.target.process.file.full_path = /\\NTDSDump\.exe|\\NTDSDumpEx\.exe/ nocase or
-        ($event.target.process.command_line = /ntds\.dit/ nocase and
-        $event.target.process.command_line = /system\.hiv/ nocase) or
-        $event.target.process.command_line = /NTDSgrab\.ps1/ nocase) or
+        ((($event.target.process.file.full_path = /\\\\NTDSDump\\.exe|\\\\NTDSDumpEx\\.exe/ nocase or
+        ($event.target.process.command_line = /ntds\\.dit/ nocase and
+        $event.target.process.command_line = /system\\.hiv/ nocase) or
+        $event.target.process.command_line = /NTDSgrab\\.ps1/ nocase) or
         ($event.target.process.command_line = /ac i ntds/ nocase and
         $event.target.process.command_line = /create full/ nocase) or
-        ($event.target.process.command_line = /\/c copy / nocase and
-        $event.target.process.command_line = /\\windows\\ntds\\ntds\.dit/ nocase) or
+        ($event.target.process.command_line = /\\/c copy / nocase and
+        $event.target.process.command_line = /\\\\windows\\\\ntds\\\\ntds\\.dit/ nocase) or
         ($event.target.process.command_line = /activate instance ntds/ nocase and
         $event.target.process.command_line = /create full/ nocase) or
         ($event.target.process.command_line = /powershell/ nocase and
-        $event.target.process.command_line = /ntds\.dit/ nocase)) or
-        ($event.target.process.command_line = /ntds\.dit/ nocase and
-        ($event.principal.process.file.full_path = /\\apache|\\tomcat|\\AppData\\|\\Temp\\|\\Public\\|\\PerfLogs\\/ nocase or
-        $event.target.process.file.full_path = /\\apache|\\tomcat|\\AppData\\|\\Temp\\|\\Public\\|\\PerfLogs\\/ nocase)))
+        $event.target.process.command_line = /ntds\\.dit/ nocase)) or
+        ($event.target.process.command_line = /ntds\\.dit/ nocase and
+        ($event.principal.process.file.full_path = /\\\\apache|\\\\tomcat|\\\\AppData\\\\|\\\\Temp\\\\|\\\\Public\\\\|\\\\PerfLogs\\\\/ nocase or
+        $event.target.process.file.full_path = /\\\\apache|\\\\tomcat|\\\\AppData\\\\|\\\\Temp\\\\|\\\\Public\\\\|\\\\PerfLogs\\\\/ nocase)))
     condition:
         $event
 }

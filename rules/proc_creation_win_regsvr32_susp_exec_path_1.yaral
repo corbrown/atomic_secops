@@ -7,9 +7,9 @@ rule regsvr32_execution_from_potential_suspicious_location {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\regsvr32\\.exe$/ nocase or
         $event.target.process.file.names = "REGSVR32.EXE" nocase) and
-        $event.target.process.command_line = /:\\ProgramData\\|:\\Temp\\|:\\Users\\Public\\|:\\Windows\\Temp\\|\\AppData\\Local\\Temp\\|\\AppData\\Roaming\\/ nocase)
+        $event.target.process.command_line = /:\\\\ProgramData\\\\|:\\\\Temp\\\\|:\\\\Users\\\\Public\\\\|:\\\\Windows\\\\Temp\\\\|\\\\AppData\\\\Local\\\\Temp\\\\|\\\\AppData\\\\Roaming\\\\/ nocase)
     condition:
         $event
 }

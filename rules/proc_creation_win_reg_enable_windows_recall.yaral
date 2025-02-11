@@ -7,9 +7,9 @@ rule windows_recall_feature_enabled_via_reg_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\reg\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\reg\\.exe$/ nocase or
         $event.target.process.file.names = "reg.exe" nocase) and
-        $event.target.process.command_line = /Microsoft\\Windows\\WindowsAI/ nocase and
+        $event.target.process.command_line = /Microsoft\\\\Windows\\\\WindowsAI/ nocase and
         $event.target.process.command_line = /DisableAIDataAnalysis/ nocase and
         ($event.target.process.command_line = /add|0/ nocase or
         $event.target.process.command_line = /delete/ nocase))

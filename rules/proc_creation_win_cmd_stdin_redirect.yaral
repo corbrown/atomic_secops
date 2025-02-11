@@ -8,7 +8,7 @@ rule read_contents_from_stdin_via_cmd_exe {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "Cmd.Exe" nocase or
-        $event.target.process.file.full_path = /\\cmd\.exe$/ nocase) and
+        $event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase) and
         $event.target.process.command_line = /</ nocase)
     condition:
         $event

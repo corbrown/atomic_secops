@@ -7,12 +7,12 @@ rule suspicious_command_patterns_in_scheduled_task_creation {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase and
-        $event.target.process.command_line = /\/Create / nocase and
-        (($event.target.process.command_line = /\/sc minute |\/ru system / nocase and
-        $event.target.process.command_line = /cmd \/c|cmd \/k|cmd \/r|cmd\.exe \/c |cmd\.exe \/k |cmd\.exe \/r / nocase) or
-        $event.target.process.command_line = / -decode | -enc | -w hidden | bypass | IEX|\.DownloadData|\.DownloadFile|\.DownloadString|\/c start \/min |FromBase64String|mshta http|mshta\.exe http/ nocase or
-        ($event.target.process.command_line = /:\\ProgramData\\|:\\Temp\\|:\\Tmp\\|:\\Users\\Public\\|:\\Windows\\Temp\\|\\AppData\\|%AppData%|%Temp%|%tmp%/ nocase and
+        ($event.target.process.file.full_path = /\\\\schtasks\\.exe$/ nocase and
+        $event.target.process.command_line = /\\/Create / nocase and
+        (($event.target.process.command_line = /\\/sc minute |\\/ru system / nocase and
+        $event.target.process.command_line = /cmd \\/c|cmd \\/k|cmd \\/r|cmd\\.exe \\/c |cmd\\.exe \\/k |cmd\\.exe \\/r / nocase) or
+        $event.target.process.command_line = / -decode | -enc | -w hidden | bypass | IEX|\\.DownloadData|\\.DownloadFile|\\.DownloadString|\\/c start \\/min |FromBase64String|mshta http|mshta\\.exe http/ nocase or
+        ($event.target.process.command_line = /:\\\\ProgramData\\\\|:\\\\Temp\\\\|:\\\\Tmp\\\\|:\\\\Users\\\\Public\\\\|:\\\\Windows\\\\Temp\\\\|\\\\AppData\\\\|%AppData%|%Temp%|%tmp%/ nocase and
         $event.target.process.command_line = /cscript|curl|wscript/ nocase)))
     condition:
         $event

@@ -7,7 +7,7 @@ rule powershell_web_download {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\.DownloadString\(|\.DownloadFile\(|Invoke-WebRequest |iwr / nocase)
+        ($event.target.process.command_line = /\\.DownloadString\\(|\\.DownloadFile\\(|Invoke-WebRequest |iwr / nocase)
     condition:
         $event
 }

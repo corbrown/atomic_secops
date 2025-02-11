@@ -8,8 +8,8 @@ rule linux_base64_encoded_pipe_to_shell {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /base64 / nocase and
-        ($event.target.process.command_line = /\| bash |\| sh |\|bash |\|sh / nocase or
-        $event.target.process.command_line = / \|sh|\| bash|\| sh|\|bash/ nocase))
+        ($event.target.process.command_line = /\\| bash |\\| sh |\\|bash |\\|sh / nocase or
+        $event.target.process.command_line = / \\|sh|\\| bash|\\| sh|\\|bash/ nocase))
     condition:
         $event
 }

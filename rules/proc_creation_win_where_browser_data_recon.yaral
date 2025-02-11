@@ -7,9 +7,9 @@ rule suspicious_where_execution {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\where\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\where\\.exe$/ nocase or
         $event.target.process.file.names = "where.exe" nocase) and
-        $event.target.process.command_line = /places\.sqlite|cookies\.sqlite|formhistory\.sqlite|logins\.json|key4\.db|key3\.db|sessionstore\.jsonlz4|History|Bookmarks|Cookies|Login Data/ nocase)
+        $event.target.process.command_line = /places\\.sqlite|cookies\\.sqlite|formhistory\\.sqlite|logins\\.json|key4\\.db|key3\\.db|sessionstore\\.jsonlz4|History|Bookmarks|Cookies|Login Data/ nocase)
     condition:
         $event
 }

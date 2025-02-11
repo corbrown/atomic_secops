@@ -9,9 +9,9 @@ rule suspicious_reg_add_bitlocker {
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /REG/ nocase and
         $event.target.process.command_line = /ADD/ nocase and
-        $event.target.process.command_line = /\\SOFTWARE\\Policies\\Microsoft\\FVE/ nocase and
-        $event.target.process.command_line = /\/v/ nocase and
-        $event.target.process.command_line = /\/f/ nocase and
+        $event.target.process.command_line = /\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\FVE/ nocase and
+        $event.target.process.command_line = /\\/v/ nocase and
+        $event.target.process.command_line = /\\/f/ nocase and
         $event.target.process.command_line = /EnableBDEWithNoTPM|UseAdvancedStartup|UseTPM|UseTPMKey|UseTPMKeyPIN|RecoveryKeyMessageSource|UseTPMPIN|RecoveryKeyMessage/ nocase)
     condition:
         $event

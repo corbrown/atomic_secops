@@ -8,7 +8,7 @@ rule potential_persistence_via_netsh_helper_dll {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "netsh.exe" nocase or
-        $event.target.process.file.full_path = /\\netsh\.exe$/ nocase) and
+        $event.target.process.file.full_path = /\\\\netsh\\.exe$/ nocase) and
         $event.target.process.command_line = /add/ nocase and
         $event.target.process.command_line = /helper/ nocase)
     condition:

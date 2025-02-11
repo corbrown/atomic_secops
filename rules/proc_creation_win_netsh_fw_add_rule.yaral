@@ -7,12 +7,12 @@ rule new_firewall_rule_added_via_netsh_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\netsh\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\netsh\\.exe$/ nocase or
         $event.target.process.file.names = "netsh.exe" nocase) and
         $event.target.process.command_line = / firewall / nocase and
         $event.target.process.command_line = / add / nocase and
-        ($event.target.process.command_line != /advfirewall firewall add rule name=Dropbox dir=in action=allow "program=.:\\Program Files \(x86\)\\Dropbox\\Client\\Dropbox\.exe" enable=yes profile=Any/ nocase and
-        $event.target.process.command_line != /advfirewall firewall add rule name=Dropbox dir=in action=allow "program=.:\\Program Files\\Dropbox\\Client\\Dropbox\.exe" enable=yes profile=Any/ nocase))
+        ($event.target.process.command_line != /advfirewall firewall add rule name=Dropbox dir=in action=allow "program=.:\\\\Program Files \\(x86\\)\\\\Dropbox\\\\Client\\\\Dropbox\\.exe" enable=yes profile=Any/ nocase and
+        $event.target.process.command_line != /advfirewall firewall add rule name=Dropbox dir=in action=allow "program=.:\\\\Program Files\\\\Dropbox\\\\Client\\\\Dropbox\\.exe" enable=yes profile=Any/ nocase))
     condition:
         $event
 }

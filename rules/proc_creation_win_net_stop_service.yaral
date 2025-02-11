@@ -8,7 +8,7 @@ rule stop_windows_service_via_net_exe {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = /net.exe|net1.exe/ nocase or
-        $event.target.process.file.full_path = /\\net\.exe|\\net1\.exe/ nocase) and
+        $event.target.process.file.full_path = /\\\\net\\.exe|\\\\net1\\.exe/ nocase) and
         $event.target.process.command_line = / stop / nocase)
     condition:
         $event

@@ -7,16 +7,16 @@ rule script_interpreter_execution_from_suspicious_folder {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\cscript\.exe|\\mshta\.exe|\\wscript\.exe/ nocase or
-        $event.target.process.command_line = / -ep bypass | -ExecutionPolicy bypass | -w hidden |\/e:javascript |\/e:Jscript |\/e:vbscript / nocase or
+        (($event.target.process.file.full_path = /\\\\cscript\\.exe|\\\\mshta\\.exe|\\\\wscript\\.exe/ nocase or
+        $event.target.process.command_line = / -ep bypass | -ExecutionPolicy bypass | -w hidden |\\/e:javascript |\\/e:Jscript |\\/e:vbscript / nocase or
         $event.target.process.file.names = /cscript.exe|mshta.exe|wscript.exe/ nocase) and
-        ($event.target.process.command_line = /:\\Perflogs\\|:\\Users\\Public\\|\\AppData\\Local\\Temp|\\AppData\\Roaming\\Temp|\\Temporary Internet|\\Windows\\Temp/ nocase or
-        (($event.target.process.command_line = /:\\Users\\/ nocase and
-        $event.target.process.command_line = /\\Favorites\\/ nocase) or
-        ($event.target.process.command_line = /:\\Users\\/ nocase and
-        $event.target.process.command_line = /\\Favourites\\/ nocase) or
-        ($event.target.process.command_line = /:\\Users\\/ nocase and
-        $event.target.process.command_line = /\\Contacts\\/ nocase))))
+        ($event.target.process.command_line = /:\\\\Perflogs\\\\|:\\\\Users\\\\Public\\\\|\\\\AppData\\\\Local\\\\Temp|\\\\AppData\\\\Roaming\\\\Temp|\\\\Temporary Internet|\\\\Windows\\\\Temp/ nocase or
+        (($event.target.process.command_line = /:\\\\Users\\\\/ nocase and
+        $event.target.process.command_line = /\\\\Favorites\\\\/ nocase) or
+        ($event.target.process.command_line = /:\\\\Users\\\\/ nocase and
+        $event.target.process.command_line = /\\\\Favourites\\\\/ nocase) or
+        ($event.target.process.command_line = /:\\\\Users\\\\/ nocase and
+        $event.target.process.command_line = /\\\\Contacts\\\\/ nocase))))
     condition:
         $event
 }

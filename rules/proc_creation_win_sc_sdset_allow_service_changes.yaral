@@ -7,7 +7,7 @@ rule allow_service_access_using_security_descriptor_tampering_via_sc_exe {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\sc\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\sc\\.exe$/ nocase or
         $event.target.process.file.names = "sc.exe" nocase) and
         $event.target.process.command_line = /sdset/ nocase and
         $event.target.process.command_line = /A;/ nocase and

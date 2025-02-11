@@ -7,11 +7,11 @@ rule use_short_name_path_in_command_line {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /~1\\|~2\\/ nocase and
-        ($event.principal.process.file.full_path = /C:\\Windows\\System32\\Dism.exe|C:\\Windows\\System32\\cleanmgr.exe|C:\\Program Files\\GPSoftware\\Directory Opus\\dopus.exe/ nocase or
-        $event.principal.process.file.full_path = /\\WebEx\\WebexHost\.exe|\\thor\\thor64\.exe|\\veam\.backup\.shell\.exe|\\winget\.exe|\\Everything\\Everything\.exe/ nocase or
-        $event.principal.process.file.full_path = /\\AppData\\Local\\Temp\\WinGet\\/ nocase or
-        $event.target.process.command_line = /\\appdata\\local\\webex\\webex64\\meetings\\wbxreport\.exe|C:\\Program Files\\Git\\post-install\.bat|C:\\Program Files\\Git\\cmd\\scalar\.exe/ nocase))
+        ($event.target.process.command_line = /~1\\\\|~2\\\\/ nocase and
+        ($event.principal.process.file.full_path = /C:\\\\Windows\\\\System32\\\\Dism.exe|C:\\\\Windows\\\\System32\\\\cleanmgr.exe|C:\\\\Program Files\\\\GPSoftware\\\\Directory Opus\\\\dopus.exe/ nocase or
+        $event.principal.process.file.full_path = /\\\\WebEx\\\\WebexHost\\.exe|\\\\thor\\\\thor64\\.exe|\\\\veam\\.backup\\.shell\\.exe|\\\\winget\\.exe|\\\\Everything\\\\Everything\\.exe/ nocase or
+        $event.principal.process.file.full_path = /\\\\AppData\\\\Local\\\\Temp\\\\WinGet\\\\/ nocase or
+        $event.target.process.command_line = /\\\\appdata\\\\local\\\\webex\\\\webex64\\\\meetings\\\\wbxreport\\.exe|C:\\\\Program Files\\\\Git\\\\post-install\\.bat|C:\\\\Program Files\\\\Git\\\\cmd\\\\scalar\\.exe/ nocase))
     condition:
         $event
 }

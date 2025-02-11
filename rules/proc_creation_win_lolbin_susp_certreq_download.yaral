@@ -7,12 +7,12 @@ rule suspicious_certreq_command_to_download {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\certreq\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\certreq\\.exe$/ nocase or
         $event.target.process.file.names = "CertReq.exe" nocase) and
         $event.target.process.command_line = / -Post / nocase and
         $event.target.process.command_line = / -config / nocase and
         $event.target.process.command_line = / http/ nocase and
-        $event.target.process.command_line = / C:\\windows\\win\.ini / nocase)
+        $event.target.process.command_line = / C:\\\\windows\\\\win\\.ini / nocase)
     condition:
         $event
 }

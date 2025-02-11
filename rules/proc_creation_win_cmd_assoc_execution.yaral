@@ -7,7 +7,7 @@ rule change_default_file_association_via_assoc {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\cmd\.exe$/ nocase or
+        (($event.target.process.file.full_path = /\\\\cmd\\.exe$/ nocase or
         $event.target.process.file.names = "Cmd.Exe" nocase) and
         $event.target.process.command_line = /assoc/ nocase)
     condition:

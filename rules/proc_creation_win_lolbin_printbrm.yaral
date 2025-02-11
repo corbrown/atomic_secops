@@ -7,9 +7,9 @@ rule printbrm_zip_creation_of_extraction {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\PrintBrm\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\\\PrintBrm\\.exe$/ nocase and
         $event.target.process.command_line = / -f/ nocase and
-        $event.target.process.command_line = /\.zip/ nocase)
+        $event.target.process.command_line = /\\.zip/ nocase)
     condition:
         $event
 }

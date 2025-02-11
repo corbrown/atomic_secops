@@ -8,7 +8,7 @@ rule potential_lsass_process_dump_via_procdump {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = / -ma / nocase or
-        $event.target.process.command_line = / \/ma / nocase or
+        $event.target.process.command_line = / \\/ma / nocase or
         $event.target.process.command_line = / –ma / nocase or
         $event.target.process.command_line = / —ma / nocase or
         $event.target.process.command_line = / ―ma / nocase and

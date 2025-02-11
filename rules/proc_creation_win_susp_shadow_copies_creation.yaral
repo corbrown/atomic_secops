@@ -7,7 +7,7 @@ rule shadow_copies_creation_using_operating_systems_utilities {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe|\\wmic\.exe|\\vssadmin\.exe/ nocase or
+        (($event.target.process.file.full_path = /\\\\powershell\\.exe|\\\\pwsh\\.exe|\\\\wmic\\.exe|\\\\vssadmin\\.exe/ nocase or
         $event.target.process.file.names = /PowerShell.EXE|pwsh.dll|wmic.exe|VSSADMIN.EXE/ nocase) and
         $event.target.process.command_line = /shadow/ nocase and
         $event.target.process.command_line = /create/ nocase)

@@ -11,7 +11,7 @@ rule suspicious_powershell_invocations___specific___processcreation {
         $event.target.process.command_line = / -w / nocase and
         $event.target.process.command_line = /hidden/ nocase and
         $event.target.process.command_line = / -c / nocase and
-        $event.target.process.command_line = /\[Convert\]::FromBase64String/ nocase) or
+        $event.target.process.command_line = /\\[Convert\\]::FromBase64String/ nocase) or
         ($event.target.process.command_line = / -w / nocase and
         $event.target.process.command_line = /hidden/ nocase and
         $event.target.process.command_line = /-noni/ nocase and
@@ -27,19 +27,19 @@ rule suspicious_powershell_invocations___specific___processcreation {
         ($event.target.process.command_line = /powershell/ nocase and
         $event.target.process.command_line = /reg/ nocase and
         $event.target.process.command_line = /add/ nocase and
-        $event.target.process.command_line = /\\software\\/ nocase) or
+        $event.target.process.command_line = /\\\\software\\\\/ nocase) or
         ($event.target.process.command_line = /bypass/ nocase and
         $event.target.process.command_line = /-noprofile/ nocase and
         $event.target.process.command_line = /-windowstyle/ nocase and
         $event.target.process.command_line = /hidden/ nocase and
         $event.target.process.command_line = /new-object/ nocase and
-        $event.target.process.command_line = /system\.net\.webclient/ nocase and
-        $event.target.process.command_line = /\.download/ nocase) or
+        $event.target.process.command_line = /system\\.net\\.webclient/ nocase and
+        $event.target.process.command_line = /\\.download/ nocase) or
         ($event.target.process.command_line = /iex/ nocase and
         $event.target.process.command_line = /New-Object/ nocase and
-        $event.target.process.command_line = /Net\.WebClient/ nocase and
-        $event.target.process.command_line = /\.Download/ nocase)) and
-        ($event.target.process.command_line != /\(New-Object System\.Net\.WebClient\)\.DownloadString\('https:\/\/community\.chocolatey\.org\/install\.ps1/ nocase and
+        $event.target.process.command_line = /Net\\.WebClient/ nocase and
+        $event.target.process.command_line = /\\.Download/ nocase)) and
+        ($event.target.process.command_line != /\\(New-Object System\\.Net\\.WebClient\\)\\.DownloadString\\('https:\\/\\/community\\.chocolatey\\.org\\/install\\.ps1/ nocase and
         $event.target.process.command_line != /Write-ChocolateyWarning/ nocase))
     condition:
         $event

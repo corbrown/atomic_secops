@@ -8,8 +8,8 @@ rule powershell_downloadfile {
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /powershell/ nocase and
-        $event.target.process.command_line = /\.DownloadFile/ nocase and
-        $event.target.process.command_line = /System\.Net\.WebClient/ nocase)
+        $event.target.process.command_line = /\\.DownloadFile/ nocase and
+        $event.target.process.command_line = /System\\.Net\\.WebClient/ nocase)
     condition:
         $event
 }

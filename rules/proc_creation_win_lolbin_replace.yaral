@@ -7,9 +7,9 @@ rule replace_exe_usage {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.file.full_path = /\\replace\.exe$/ nocase and
+        ($event.target.process.file.full_path = /\\\\replace\\.exe$/ nocase and
         $event.target.process.command_line = /-a/ nocase or
-        $event.target.process.command_line = /\/a/ nocase or
+        $event.target.process.command_line = /\\/a/ nocase or
         $event.target.process.command_line = /–a/ nocase or
         $event.target.process.command_line = /—a/ nocase or
         $event.target.process.command_line = /―a/ nocase)

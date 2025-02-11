@@ -7,7 +7,7 @@ rule mshtml_dll_runhtmlapplication_suspicious_usage {
         product = "windows"
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
-        ($event.target.process.command_line = /\\\.\.\\/ nocase and
+        ($event.target.process.command_line = /\\\\\\.\\.\\\\/ nocase and
         $event.target.process.command_line = /mshtml/ nocase and
         $event.target.process.command_line = /#135|RunHTMLApplication/ nocase)
     condition:
