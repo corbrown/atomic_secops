@@ -10,7 +10,7 @@ rule whoami_exe_execution_with_output_option {
         ((($event.target.process.file.full_path = /\\whoami\.exe$/ nocase or
         $event.target.process.file.names = "whoami.exe" nocase) and
         $event.target.process.command_line = / \/FO CSV| -FO CSV/ nocase) or
-        $event.target.process.command_line = whoami.*> nocase)
+        $event.target.process.command_line = /whoami.*>/ nocase)
     condition:
         $event
 }
