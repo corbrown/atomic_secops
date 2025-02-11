@@ -1,7 +1,7 @@
 rule wlrmdr.exe_uncommon_argument_or_child_process {
     meta:
-        description = "Detects the execution of "Wlrmdr.exe" with the "-u" command line flag which allows anything passed to it to be an argument of the ShellExecute API, which would allow an attacker to execute arbitrary binaries.
-This detection also focuses on any uncommon child processes spawned from "Wlrmdr.exe" as a supplement for those that posses "ParentImage" telemetry.
+        description = "Detects the execution of \"Wlrmdr.exe\" with the \"-u\" command line flag which allows anything passed to it to be an argument of the ShellExecute API, which would allow an attacker to execute arbitrary binaries.
+This detection also focuses on any uncommon child processes spawned from \"Wlrmdr.exe\" as a supplement for those that posses \"ParentImage\" telemetry.
 "
         references = "https://twitter.com/0gtweet/status/1493963591745220608?s=20&t=xUg9DsZhJy1q9bPTUWgeIQ, https://lolbas-project.github.io/lolbas/Binaries/Wlrmdr/"
         mitre = "attack.defense-evasion, attack.t1218"

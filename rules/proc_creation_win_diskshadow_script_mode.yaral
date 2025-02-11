@@ -1,6 +1,6 @@
 rule diskshadow_script_mode_execution {
     meta:
-        description = "Detects execution of "Diskshadow.exe" in script mode using the "/s" flag. Attackers often abuse "diskshadow" to execute scripts that deleted the shadow copies on the systems. Investigate the content of the scripts and its location.
+        description = "Detects execution of \"Diskshadow.exe\" in script mode using the \"/s\" flag. Attackers often abuse \"diskshadow\" to execute scripts that deleted the shadow copies on the systems. Investigate the content of the scripts and its location.
 "
         references = "https://bohops.com/2018/03/26/diskshadow-the-return-of-vss-evasion-persistence-and-active-directory-database-extraction/, https://www.ired.team/offensive-security/credential-access-and-credential-dumping/ntds.dit-enumeration, https://medium.com/@cyberjyot/lolbin-execution-via-diskshadow-f6ff681a27a4, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskshadow"
         mitre = "attack.defense-evasion, attack.t1218, attack.execution, detection.threat-hunting"

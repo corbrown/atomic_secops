@@ -1,6 +1,6 @@
 rule xsl_script_execution_via_wmic.exe {
     meta:
-        description = "Detects the execution of WMIC with the "format" flag to potentially load XSL files.
+        description = "Detects the execution of WMIC with the \"format\" flag to potentially load XSL files.
 Adversaries abuse this functionality to execute arbitrary files while potentially bypassing application whitelisting defenses.
 Extensible Stylesheet Language (XSL) files are commonly used to describe the processing and rendering of data within XML files.
 "

@@ -1,6 +1,6 @@
 rule potential_tampering_with_rdp_related_registry_keys_via_reg.exe {
     meta:
-        description = "Detects the execution of "reg.exe" for enabling/disabling the RDP service on the host by tampering with the 'CurrentControlSet\Control\Terminal Server' values"
+        description = "Detects the execution of \"reg.exe\" for enabling/disabling the RDP service on the host by tampering with the 'CurrentControlSet\Control\Terminal Server' values"
         references = "https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/"
         mitre = "attack.defense-evasion, attack.lateral-movement, attack.t1021.001, attack.t1112"
         logsource = "process_creation"

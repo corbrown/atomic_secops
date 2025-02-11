@@ -1,6 +1,6 @@
 rule stop_windows_service_via_sc.exe {
     meta:
-        description = "Detects the stopping of a Windows service via the "sc.exe" utility"
+        description = "Detects the stopping of a Windows service via the \"sc.exe\" utility"
         references = "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc742107(v=ws.11)"
         mitre = "attack.impact, attack.t1489"
         logsource = "process_creation"

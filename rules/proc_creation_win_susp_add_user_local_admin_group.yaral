@@ -1,6 +1,6 @@
 rule user_added_to_local_administrators_group {
     meta:
-        description = "Detects addition of users to the local administrator group via "Net" or "Add-LocalGroupMember"."
+        description = "Detects addition of users to the local administrator group via \"Net\" or \"Add-LocalGroupMember\"."
         references = "https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1"
         mitre = "attack.persistence, attack.t1098"
         logsource = "process_creation"

@@ -1,6 +1,6 @@
 rule new_process_created_via_wmic.exe {
     meta:
-        description = "Detects new process creation using WMIC via the "process call create" flag"
+        description = "Detects new process creation using WMIC via the \"process call create\" flag"
         references = "https://www.sans.org/blog/wmic-for-incident-response/, https://github.com/redcanaryco/atomic-red-team/blob/84215139ee5127f8e3a117e063b604812bd71928/atomics/T1047/T1047.md#atomic-test-5---wmi-execute-local-process"
         mitre = "attack.execution, attack.t1047, car.2016-03-002"
         logsource = "process_creation"

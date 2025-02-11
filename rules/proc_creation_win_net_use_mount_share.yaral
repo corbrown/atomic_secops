@@ -1,6 +1,6 @@
 rule windows_share_mount_via_net.exe {
     meta:
-        description = "Detects when a share is mounted using the "net.exe" utility"
+        description = "Detects when a share is mounted using the \"net.exe\" utility"
         references = "https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view"
         mitre = "attack.lateral-movement, attack.t1021.002"
         logsource = "process_creation"
