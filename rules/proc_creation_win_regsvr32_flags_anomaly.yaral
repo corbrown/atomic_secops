@@ -1,10 +1,10 @@
 rule potential_regsvr32_commandline_flag_anomaly {
     meta:
-        description = "Detects a potential command line flag anomaly related to 'regsvr32' in which the '/i' flag is used without the '/n' which should be uncommon."
-        references = "https://twitter.com/sbousseaden/status/1282441816986484737?s=12"
-        mitre = "attack.defense-evasion, attack.t1218.010"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects a potential command line flag anomaly related to "regsvr32" in which the "/i" flag is used without the "/n" which should be uncommon.`
+        references = `https://twitter.com/sbousseaden/status/1282441816986484737?s=12`
+        mitre = `attack.defense-evasion, attack.t1218.010`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\regsvr32\.exe$/ nocase and

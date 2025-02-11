@@ -1,10 +1,10 @@
 rule deleted_data_overwritten_via_cipher_exe {
     meta:
-        description = "Detects usage of the 'cipher' built-in utility in order to overwrite deleted data from disk. Adversaries may destroy data and files on specific systems or in large numbers on a network to interrupt availability to systems, services, and network resources. Data destruction is likely to render stored data irrecoverable by forensic techniques through overwriting files or data on local and remote drives"
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1485/T1485.md#atomic-test-3---overwrite-deleted-data-on-c-drive"
-        mitre = "attack.impact, attack.t1485"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects usage of the "cipher" built-in utility in order to overwrite deleted data from disk. Adversaries may destroy data and files on specific systems or in large numbers on a network to interrupt availability to systems, services, and network resources. Data destruction is likely to render stored data irrecoverable by forensic techniques through overwriting files or data on local and remote drives`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1485/T1485.md#atomic-test-3---overwrite-deleted-data-on-c-drive`
+        mitre = `attack.impact, attack.t1485`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = "CIPHER.EXE" nocase or

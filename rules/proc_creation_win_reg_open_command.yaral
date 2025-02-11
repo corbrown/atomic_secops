@@ -1,10 +1,10 @@
 rule suspicious_reg_add_open_command {
     meta:
-        description = "Threat actors performed dumping of SAM, SECURITY and SYSTEM registry hives using DelegateExecute key"
-        references = "https://thedfirreport.com/2021/12/13/diavol-ransomware/"
-        mitre = "attack.credential-access, attack.t1003"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Threat actors performed dumping of SAM, SECURITY and SYSTEM registry hives using DelegateExecute key`
+        references = `https://thedfirreport.com/2021/12/13/diavol-ransomware/`
+        mitre = `attack.credential-access, attack.t1003`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.command_line = /reg/ nocase and

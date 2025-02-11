@@ -1,10 +1,10 @@
 rule wsf_jse_js_vba_vbe_file_execution_via_cscript_wscript {
     meta:
-        description = "Detects script file execution (.js, .jse, .vba, .vbe, .vbs, .wsf) by Wscript/Cscript"
-        references = "https://thedfirreport.com/2023/10/30/netsupport-intrusion-results-in-domain-compromise/, https://redcanary.com/blog/gootloader/"
-        mitre = "attack.execution, attack.t1059.005, attack.t1059.007, detection.threat-hunting"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects script file execution (.js, .jse, .vba, .vbe, .vbs, .wsf) by Wscript/Cscript`
+        references = `https://thedfirreport.com/2023/10/30/netsupport-intrusion-results-in-domain-compromise/, https://redcanary.com/blog/gootloader/`
+        mitre = `attack.execution, attack.t1059.005, attack.t1059.007, detection.threat-hunting`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = /wscript.exe|cscript.exe/ nocase or

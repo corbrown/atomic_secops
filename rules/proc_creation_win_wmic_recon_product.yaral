@@ -1,10 +1,10 @@
 rule potential_product_reconnaissance_via_wmic_exe {
     meta:
-        description = "Detects the execution of WMIC in order to get a list of firewall and antivirus products"
-        references = "https://thedfirreport.com/2023/03/06/2022-year-in-review/, https://www.yeahhub.com/list-installed-programs-version-path-windows/, https://learn.microsoft.com/en-us/answers/questions/253555/software-list-inventory-wmic-product"
-        mitre = "attack.execution, attack.t1047"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the execution of WMIC in order to get a list of firewall and antivirus products`
+        references = `https://thedfirreport.com/2023/03/06/2022-year-in-review/, https://www.yeahhub.com/list-installed-programs-version-path-windows/, https://learn.microsoft.com/en-us/answers/questions/253555/software-list-inventory-wmic-product`
+        mitre = `attack.execution, attack.t1047`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\wmic\.exe$/ nocase or

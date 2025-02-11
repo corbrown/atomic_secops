@@ -1,10 +1,10 @@
 rule hacktool___hashcat_password_cracker_execution {
     meta:
-        description = "Execute Hashcat.exe with provided SAM file from registry of Windows and Password list to crack against"
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1110.002/T1110.002.md#atomic-test-1---password-cracking-with-hashcat, https://hashcat.net/wiki/doku.php?id=hashcat"
-        mitre = "attack.credential-access, attack.t1110.002"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Execute Hashcat.exe with provided SAM file from registry of Windows and Password list to crack against`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1110.002/T1110.002.md#atomic-test-1---password-cracking-with-hashcat, https://hashcat.net/wiki/doku.php?id=hashcat`
+        mitre = `attack.credential-access, attack.t1110.002`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\hashcat\.exe$/ nocase or

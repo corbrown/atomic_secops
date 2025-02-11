@@ -1,10 +1,10 @@
 rule suspicious_reg_add_bitlocker {
     meta:
-        description = "Detects suspicious addition to BitLocker related registry keys via the reg.exe utility"
-        references = "https://thedfirreport.com/2021/11/15/exchange-exploit-leads-to-domain-wide-ransomware/"
-        mitre = "attack.impact, attack.t1486"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious addition to BitLocker related registry keys via the reg.exe utility`
+        references = `https://thedfirreport.com/2021/11/15/exchange-exploit-leads-to-domain-wide-ransomware/`
+        mitre = `attack.impact, attack.t1486`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /REG/ nocase and

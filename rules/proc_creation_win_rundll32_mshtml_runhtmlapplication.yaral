@@ -1,10 +1,10 @@
 rule mshtml_dll_runhtmlapplication_suspicious_usage {
     meta:
-        description = "Detects execution of commands that leverage the 'mshtml.dll' RunHTMLApplication export to run arbitrary code via different protocol handlers (vbscript, javascript, file, http...)"
-        references = "https://twitter.com/n1nj4sec/status/1421190238081277959, https://hyp3rlinx.altervista.org/advisories/MICROSOFT_WINDOWS_DEFENDER_TROJAN.WIN32.POWESSERE.G_MITIGATION_BYPASS_PART2.txt, http://hyp3rlinx.altervista.org/advisories/MICROSOFT_WINDOWS_DEFENDER_DETECTION_BYPASS.txt"
-        mitre = "attack.defense-evasion, attack.execution"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects execution of commands that leverage the "mshtml.dll" RunHTMLApplication export to run arbitrary code via different protocol handlers (vbscript, javascript, file, http...)`
+        references = `https://twitter.com/n1nj4sec/status/1421190238081277959, https://hyp3rlinx.altervista.org/advisories/MICROSOFT_WINDOWS_DEFENDER_TROJAN.WIN32.POWESSERE.G_MITIGATION_BYPASS_PART2.txt, http://hyp3rlinx.altervista.org/advisories/MICROSOFT_WINDOWS_DEFENDER_DETECTION_BYPASS.txt`
+        mitre = `attack.defense-evasion, attack.execution`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /\\\.\.\\/ nocase and

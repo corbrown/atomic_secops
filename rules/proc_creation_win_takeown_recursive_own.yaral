@@ -1,10 +1,10 @@
 rule suspicious_recursive_takeown {
     meta:
-        description = "Adversaries can interact with the DACLs using built-in Windows commands takeown which can grant adversaries higher permissions on specific files and folders"
-        references = "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/takeown, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.001/T1222.001.md#atomic-test-1---take-ownership-using-takeown-utility"
-        mitre = "attack.defense-evasion, attack.t1222.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Adversaries can interact with the DACLs using built-in Windows commands takeown which can grant adversaries higher permissions on specific files and folders`
+        references = `https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/takeown, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.001/T1222.001.md#atomic-test-1---take-ownership-using-takeown-utility`
+        mitre = `attack.defense-evasion, attack.t1222.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\takeown\.exe$/ nocase and

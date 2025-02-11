@@ -1,10 +1,10 @@
 rule lsass_process_reconnaissance_via_findstr_exe {
     meta:
-        description = "Detects findstring commands that include the keyword lsass, which indicates recon actviity for the LSASS process PID"
-        references = "https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1"
-        mitre = "attack.credential-access, attack.t1552.006"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects findstring commands that include the keyword lsass, which indicates recon actviity for the LSASS process PID`
+        references = `https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1`
+        mitre = `attack.credential-access, attack.t1552.006`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ((($event.target.process.file.full_path = /\\find\.exe|\\findstr\.exe/ nocase or

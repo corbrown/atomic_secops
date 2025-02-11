@@ -1,10 +1,10 @@
 rule curl_usage_on_linux {
     meta:
-        description = "Detects a curl process start on linux, which indicates a file download from a remote location or a simple web request to a remote server"
-        references = "https://www.trendmicro.com/en_us/research/22/i/how-malicious-actors-abuse-native-linux-tools-in-their-attacks.html"
-        mitre = "attack.command-and-control, attack.t1105"
-        logsource = "process_creation"
-        product = "linux"
+        description = `Detects a curl process start on linux, which indicates a file download from a remote location or a simple web request to a remote server`
+        references = `https://www.trendmicro.com/en_us/research/22/i/how-malicious-actors-abuse-native-linux-tools-in-their-attacks.html`
+        mitre = `attack.command-and-control, attack.t1105`
+        logsource = `process_creation`
+        product = `linux`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\/curl$/ nocase)

@@ -1,10 +1,10 @@
 rule network_reconnaissance_activity {
     meta:
-        description = "Detects a set of suspicious network related commands often used in recon stages"
-        references = "https://thedfirreport.com/2022/02/07/qbot-likes-to-move-it-move-it/"
-        mitre = "attack.discovery, attack.t1087, attack.t1082, car.2016-03-001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects a set of suspicious network related commands often used in recon stages`
+        references = `https://thedfirreport.com/2022/02/07/qbot-likes-to-move-it-move-it/`
+        mitre = `attack.discovery, attack.t1087, attack.t1082, car.2016-03-001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /nslookup/ nocase and

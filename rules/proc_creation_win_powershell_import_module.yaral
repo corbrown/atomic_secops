@@ -1,10 +1,10 @@
 rule import_new_module_via_powershell_commandline {
     meta:
-        description = "Detects usage of the 'Import-Module' cmdlet in order to add new Cmdlets to the current PowerShell session"
-        references = "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/import-module?view=powershell-7.3, https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/import-module?view=powershell-5.1"
-        mitre = "attack.execution, detection.threat-hunting"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects usage of the "Import-Module" cmdlet in order to add new Cmdlets to the current PowerShell session`
+        references = `https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/import-module?view=powershell-7.3, https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/import-module?view=powershell-5.1`
+        mitre = `attack.execution, detection.threat-hunting`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or

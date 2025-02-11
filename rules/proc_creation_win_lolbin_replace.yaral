@@ -1,10 +1,10 @@
 rule replace_exe_usage {
     meta:
-        description = "Detects the use of Replace.exe which can be used to replace file with another file"
-        references = "https://lolbas-project.github.io/lolbas/Binaries/Replace/, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/replace"
-        mitre = "attack.command-and-control, attack.t1105"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the use of Replace.exe which can be used to replace file with another file`
+        references = `https://lolbas-project.github.io/lolbas/Binaries/Replace/, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/replace`
+        mitre = `attack.command-and-control, attack.t1105`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\replace\.exe$/ nocase and

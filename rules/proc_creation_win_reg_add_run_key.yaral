@@ -1,10 +1,10 @@
 rule potential_persistence_attempt_via_run_keys_using_reg_exe {
     meta:
-        description = "Detects suspicious command line reg.exe tool adding key to RUN key in Registry"
-        references = "https://app.any.run/tasks/9c0f37bc-867a-4314-b685-e101566766d7/, https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys"
-        mitre = "attack.persistence, attack.t1547.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious command line reg.exe tool adding key to RUN key in Registry`
+        references = `https://app.any.run/tasks/9c0f37bc-867a-4314-b685-e101566766d7/, https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys`
+        mitre = `attack.persistence, attack.t1547.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /reg/ nocase and

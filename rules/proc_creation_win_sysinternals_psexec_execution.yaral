@@ -1,10 +1,10 @@
 rule psexec_execution {
     meta:
-        description = "Detects user accept agreement execution in psexec commandline"
-        references = "https://www.fireeye.com/blog/threat-research/2020/10/kegtap-and-singlemalt-with-a-ransomware-chaser.html"
-        mitre = "attack.execution, attack.t1569, attack.t1021"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects user accept agreement execution in psexec commandline`
+        references = `https://www.fireeye.com/blog/threat-research/2020/10/kegtap-and-singlemalt-with-a-ransomware-chaser.html`
+        mitre = `attack.execution, attack.t1569, attack.t1021`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\psexec\.exe$/ nocase or

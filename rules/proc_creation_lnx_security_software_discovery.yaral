@@ -1,10 +1,10 @@
 rule security_software_discovery___linux {
     meta:
-        description = "Detects usage of system utilities (only grep and egrep for now) to discover security software discovery"
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1518.001/T1518.001.md"
-        mitre = "attack.discovery, attack.t1518.001"
-        logsource = "process_creation"
-        product = "linux"
+        description = `Detects usage of system utilities (only grep and egrep for now) to discover security software discovery`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1518.001/T1518.001.md`
+        mitre = `attack.discovery, attack.t1518.001`
+        logsource = `process_creation`
+        product = `linux`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\/grep|\/egrep/ nocase and

@@ -1,10 +1,10 @@
 rule suspicious_network_command {
     meta:
-        description = "Adversaries may look for details about the network configuration and settings of systems they access or through information discovery of remote systems"
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1016/T1016.md#atomic-test-1---system-network-configuration-discovery-on-windows"
-        mitre = "attack.discovery, attack.t1016"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Adversaries may look for details about the network configuration and settings of systems they access or through information discovery of remote systems`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1016/T1016.md#atomic-test-1---system-network-configuration-discovery-on-windows`
+        mitre = `attack.discovery, attack.t1016`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /ipconfig \/all|netsh interface show interface|arp -a|nbtstat -n|net config|route print/ nocase)

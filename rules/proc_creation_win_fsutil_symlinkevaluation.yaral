@@ -1,10 +1,10 @@
 rule fsutil_behavior_set_symlinkevaluation {
     meta:
-        description = "A symbolic link is a type of file that contains a reference to another file. This is probably done to make sure that the ransomware is able to follow shortcuts on the machine in order to find the original file to encrypt"
-        references = "https://www.cybereason.com/blog/cybereason-vs.-blackcat-ransomware, https://learn.microsoft.com/fr-fr/windows-server/administration/windows-commands/fsutil-behavior"
-        mitre = "attack.execution, attack.t1059"
-        logsource = "process_creation"
-        product = "windows"
+        description = `A symbolic link is a type of file that contains a reference to another file. This is probably done to make sure that the ransomware is able to follow shortcuts on the machine in order to find the original file to encrypt`
+        references = `https://www.cybereason.com/blog/cybereason-vs.-blackcat-ransomware, https://learn.microsoft.com/fr-fr/windows-server/administration/windows-commands/fsutil-behavior`
+        mitre = `attack.execution, attack.t1059`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\fsutil\.exe$/ nocase or

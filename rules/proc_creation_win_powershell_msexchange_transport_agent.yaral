@@ -1,10 +1,10 @@
 rule msexchange_transport_agent_installation {
     meta:
-        description = "Detects the Installation of a Exchange Transport Agent"
-        references = "https://speakerdeck.com/heirhabarov/hunting-for-persistence-via-microsoft-exchange-server-or-outlook?slide=7"
-        mitre = "attack.persistence, attack.t1505.002"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the Installation of a Exchange Transport Agent`
+        references = `https://speakerdeck.com/heirhabarov/hunting-for-persistence-via-microsoft-exchange-server-or-outlook?slide=7`
+        mitre = `attack.persistence, attack.t1505.002`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /Install-TransportAgent/ nocase)

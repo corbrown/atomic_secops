@@ -1,10 +1,10 @@
 rule iis_native_code_module_command_line_installation {
     meta:
-        description = "Detects suspicious IIS native-code module installations via command line"
-        references = "https://researchcenter.paloaltonetworks.com/2018/01/unit42-oilrig-uses-rgdoor-iis-backdoor-targets-middle-east/, https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/"
-        mitre = "attack.persistence, attack.t1505.003"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious IIS native-code module installations via command line`
+        references = `https://researchcenter.paloaltonetworks.com/2018/01/unit42-oilrig-uses-rgdoor-iis-backdoor-targets-middle-east/, https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/`
+        mitre = `attack.persistence, attack.t1505.003`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\appcmd\.exe$/ nocase or

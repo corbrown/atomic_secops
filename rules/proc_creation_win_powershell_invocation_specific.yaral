@@ -1,10 +1,10 @@
 rule suspicious_powershell_invocations___specific___processcreation {
     meta:
-        description = "Detects suspicious PowerShell invocation command parameters"
-        references = "Internal Research"
-        mitre = "attack.defense-evasion"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious PowerShell invocation command parameters`
+        references = `Internal Research`
+        mitre = `attack.defense-evasion`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ((($event.target.process.command_line = /-nop/ nocase and

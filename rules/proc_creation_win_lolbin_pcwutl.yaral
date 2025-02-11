@@ -1,10 +1,10 @@
 rule code_execution_via_pcwutl_dll {
     meta:
-        description = "Detects launch of executable by calling the LaunchApplication function from pcwutl.dll library."
-        references = "https://lolbas-project.github.io/lolbas/Libraries/Pcwutl/, https://twitter.com/harr0ey/status/989617817849876488"
-        mitre = "attack.defense-evasion, attack.t1218.011"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects launch of executable by calling the LaunchApplication function from pcwutl.dll library.`
+        references = `https://lolbas-project.github.io/lolbas/Libraries/Pcwutl/, https://twitter.com/harr0ey/status/989617817849876488`
+        mitre = `attack.defense-evasion, attack.t1218.011`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\rundll32\.exe$/ nocase or

@@ -1,10 +1,10 @@
 rule disable_or_stop_services {
     meta:
-        description = "Detects the usage of utilities such as 'systemctl', 'service'...etc to stop or disable tools and services"
-        references = "https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html"
-        mitre = "attack.defense-evasion"
-        logsource = "process_creation"
-        product = "linux"
+        description = `Detects the usage of utilities such as 'systemctl', 'service'...etc to stop or disable tools and services`
+        references = `https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html`
+        mitre = `attack.defense-evasion`
+        logsource = `process_creation`
+        product = `linux`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\/service|\/systemctl|\/chkconfig/ nocase and

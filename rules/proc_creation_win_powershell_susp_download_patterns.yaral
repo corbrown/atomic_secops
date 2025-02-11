@@ -1,10 +1,10 @@
 rule suspicious_powershell_download_and_execute_pattern {
     meta:
-        description = "Detects suspicious PowerShell download patterns that are often used in malicious scripts, stagers or downloaders (make sure that your backend applies the strings case-insensitive)"
-        references = "https://gist.github.com/jivoi/c354eaaf3019352ce32522f916c03d70, https://www.trendmicro.com/en_us/research/22/j/lv-ransomware-exploits-proxyshell-in-attack.html"
-        mitre = "attack.execution, attack.t1059.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious PowerShell download patterns that are often used in malicious scripts, stagers or downloaders (make sure that your backend applies the strings case-insensitive)`
+        references = `https://gist.github.com/jivoi/c354eaaf3019352ce32522f916c03d70, https://www.trendmicro.com/en_us/research/22/j/lv-ransomware-exploits-proxyshell-in-attack.html`
+        mitre = `attack.execution, attack.t1059.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /IEX \(\(New-Object Net\.WebClient\)\.DownloadString|IEX \(New-Object Net\.WebClient\)\.DownloadString|IEX\(\(New-Object Net\.WebClient\)\.DownloadString|IEX\(New-Object Net\.WebClient\)\.DownloadString| -command \(New-Object System\.Net\.WebClient\)\.DownloadFile\(| -c \(New-Object System\.Net\.WebClient\)\.DownloadFile\(/ nocase)

@@ -1,10 +1,10 @@
 rule powershell_web_download {
     meta:
-        description = "Detects suspicious ways to download files or content using PowerShell"
-        references = "https://github.com/VirtualAlllocEx/Payload-Download-Cradles/blob/88e8eca34464a547c90d9140d70e9866dcbc6a12/Download-Cradles.cmd"
-        mitre = "attack.command-and-control, attack.execution, attack.t1059.001, attack.t1105"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious ways to download files or content using PowerShell`
+        references = `https://github.com/VirtualAlllocEx/Payload-Download-Cradles/blob/88e8eca34464a547c90d9140d70e9866dcbc6a12/Download-Cradles.cmd`
+        mitre = `attack.command-and-control, attack.execution, attack.t1059.001, attack.t1105`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /\.DownloadString\(|\.DownloadFile\(|Invoke-WebRequest |iwr / nocase)

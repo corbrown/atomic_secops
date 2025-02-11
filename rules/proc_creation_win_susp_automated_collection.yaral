@@ -1,10 +1,10 @@
 rule automated_collection_command_prompt {
     meta:
-        description = "Once established within a system or network, an adversary may use automated techniques for collecting internal data."
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1119/T1119.md, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1552.001/T1552.001.md"
-        mitre = "attack.collection, attack.t1119, attack.credential-access, attack.t1552.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Once established within a system or network, an adversary may use automated techniques for collecting internal data.`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1119/T1119.md, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1552.001/T1552.001.md`
+        mitre = `attack.collection, attack.t1119, attack.credential-access, attack.t1552.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /\.doc|\.docx|\.xls|\.xlsx|\.ppt|\.pptx|\.rtf|\.pdf|\.txt/ nocase and

@@ -1,10 +1,10 @@
 rule suspicious_key_manager_access {
     meta:
-        description = "Detects the invocation of the Stored User Names and Passwords dialogue (Key Manager)"
-        references = "https://twitter.com/NinjaParanoid/status/1516442028963659777"
-        mitre = "attack.credential-access, attack.t1555.004"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the invocation of the Stored User Names and Passwords dialogue (Key Manager)`
+        references = `https://twitter.com/NinjaParanoid/status/1516442028963659777`
+        mitre = `attack.credential-access, attack.t1555.004`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\rundll32\.exe$/ nocase or

@@ -1,10 +1,10 @@
 rule suspicious_manipulation_of_default_accounts_via_net_exe {
     meta:
-        description = "Detects suspicious manipulations of default accounts such as 'administrator' and 'guest'. For example 'enable' or 'disable' accounts or change the password...etc"
-        references = "https://www.trellix.com/en-sg/about/newsroom/stories/threat-labs/lockergoga-ransomware-family-used-in-targeted-attacks.html, https://redacted.com/blog/bianlian-ransomware-gang-gives-it-a-go/, https://www.microsoft.com/security/blog/2022/09/07/profiling-dev-0270-phosphorus-ransomware-operations/"
-        mitre = "attack.collection, attack.t1560.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious manipulations of default accounts such as 'administrator' and 'guest'. For example 'enable' or 'disable' accounts or change the password...etc`
+        references = `https://www.trellix.com/en-sg/about/newsroom/stories/threat-labs/lockergoga-ransomware-family-used-in-targeted-attacks.html, https://redacted.com/blog/bianlian-ransomware-gang-gives-it-a-go/, https://www.microsoft.com/security/blog/2022/09/07/profiling-dev-0270-phosphorus-ransomware-operations/`
+        mitre = `attack.collection, attack.t1560.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\net\.exe|\\net1\.exe/ nocase or

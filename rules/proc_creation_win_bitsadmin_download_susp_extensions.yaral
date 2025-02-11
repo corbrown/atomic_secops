@@ -1,10 +1,10 @@
 rule file_with_suspicious_extension_downloaded_via_bitsadmin {
     meta:
-        description = "Detects usage of bitsadmin downloading a file with a suspicious extension"
-        references = "https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin, https://isc.sans.edu/diary/22264, https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/"
-        mitre = "attack.defense-evasion, attack.persistence, attack.t1197, attack.s0190, attack.t1036.003"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects usage of bitsadmin downloading a file with a suspicious extension`
+        references = `https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin, https://isc.sans.edu/diary/22264, https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/`
+        mitre = `attack.defense-evasion, attack.persistence, attack.t1197, attack.s0190, attack.t1036.003`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\bitsadmin\.exe$/ nocase or

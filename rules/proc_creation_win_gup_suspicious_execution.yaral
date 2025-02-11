@@ -1,10 +1,10 @@
 rule suspicious_gup_usage {
     meta:
-        description = "Detects execution of the Notepad++ updater in a suspicious directory, which is often used in DLL side-loading attacks"
-        references = "https://www.fireeye.com/blog/threat-research/2018/09/apt10-targeting-japanese-corporations-using-updated-ttps.html"
-        mitre = "attack.defense-evasion, attack.t1574.002"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects execution of the Notepad++ updater in a suspicious directory, which is often used in DLL side-loading attacks`
+        references = `https://www.fireeye.com/blog/threat-research/2018/09/apt10-targeting-japanese-corporations-using-updated-ttps.html`
+        mitre = `attack.defense-evasion, attack.t1574.002`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\GUP\.exe$/ nocase and

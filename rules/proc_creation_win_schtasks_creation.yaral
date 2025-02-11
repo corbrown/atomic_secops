@@ -1,10 +1,10 @@
 rule scheduled_task_creation_via_schtasks_exe {
     meta:
-        description = "Detects the creation of scheduled tasks by user accounts via the 'schtasks' utility."
-        references = "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create"
-        mitre = "attack.execution, attack.persistence, attack.privilege-escalation, attack.t1053.005, attack.s0111, car.2013-08-001, stp.1u"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the creation of scheduled tasks by user accounts via the "schtasks" utility.`
+        references = `https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create`
+        mitre = `attack.execution, attack.persistence, attack.privilege-escalation, attack.t1053.005, attack.s0111, car.2013-08-001, stp.1u`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\schtasks\.exe$/ nocase and

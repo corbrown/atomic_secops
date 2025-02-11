@@ -1,10 +1,10 @@
 rule potentially_suspicious_powershell_child_processes {
     meta:
-        description = "Detects potentially suspicious child processes spawned by PowerShell. Use this rule to hunt for potential anomalies initiating from PowerShell scripts and commands."
-        references = "https://twitter.com/ankit_anubhav/status/1518835408502620162"
-        mitre = "attack.execution, attack.t1059.001, detection.threat-hunting"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects potentially suspicious child processes spawned by PowerShell. Use this rule to hunt for potential anomalies initiating from PowerShell scripts and commands.`
+        references = `https://twitter.com/ankit_anubhav/status/1518835408502620162`
+        mitre = `attack.execution, attack.t1059.001, detection.threat-hunting`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.principal.process.file.full_path = /\\powershell_ise\.exe|\\powershell\.exe|\\pwsh\.exe/ nocase and

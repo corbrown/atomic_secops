@@ -1,10 +1,10 @@
 rule dd_file_overwrite {
     meta:
-        description = "Detects potential overwriting and deletion of a file using DD."
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1485/T1485.md#atomic-test-2---macoslinux---overwrite-file-with-dd"
-        mitre = "attack.impact, attack.t1485"
-        logsource = "process_creation"
-        product = "linux"
+        description = `Detects potential overwriting and deletion of a file using DD.`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1485/T1485.md#atomic-test-2---macoslinux---overwrite-file-with-dd`
+        mitre = `attack.impact, attack.t1485`
+        logsource = `process_creation`
+        product = `linux`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\/bin\/dd|\/usr\/bin\/dd/ nocase and

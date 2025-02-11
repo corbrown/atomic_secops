@@ -1,10 +1,10 @@
 rule printbrm_zip_creation_of_extraction {
     meta:
-        description = "Detects the execution of the LOLBIN PrintBrm.exe, which can be used to create or extract ZIP files. PrintBrm.exe should not be run on a normal workstation."
-        references = "https://lolbas-project.github.io/lolbas/Binaries/PrintBrm/"
-        mitre = "attack.command-and-control, attack.t1105, attack.defense-evasion, attack.t1564.004"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the execution of the LOLBIN PrintBrm.exe, which can be used to create or extract ZIP files. PrintBrm.exe should not be run on a normal workstation.`
+        references = `https://lolbas-project.github.io/lolbas/Binaries/PrintBrm/`
+        mitre = `attack.command-and-control, attack.t1105, attack.defense-evasion, attack.t1564.004`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\PrintBrm\.exe$/ nocase and

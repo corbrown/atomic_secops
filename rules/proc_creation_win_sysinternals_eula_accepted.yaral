@@ -1,10 +1,10 @@
 rule potential_execution_of_sysinternals_tools {
     meta:
-        description = "Detects command lines that contain the 'accepteula' flag which could be a sign of execution of one of the Sysinternals tools"
-        references = "https://twitter.com/Moti_B/status/1008587936735035392"
-        mitre = "attack.resource-development, attack.t1588.002"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects command lines that contain the 'accepteula' flag which could be a sign of execution of one of the Sysinternals tools`
+        references = `https://twitter.com/Moti_B/status/1008587936735035392`
+        mitre = `attack.resource-development, attack.t1588.002`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = / -accepteula/ nocase or

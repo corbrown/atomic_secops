@@ -1,10 +1,10 @@
 rule suspicious_msiexec_quiet_install_from_remote_location {
     meta:
-        description = "Detects usage of Msiexec.exe to install packages hosted remotely quietly"
-        references = "https://www.microsoft.com/en-us/security/blog/2022/10/27/raspberry-robin-worm-part-of-larger-ecosystem-facilitating-pre-ransomware-activity/"
-        mitre = "attack.defense-evasion, attack.t1218.007"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects usage of Msiexec.exe to install packages hosted remotely quietly`
+        references = `https://www.microsoft.com/en-us/security/blog/2022/10/27/raspberry-robin-worm-part-of-larger-ecosystem-facilitating-pre-ransomware-activity/`
+        mitre = `attack.defense-evasion, attack.t1218.007`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\msiexec\.exe$/ nocase or

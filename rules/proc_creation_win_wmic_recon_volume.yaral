@@ -1,10 +1,10 @@
 rule system_disk_and_volume_reconnaissance_via_wmic_exe {
     meta:
-        description = "An adversary might use WMI to discover information about the system, such as the volume name, size, free space, and other disk information. This can be done using the `wmic` command-line utility and has been observed being used by threat actors such as Volt Typhoon."
-        references = "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-144a, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wmic"
-        mitre = "attack.execution, attack.discovery, attack.t1047, attack.t1082"
-        logsource = "process_creation"
-        product = "windows"
+        description = `An adversary might use WMI to discover information about the system, such as the volume name, size, free space, and other disk information. This can be done using the `wmic` command-line utility and has been observed being used by threat actors such as Volt Typhoon.`
+        references = `https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-144a, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wmic`
+        mitre = `attack.execution, attack.discovery, attack.t1047, attack.t1082`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\WMIC\.exe$/ nocase or

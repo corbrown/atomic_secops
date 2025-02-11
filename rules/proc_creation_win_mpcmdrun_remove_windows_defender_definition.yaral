@@ -1,10 +1,10 @@
 rule windows_defender_definition_files_removed {
     meta:
-        description = "Adversaries may disable security tools to avoid possible detection of their tools and activities by removing Windows Defender Definition Files"
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md, https://unit42.paloaltonetworks.com/unit42-gorgon-group-slithering-nation-state-cybercrime/"
-        mitre = "attack.defense-evasion, attack.t1562.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Adversaries may disable security tools to avoid possible detection of their tools and activities by removing Windows Defender Definition Files`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md, https://unit42.paloaltonetworks.com/unit42-gorgon-group-slithering-nation-state-cybercrime/`
+        mitre = `attack.defense-evasion, attack.t1562.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\MpCmdRun\.exe$/ nocase or

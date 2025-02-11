@@ -1,10 +1,10 @@
 rule linux_base64_encoded_shebang_in_cli {
     meta:
-        description = "Detects the presence of a base64 version of the shebang in the commandline, which could indicate a malicious payload about to be decoded"
-        references = "https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html, https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS"
-        mitre = "attack.defense-evasion, attack.t1140"
-        logsource = "process_creation"
-        product = "linux"
+        description = `Detects the presence of a base64 version of the shebang in the commandline, which could indicate a malicious payload about to be decoded`
+        references = `https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html, https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS`
+        mitre = `attack.defense-evasion, attack.t1140`
+        logsource = `process_creation`
+        product = `linux`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /IyEvYmluL2Jhc2|IyEvYmluL2Rhc2|IyEvYmluL3pza|IyEvYmluL2Zpc2|IyEvYmluL3No/ nocase)

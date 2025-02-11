@@ -1,10 +1,10 @@
 rule potential_smb_relay_attack_tool_execution {
     meta:
-        description = "Detects different hacktools used for relay attacks on Windows for privilege escalation"
-        references = "https://foxglovesecurity.com/2016/09/26/rotten-potato-privilege-escalation-from-service-accounts-to-system/, https://pentestlab.blog/2017/04/13/hot-potato/, https://github.com/ohpe/juicy-potato, https://hunter2.gitbook.io/darthsidious/other/war-stories/domain-admin-in-30-minutes, https://hunter2.gitbook.io/darthsidious/execution/responder-with-ntlm-relay-and-empire, https://www.localpotato.com/"
-        mitre = "attack.execution, attack.t1557.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects different hacktools used for relay attacks on Windows for privilege escalation`
+        references = `https://foxglovesecurity.com/2016/09/26/rotten-potato-privilege-escalation-from-service-accounts-to-system/, https://pentestlab.blog/2017/04/13/hot-potato/, https://github.com/ohpe/juicy-potato, https://hunter2.gitbook.io/darthsidious/other/war-stories/domain-admin-in-30-minutes, https://hunter2.gitbook.io/darthsidious/execution/responder-with-ntlm-relay-and-empire, https://www.localpotato.com/`
+        mitre = `attack.execution, attack.t1557.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /PetitPotam|RottenPotato|HotPotato|JuicyPotato|\\just_dce_|Juicy Potato|\\temp\\rot\.exe|\\Potato\.exe|\\SpoolSample\.exe|\\Responder\.exe|\\smbrelayx|\\ntlmrelayx|\\LocalPotato/ nocase or

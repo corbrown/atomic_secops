@@ -1,10 +1,10 @@
 rule file_download_using_notepad___gup_utility {
     meta:
-        description = "Detects execution of the Notepad++ updater (gup) from a process other than Notepad++ to download files."
-        references = "https://twitter.com/nas_bench/status/1535322182863179776"
-        mitre = "attack.command-and-control, attack.t1105"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects execution of the Notepad++ updater (gup) from a process other than Notepad++ to download files.`
+        references = `https://twitter.com/nas_bench/status/1535322182863179776`
+        mitre = `attack.command-and-control, attack.t1105`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\GUP\.exe$/ nocase or

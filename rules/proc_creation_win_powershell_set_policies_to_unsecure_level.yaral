@@ -1,10 +1,10 @@
 rule change_powershell_policies_to_an_insecure_level {
     meta:
-        description = "Detects changing the PowerShell script execution policy to a potentially insecure level using the '-ExecutionPolicy' flag."
-        references = "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.4, https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4, https://adsecurity.org/?p=2604, https://thedfirreport.com/2021/11/01/from-zero-to-domain-admin/"
-        mitre = "attack.execution, attack.t1059.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects changing the PowerShell script execution policy to a potentially insecure level using the "-ExecutionPolicy" flag.`
+        references = `https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.4, https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4, https://adsecurity.org/?p=2604, https://thedfirreport.com/2021/11/01/from-zero-to-domain-admin/`
+        mitre = `attack.execution, attack.t1059.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = /PowerShell.EXE|pwsh.dll/ nocase or

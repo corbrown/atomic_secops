@@ -1,10 +1,10 @@
 rule file_or_folder_permissions_modifications {
     meta:
-        description = "Detects a file or folder's permissions being modified or tampered with."
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.001/T1222.001.md, https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/hh750728(v=ws.11), https://github.com/swagkarna/Defeat-Defender-V1.2.0"
-        mitre = "attack.defense-evasion, attack.t1222.001, detection.threat-hunting"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects a file or folder's permissions being modified or tampered with.`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.001/T1222.001.md, https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/hh750728(v=ws.11), https://github.com/swagkarna/Defeat-Defender-V1.2.0`
+        mitre = `attack.defense-evasion, attack.t1222.001, detection.threat-hunting`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ((($event.target.process.file.full_path = /\\cacls\.exe|\\icacls\.exe|\\net\.exe|\\net1\.exe/ nocase and

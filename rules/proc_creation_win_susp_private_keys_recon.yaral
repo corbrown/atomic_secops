@@ -1,10 +1,10 @@
 rule private_keys_reconnaissance_via_commandline_tools {
     meta:
-        description = "Adversaries may search for private key certificate files on compromised systems for insecurely stored credential"
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1552.004/T1552.004.md"
-        mitre = "attack.credential-access, attack.t1552.004"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Adversaries may search for private key certificate files on compromised systems for insecurely stored credential`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1552.004/T1552.004.md`
+        mitre = `attack.credential-access, attack.t1552.004`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /\.key|\.pgp|\.gpg|\.ppk|\.p12|\.pem|\.pfx|\.cer|\.p7b|\.asc/ nocase and

@@ -1,10 +1,10 @@
 rule potentially_suspicious_rundll32_activity {
     meta:
-        description = "Detects suspicious execution of rundll32, with specific calls to some DLLs with known LOLBIN functionalities"
-        references = "http://www.hexacorn.com/blog/2017/05/01/running-programs-via-proxy-jumping-on-a-edr-bypass-trampoline/, https://twitter.com/Hexacorn/status/885258886428725250, https://gist.github.com/ryhanson/227229866af52e2d963cf941af135a52, https://twitter.com/nas_bench/status/1433344116071583746, https://twitter.com/eral4m/status/1479106975967240209, https://twitter.com/eral4m/status/1479080793003671557"
-        mitre = "attack.defense-evasion, attack.t1218.011"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious execution of rundll32, with specific calls to some DLLs with known LOLBIN functionalities`
+        references = `http://www.hexacorn.com/blog/2017/05/01/running-programs-via-proxy-jumping-on-a-edr-bypass-trampoline/, https://twitter.com/Hexacorn/status/885258886428725250, https://gist.github.com/ryhanson/227229866af52e2d963cf941af135a52, https://twitter.com/nas_bench/status/1433344116071583746, https://twitter.com/eral4m/status/1479106975967240209, https://twitter.com/eral4m/status/1479080793003671557`
+        mitre = `attack.defense-evasion, attack.t1218.011`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ((($event.target.process.command_line = /javascript:/ nocase and

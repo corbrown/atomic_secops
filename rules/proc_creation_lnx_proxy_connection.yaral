@@ -1,10 +1,10 @@
 rule connection_proxy {
     meta:
-        description = "Detects setting proxy configuration"
-        references = "https://attack.mitre.org/techniques/T1090/"
-        mitre = "attack.defense-evasion, attack.t1090"
-        logsource = "process_creation"
-        product = "linux"
+        description = `Detects setting proxy configuration`
+        references = `https://attack.mitre.org/techniques/T1090/`
+        mitre = `attack.defense-evasion, attack.t1090`
+        logsource = `process_creation`
+        product = `linux`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /http_proxy=|https_proxy=/ nocase)

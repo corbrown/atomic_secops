@@ -1,10 +1,10 @@
 rule potential_lsass_process_dump_via_procdump {
     meta:
-        description = "Detects suspicious uses of the SysInternals Procdump utility by using a special command line parameter in combination with the lsass.exe process. This way we are also able to catch cases in which the attacker has renamed the procdump executable."
-        references = "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump"
-        mitre = "attack.defense-evasion, attack.t1036, attack.credential-access, attack.t1003.001, car.2013-05-009"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects suspicious uses of the SysInternals Procdump utility by using a special command line parameter in combination with the lsass.exe process. This way we are also able to catch cases in which the attacker has renamed the procdump executable.`
+        references = `https://learn.microsoft.com/en-us/sysinternals/downloads/procdump`
+        mitre = `attack.defense-evasion, attack.t1036, attack.credential-access, attack.t1003.001, car.2013-05-009`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = / -ma / nocase or

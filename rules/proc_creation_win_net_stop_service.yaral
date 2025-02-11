@@ -1,10 +1,10 @@
 rule stop_windows_service_via_net_exe {
     meta:
-        description = "Detects the stopping of a Windows service via the 'net' utility."
-        references = "https://ss64.com/nt/net-service.html"
-        mitre = "attack.impact, attack.t1489"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the stopping of a Windows service via the "net" utility.`
+        references = `https://ss64.com/nt/net-service.html`
+        mitre = `attack.impact, attack.t1489`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.names = /net.exe|net1.exe/ nocase or

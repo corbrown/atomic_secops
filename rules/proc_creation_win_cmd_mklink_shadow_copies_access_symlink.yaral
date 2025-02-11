@@ -1,10 +1,10 @@
 rule volumeshadowcopy_symlink_creation_via_mklink {
     meta:
-        description = "Shadow Copies storage symbolic link creation using operating systems utilities"
-        references = "https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment"
-        mitre = "attack.credential-access, attack.t1003.002, attack.t1003.003"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Shadow Copies storage symbolic link creation using operating systems utilities`
+        references = `https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment`
+        mitre = `attack.credential-access, attack.t1003.002, attack.t1003.003`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /mklink/ nocase and

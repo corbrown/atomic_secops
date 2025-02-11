@@ -1,10 +1,10 @@
 rule potential_persistence_attempt_via_existing_service_tampering {
     meta:
-        description = "Detects the modification of an existing service in order to execute an arbitrary payload when the service is started or killed as a potential method for persistence."
-        references = "https://pentestlab.blog/2020/01/22/persistence-modify-existing-service/"
-        mitre = "attack.persistence, attack.t1543.003, attack.t1574.011"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the modification of an existing service in order to execute an arbitrary payload when the service is started or killed as a potential method for persistence.`
+        references = `https://pentestlab.blog/2020/01/22/persistence-modify-existing-service/`
+        mitre = `attack.persistence, attack.t1543.003, attack.t1574.011`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ((($event.target.process.command_line = /sc / nocase and

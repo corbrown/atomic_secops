@@ -1,10 +1,10 @@
 rule use_of_pcalua_for_execution {
     meta:
-        description = "Detects execition of commands and binaries from the context of The program compatibility assistant (Pcalua.exe). This can be used as a LOLBIN in order to bypass application whitelisting."
-        references = "https://lolbas-project.github.io/lolbas/Binaries/Pcalua/, https://pentestlab.blog/2020/07/06/indirect-command-execution/"
-        mitre = "attack.execution, attack.t1059"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects execition of commands and binaries from the context of The program compatibility assistant (Pcalua.exe). This can be used as a LOLBIN in order to bypass application whitelisting.`
+        references = `https://lolbas-project.github.io/lolbas/Binaries/Pcalua/, https://pentestlab.blog/2020/07/06/indirect-command-execution/`
+        mitre = `attack.execution, attack.t1059`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.file.full_path = /\\pcalua\.exe$/ nocase and

@@ -1,10 +1,10 @@
 rule hacktool___mimikatz_execution {
     meta:
-        description = "Detection well-known mimikatz command line arguments"
-        references = "https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment, https://tools.thehacker.recipes/mimikatz/modules"
-        mitre = "attack.credential-access, attack.t1003.001, attack.t1003.002, attack.t1003.004, attack.t1003.005, attack.t1003.006"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detection well-known mimikatz command line arguments`
+        references = `https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment, https://tools.thehacker.recipes/mimikatz/modules`
+        mitre = `attack.credential-access, attack.t1003.001, attack.t1003.002, attack.t1003.004, attack.t1003.005, attack.t1003.006`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /DumpCreds|mimikatz/ nocase or

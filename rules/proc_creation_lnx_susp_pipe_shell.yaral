@@ -1,10 +1,10 @@
 rule linux_shell_pipe_to_shell {
     meta:
-        description = "Detects suspicious process command line that starts with a shell that executes something and finally gets piped into another shell"
-        references = "Internal Research"
-        mitre = "attack.defense-evasion, attack.t1140"
-        logsource = "process_creation"
-        product = "linux"
+        description = `Detects suspicious process command line that starts with a shell that executes something and finally gets piped into another shell`
+        references = `Internal Research`
+        mitre = `attack.defense-evasion, attack.t1140`
+        logsource = `process_creation`
+        product = `linux`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ($event.target.process.command_line = /sh -c |bash -c / nocase and

@@ -1,10 +1,10 @@
 rule disable_windows_defender_av_security_monitoring {
     meta:
-        description = "Detects attackers attempting to disable Windows Defender using Powershell"
-        references = "https://research.nccgroup.com/2020/06/23/wastedlocker-a-new-ransomware-variant-developed-by-the-evil-corp-group/, https://rvsec0n.wordpress.com/2020/01/24/malwares-that-bypass-windows-defender/, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md"
-        mitre = "attack.defense-evasion, attack.t1562.001"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects attackers attempting to disable Windows Defender using Powershell`
+        references = `https://research.nccgroup.com/2020/06/23/wastedlocker-a-new-ransomware-variant-developed-by-the-evil-corp-group/, https://rvsec0n.wordpress.com/2020/01/24/malwares-that-bypass-windows-defender/, https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md`
+        mitre = `attack.defense-evasion, attack.t1562.001`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         ((($event.target.process.file.full_path = /\\powershell\.exe|\\pwsh\.exe/ nocase or

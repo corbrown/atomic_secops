@@ -1,10 +1,10 @@
 rule windows_share_mount_via_net_exe {
     meta:
-        description = "Detects when a share is mounted using the 'net.exe' utility"
-        references = "https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view"
-        mitre = "attack.lateral-movement, attack.t1021.002"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects when a share is mounted using the "net.exe" utility`
+        references = `https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view`
+        mitre = `attack.lateral-movement, attack.t1021.002`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\net\.exe|\\net1\.exe/ nocase or

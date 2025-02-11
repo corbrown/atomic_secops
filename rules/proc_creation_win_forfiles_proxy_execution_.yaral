@@ -1,10 +1,10 @@
 rule forfiles_command_execution {
     meta:
-        description = "Detects the execution of 'forfiles' with the '/c' flag. While this is an expected behavior of the tool, it can be abused in order to proxy execution through it with any binary. Can be used to bypass application whitelisting."
-        references = "https://lolbas-project.github.io/lolbas/Binaries/Forfiles/, https://pentestlab.blog/2020/07/06/indirect-command-execution/"
-        mitre = "attack.execution, attack.t1059"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the execution of "forfiles" with the "/c" flag. While this is an expected behavior of the tool, it can be abused in order to proxy execution through it with any binary. Can be used to bypass application whitelisting.`
+        references = `https://lolbas-project.github.io/lolbas/Binaries/Forfiles/, https://pentestlab.blog/2020/07/06/indirect-command-execution/`
+        mitre = `attack.execution, attack.t1059`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\forfiles\.exe$/ nocase or

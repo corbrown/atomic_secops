@@ -1,10 +1,10 @@
 rule process_reconnaissance_via_wmic_exe {
     meta:
-        description = "Detects the execution of 'wmic' with the 'process' flag, which adversary might use to list processes running on the compromised host or list installed software hotfixes and patches."
-        references = "https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1047/T1047.md, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wmic"
-        mitre = "attack.execution, attack.t1047"
-        logsource = "process_creation"
-        product = "windows"
+        description = `Detects the execution of "wmic" with the "process" flag, which adversary might use to list processes running on the compromised host or list installed software hotfixes and patches.`
+        references = `https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1047/T1047.md, https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wmic`
+        mitre = `attack.execution, attack.t1047`
+        logsource = `process_creation`
+        product = `windows`
     events:
         ($event.metadata.event_type = "PROCESS_LAUNCH") and
         (($event.target.process.file.full_path = /\\WMIC\.exe$/ nocase or
