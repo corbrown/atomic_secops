@@ -1,4 +1,4 @@
-# Atomic SecOps Mapping
+# Atomic SecOps
 
 [![Website](https://img.shields.io/badge/Website-atomicsecops.com-blue)](https://atomicsecops.com)
 ![GitHub License](https://img.shields.io/github/license/corbrown/atomic-secops?style=flat)
