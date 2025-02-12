@@ -34,7 +34,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📞 Contact
 
-For any questions or further discussion, please open an issue or contact the maintainer at [email@example.com](mailto:email@example.com).
+For any questions or further discussion, please open an issue or contact the maintainer at [mail@threatlabs.tech](mailto:mail@threatlabs.tech).
 
 ---
 
