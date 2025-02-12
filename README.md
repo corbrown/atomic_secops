@@ -5,8 +5,6 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/corbrown/atomic-secops/deploy.yml?style=flat)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fatomicsecops.com&style=flat)
 
-<img src="logo.png" alt="Atomic SecOps Mapping, detection rules, Unified Data Model" width="250">
-
 ## 🎯 Project Purpose
 
 Atomic SecOps Mapping is designed to unify detection rules for security operations by mapping **Sigma rules** to **Google SecOps YARAL rules** and correlating them with **Atomic Red Team** adversary emulation tests. This provides **SOC teams and threat hunters** with a structured and actionable detection library.
