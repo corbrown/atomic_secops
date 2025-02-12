@@ -5,8 +5,6 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/yourusername/atomic-secops-mapping/deploy.yml?style=flat)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fatomicsecops.com&style=flat)
 
-<img src="logo.png" alt="Atomic SecOps Mapping, detection rules, Unified Data Model" width="250">
-
 This repository was created as a mapping of YARAL rules to Atomic Red Team tests. 
 
 ### [Go to Atomic SecOps Mapping](https://atomicsecops.com)
