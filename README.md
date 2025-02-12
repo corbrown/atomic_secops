@@ -7,7 +7,7 @@
 
 <img src="logo.png" alt="Atomic SecOps Mapping, detection rules, Unified Data Model" width="250">
 
-This repository provides a mapping of detection rules—originally in formats like Sigma—into a unified format (YARAL) tailored for integration with Google SecOps and the Unified Data Model (UDM). It serves as a bridge between simulated adversary techniques and operational security detection strategies.
+This repository was created as a mapping of YARAL rules to Atomic Red Team tests. 
 
 ### [Go to Atomic SecOps Mapping](https://atomicsecops.com)
 
@@ -18,25 +18,6 @@ The purpose of Atomic SecOps Mapping is to streamline the integration of detecti
 ## 🛠️ Project Origin
 
 This project was born out of the need to enhance detection capabilities in a personal lab environment. Through the execution of simulated attacks and rigorous testing, detection rules were collected, converted, and mapped to the UDM used in Google SecOps. The conversion process combines both automated scripts and manual fine-tuning to achieve optimal compatibility and performance.
-
-### Environment Setup
-
-- **Operating System:** Primarily Windows (with plans to extend to other platforms)
-- **Testing Tools:** Various threat simulation tools (e.g., Atomic Red Team)
-- **Rule Conversion:** Custom Python scripts for converting Sigma rules to YARAL format, with adjustments for RE2 syntax and UDM field requirements
-- **Integration:** Designed for use with the Google SecOps detection engine and UDM
-
-The current focus is on Windows-based detections, though future updates will expand support for additional platforms.
-
-## 🔄 Rule Conversion Process
-
-Detection rules from formats such as Sigma are converted into YARAL using a multi-step process:
-- **Parsing & Sanitization:** Load the Sigma rule YAML and clean up whitespace and problematic comments.
-- **Regex & Field Adjustments:** Modify regular expressions to be RE2-compatible and insert the necessary `$event.` prefixes for UDM fields.
-- **Targeted Fixes:** Apply custom fix-ups (e.g., escaping characters, collapsing duplicate modifiers) to ensure that the rules meet YARAL language constraints.
-- **Metadata Formatting:** Use backticks for metadata values (description, references, etc.) and replace any internal backticks with single quotes.
-
-This automated process significantly reduces manual effort when integrating new detection rules into the SecOps environment.
 
 ## 🤝 Contribution
 
