@@ -1,13 +1,13 @@
 # Atomic SecOps
 
 [![Website](https://img.shields.io/badge/Website-atomicsecops.com-blue)](https://atomicsecops.com)
-![GitHub License](https://img.shields.io/github/license/corbrown/atomic-secops?style=flat)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/corbrown/atomic-secops/deploy.yml?style=flat)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fatomicsecops.com&style=flat)
+
+<img src="secops-atomic-logo.png" alt="Atomic SecOps Mapping, detection rules, Unified Data Model" width="250">
 
 ## 🎯 Project Purpose
 
-Atomic SecOps Mapping is designed to unify detection rules for security operations by mapping **Sigma rules** to **Google SecOps YARAL rules** and correlating them with **Atomic Red Team** adversary emulation tests. This provides **SOC teams and threat hunters** with a structured and actionable detection library.
+Atomic SecOps is designed to unify detection rules for security operations by mapping **Sigma rules** to **Google SecOps YARAL rules** and correlating them with **Atomic Red Team** adversary emulation tests. This provides **SOC teams and threat hunters** with a structured and actionable detection library.
 
 ### [Explore the Atomic SecOps Mapping](https://atomicsecops.com)
 
@@ -30,6 +30,18 @@ Atomic SecOps Mapping is designed to unify detection rules for security operatio
 ## 🛠️ Project Origin
 
 This project emerged from the need to bridge **threat simulation** with **real-world detection**. By leveraging Atomic Red Team for execution and Google SecOps for detection, **SOC analysts and blue teams** can improve their detection engineering workflows.
+
+## Credit
+
+This project was heavily inspired by [AttackRuleMap](https://github.com/krdmnbr/AttackRuleMap).  
+
+Conversions were assisted by a heavily doctored version of [pySigma Google SecOps (AttackIQ)](https://github.com/attackIQ/pySigma-Google-SecOps).
+
+Adversary emulation scenarios are credited to the excellent team at Red Canary's [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team).  
+
+Framework mappings and ATT&CK matrix concepts are credited to [The MITRE Corporation](https://github.com/mitre-attack).  
+
+Finally, special appreciation and respect to Florian Roth at [SigmaHQ](https://github.com/SigmaHQ/sigma), whose pioneering contributions continue to inspire detection engineers around the globe.
 
 ## 🚀 Features
 
