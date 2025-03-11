@@ -31,7 +31,7 @@ Atomic SecOps is designed to unify detection rules for security operations by ma
 
 This project emerged from the need to bridge **threat simulation** with **real-world detection**. By leveraging Atomic Red Team for execution and Google SecOps for detection, **SOC analysts and blue teams** can improve their detection engineering workflows.
 
-Disclaimer: This project is in it's infancy and the viability of the detection logic largely depends on the log sources ingested and the parsing of those log sources; while the rules may validate, changes in UDM field names and logic may be required to fit your environment. 
+Disclaimer: This project is in its early stages. The effectiveness of detection logic heavily relies on the specific log sources ingested and how those logs are parsed. While the rules provided may validate successfully, modifications to UDM field names and logic may still be necessary to align with your specific environment. Additionally, these rules should be treated as baseline detections intended for testing pipelines and workflows, and should not be considered comprehensive or sufficient for full enterprise coverage.
 
 ## Credit
 
