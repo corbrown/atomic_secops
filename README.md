@@ -39,7 +39,7 @@ This project was heavily inspired by [AttackRuleMap](https://github.com/krdmnbr/
 
 Conversions were assisted by a heavily doctored version of [pySigma Google SecOps (AttackIQ)](https://github.com/attackIQ/pySigma-Google-SecOps).
 
-Adversary emulation scenarios are credited to the excellent team at Red Canary's [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team).  
+Adversary emulation scenarios are credited to the excellent team at Red Canary [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team).  
 
 Framework mappings and ATT&CK matrix concepts are credited to [The MITRE Corporation](https://github.com/mitre-attack).  
 
