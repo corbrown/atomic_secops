@@ -9,7 +9,7 @@
 
 Atomic SecOps is designed to unify detection rules for security operations by mapping **Sigma rules** to **Google SecOps YARAL rules** and correlating them with **Atomic Red Team** adversary emulation tests. This provides **SOC teams and threat hunters** with a structured and actionable detection library.
 
-### [Explore the Atomic SecOps Mapping](https://atomicsecops.com)
+### [Explore the Atomic SecOps Mapping](https://atomicsecops.com) 
 
 ## 🔍 How It Works
 
